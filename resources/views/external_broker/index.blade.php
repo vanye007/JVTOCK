@@ -25,7 +25,12 @@
             <h1 class="buyer-header">Buyer Form</h1>
             <label for="name" class="field-label">Full Name</label><input type="text" class="input-fields w-input" maxlength="256" name="name" data-name="Name" id="name" required="">
             <label for="email" class="field-label">Email</label><input type="email" class="input-fields w-input" maxlength="256" name="email" data-name="Email 5" id="email-5" required="">
-            <label for="email" class="field-label">Phone</label><input type="number" class="input-fields w-input" maxlength="256" name="phone" data-name="Phone" id="phone" required="">
+            <label for="phone" class="field-label">Phone</label><input type="number" class="input-fields w-input" maxlength="256" name="phone" data-name="Phone" id="phone" required="">
+            <select class="input-fields w-input" name="countries">
+              @foreach ($countries as $key => $value)
+                <option value="{{$value->id}}" >{{$value->name}}</option>
+              @endforeach
+            </select>
             <label for="myfile" class="field-label">Proof of funds:</label>
             <input type="file" class="input-fields w-input" name="proof">
             @if ($errors->any())

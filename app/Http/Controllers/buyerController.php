@@ -10,11 +10,10 @@ use Illuminate\Support\Facades\Crypt;
 use Session;
 use App\buyer;
 use App\product;
-use App\supplier;
 use App\inquiry;
+use App\countries;
 
-
-class publicController extends Controller
+class buyerController extends Controller
 {
   public function products(){
     $products = product::get();
@@ -24,6 +23,7 @@ class publicController extends Controller
   public function index(){
 
     $products = $this->products();
+    $countries = countries::get();
 
     //retrieve the session id
     $session_id = Session::getId();
@@ -34,10 +34,10 @@ class publicController extends Controller
     //check if the the current session is already in the broker system
     if($buyer === null){
         // if session not available return redirect user to home
-        return view('external_broker.index');
+        return view('external_broker.index',['countries'=>$countries]);
     }else{
       // else redirect user back to inventory
-        return view('external_broker.inventory',['products'=>$products])->with('session',$encrypted_session);
+        return view('external_broker.inventory',['products'=>$products,'countries'=>$countries])->with('session',$encrypted_session);
     }
   }
 
@@ -51,6 +51,7 @@ class publicController extends Controller
     $proof = $request->file('proof');
     $email = $request->input('email');
     $phone = $request->input('phone');
+    $country_id = $request->input('countries');
     $port = $request->input('delivery_port');
     $session_id = Session::getId();
 
@@ -71,6 +72,7 @@ class publicController extends Controller
     $buyer = new buyer();
     $buyer->name = $name;
     $buyer->session = $session_id;
+    $buyer->country_id = $country_id;
     $buyer->email = $email;
     $buyer->phone = $phone;
     $buyer->proof = $proof;

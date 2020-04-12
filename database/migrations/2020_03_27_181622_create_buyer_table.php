@@ -19,9 +19,12 @@ class CreateBuyerTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
+            $table->unsignedInteger('country_id');
             $table->string('proof')->null();
             $table->string('delivery_port');
             $table->timestamps();
+
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
         });
     }
 
