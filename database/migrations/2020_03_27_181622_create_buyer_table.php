@@ -15,14 +15,12 @@ class CreateBuyerTable extends Migration
     {
         Schema::create('buyer', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('country');
-            $table->foreign('product_id')->references('id')->on('product');
-            $table->string('demand');
-            $table->string('certificates');
-            $table->string('plug');
-            $table->string('PO')->null();
-            $table->string('P0F')->null();
-            //proof of fund
+            $table->string('session');
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('proof')->null();
+            $table->string('delivery_port');
             $table->timestamps();
         });
     }

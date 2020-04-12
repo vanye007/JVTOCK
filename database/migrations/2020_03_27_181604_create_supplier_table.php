@@ -15,16 +15,21 @@ class CreateSupplierTable extends Migration
     {
         Schema::create('supplier', function (Blueprint $table) {
             $table->Increments('id');
-            $table->unsignedInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('product');
-            $table->string('country');
+            $table->string('product');
+            $table->string('shipping_routes');
+            $table->string('shipping_terms');
+            $table->string('payment_terms');
+            $table->string('prices');
+            $table->string('capacity_upgrades');
             $table->integer('price');
-            $table->string('product_reference');
-            $table->string('production_quantity');
             $table->string('certificates');
-            $table->string('supplier');
-            $table->string('company');
-            $table->string('origin');
+            $table->string('product_image');
+            $table->string('supply_capacity');
+            $table->string('current_inventory');
+            $table->string('port_of_origin');
+            $table->string('units_per_box');
+            $table->string('NCNDA');
+            $table->string('proof_of_life');
             //pot of origin // export port
             $table->timestamps();
         });

@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/buyer', 'publicController@index');
+Route::get('/supplier', 'publicController@supplier');
+Route::post('/buyer_request','publicController@buyer_request');
+Route::get('/product-page/{id}/{encrypted_session}/{name}','publicController@product_specs');
+Route::get('/inquiry/{id}/{session}','publicController@inquiry');
+
 
 Auth::routes();
 
