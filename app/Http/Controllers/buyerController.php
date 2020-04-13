@@ -41,9 +41,7 @@ class buyerController extends Controller
     }
   }
 
-  public function supplier(){
-    return view('supplier');
-  }
+
 
   public function buyer_request(Request $request){
     //Get all buyer forms
@@ -84,8 +82,8 @@ class buyerController extends Controller
 
         //Rename the buyer proof of funds file before uploading
         $file_name = $proof->getClientOriginalName();
-        $file_extension = $proof->getClientOriginalExtension();
-        $new_file_name = $file_name. '_' .$id . '.' . $file_extension;
+        // $file_extension = $proof->getClientOriginalExtension();
+        $new_file_name = $id . '_' . $file_name;
 
         //Move renamed Uploaded File to uploads/buyer/proof_of_funds
         $destinationPath = 'uploads/buyer/proof_of_funds';

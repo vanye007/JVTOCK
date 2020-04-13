@@ -13,12 +13,14 @@
 
 
 Route::get('/buyer', 'buyerController@index');
-Route::get('/supplier', 'buyerController@supplier');
+Route::get('/supplier', 'supplierController@supplier');
 Route::post('/buyer_request','buyerController@buyer_request');
+Route::post('/submit_supply','supplierController@submit_supply');
 Route::get('/product-page/{id}/{encrypted_session}/{name}','buyerController@product_specs');
 Route::get('/inquiry/{id}/{session}','buyerController@inquiry');
 
 
 Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
