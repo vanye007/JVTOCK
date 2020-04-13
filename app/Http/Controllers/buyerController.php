@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 use Session;
 use App\buyer;
 use App\product;
@@ -86,8 +87,10 @@ class buyerController extends Controller
         $new_file_name = $id . '_' . $file_name;
 
         //Move renamed Uploaded File to uploads/buyer/proof_of_funds
-        $destinationPath = 'uploads/buyer/proof_of_funds';
+        $destinationPath = '../storage/uploads/buyer/proof_of_funds';
         $proof->move($destinationPath,$new_file_name);
+
+        Storage::disk('local')->put($new_file_name, 'Contents');
 
         //Update the file name in the database to the new file
         buyer::where('id',$id)->update(['proof' => $new_file_name]);

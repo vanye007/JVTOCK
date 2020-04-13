@@ -24,6 +24,8 @@
             @csrf
             <h1 class="supplier-form">Supplier Form</h1>
 
+            <label for="name" class="field-label">Full Name </label>
+            <input type="text" class="input-fields w-input" maxlength="256" name="name" data-name="name" id="name" required="">
             <label for="name" class="field-label">Email </label>
             <input type="text" class="input-fields w-input" maxlength="256" name="email" data-name="email" id="email" required="">
             <label for="name" class="field-label">Phone </label>
@@ -35,7 +37,7 @@
               @endforeach
             </select>
             <select class="input-fields w-input" name="product_id">
-              <option selected="selected">PRODUCT TO SUPPLY</option>
+              <option selected="selected">SELECT PRODUCT TO SUPPLY</option>
               @foreach ($products as $key => $value)
                 <option value="{{$value->id}}" >{{$value->type}}</option>
               @endforeach

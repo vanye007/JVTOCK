@@ -23,7 +23,7 @@ class supplierController extends Controller
 
   public function submit_supply(Request $request){
 
-
+    $name = $request->input('name');
     $email = $request->input('email');
     $phone = $request->input('phone');
     $country_id = $request->input('countries');
@@ -50,8 +50,35 @@ class supplierController extends Controller
     $proof_of_life = $request->file('proof_of_life');
     $get_proof_of_life_name = $proof_of_life->getClientOriginalName();
 
+    $validate = Validator::make($request->all(), [
+      'name' => 'required',
+      'email' => 'required',
+      'phone' => 'required',
+      'specifications' => 'required',
+      'shipping_routes' => 'required',
+      'shipping_terms' => 'required',
+      'payment_terms' => 'required',
+      'prices_per_capacity' => 'required',
+      'capacity_upgrades' => 'required',
+      'price' => 'required',
+      'certificates' => 'required|mimes:png,jpeg,pdf,doc',
+      'product_image' => 'required|mimes:png,jpeg,pdf,doc',
+      'supply_capacity' => 'required',
+      'current_inventory' => 'required',
+      'port_of_origin' => 'required',
+      'units_per_box' => 'required',
+      'proof_of_life' => 'required|mimes:png,jpeg,pdf,doc',
+      'file' => 'max:20480',
+    ]);
+
+    if ($validate->fails())
+    {
+        return redirect()->back()->withErrors($validate->errors());
+    }
+
     $supplier = new supplier();
     $supplier->product_id = $product_id;
+    $supplier->name = $name;
     $supplier->country_id = $country_id;
     $supplier->email = $email;
     $supplier->phone = $phone;
@@ -84,18 +111,19 @@ class supplierController extends Controller
 
 
         //Move renamed Uploaded files to new destination
-        $certificates_destination = 'uploads/seller/certificates';
-        $product_image_destination  = 'uploads/seller/product_image';
-        $proof_of_life_destination = 'uploads/seller/proof_of_life';
+        $certificates_destination = '../storage/uploads/seller/certificates';
+        $product_image_destination  = '../storage/uploads/seller/product_image';
+        $proof_of_life_destination = '../storage/uploads/seller/proof_of_life';
 
         $certificates->move($certificates_destination, $new_certificate_name);
         $product_image->move($product_image_destination, $new_product_image_name);
         $proof_of_life->move($proof_of_life_destination, $new_proof_of_life_name);
 
+        supplier::where('id',$id)->update(['certificates' => $new_certificate_name, 'product_image'=>$new_product_image_name, 'proof_of_life'=>$new_proof_of_life_name]);
 
       }
     }
 
 
-  
+
 }
