@@ -28,7 +28,7 @@
             <label for="phone" class="field-label">Phone</label><input type="number" class="input-fields w-input" maxlength="256" name="phone" data-name="Phone" id="phone" required="">
             <select class="input-fields w-input" name="countries">
               @foreach ($countries as $key => $value)
-                <option value="{{$value->id}}" >{{$value->name}}</option>
+                <option value="{{$value->id}}" >{{$value->country_name}}</option>
               @endforeach
             </select>
             <label for="myfile" class="field-label">Proof of funds:</label>

@@ -87,7 +87,7 @@ class buyerController extends Controller
         $new_file_name = $id . '_' . $file_name;
 
         //Move renamed Uploaded File to uploads/buyer/proof_of_funds
-        $destinationPath = '../storage/uploads/buyer/proof_of_funds';
+        $destinationPath = '../storage/app/public/uploads/buyer/proof_of_funds';
         $proof->move($destinationPath,$new_file_name);
 
         Storage::disk('local')->put($new_file_name, 'Contents');
@@ -129,5 +129,15 @@ class buyerController extends Controller
       return view('external_broker.confirmation');
     }
 
+
+
+  }
+
+  public function mail(){
+    return view('layouts.mail.mail');
+  }
+
+  public function Welcome(){
+    return view('external_broker.Welcome');
   }
 }

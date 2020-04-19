@@ -8,6 +8,7 @@
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="{{asset('css/normalize.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('css/components.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/buyer-input-form.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('css/jvtock-broker-system-986ded12a3858108c9.css')}}" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({  google: {    families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]  }});</script>

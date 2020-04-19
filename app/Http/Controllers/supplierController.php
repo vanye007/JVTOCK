@@ -67,8 +67,8 @@ class supplierController extends Controller
       'current_inventory' => 'required',
       'port_of_origin' => 'required',
       'units_per_box' => 'required',
-      'proof_of_life' => 'required|mimes:png,jpeg,pdf,doc',
-      'file' => 'max:20480',
+      'proof_of_life' => 'required|mimes:pdf,mov,mp4,webm',
+      'file' => 'max:40480',
     ]);
 
     if ($validate->fails())
@@ -111,9 +111,9 @@ class supplierController extends Controller
 
 
         //Move renamed Uploaded files to new destination
-        $certificates_destination = '../storage/uploads/seller/certificates';
-        $product_image_destination  = '../storage/uploads/seller/product_image';
-        $proof_of_life_destination = '../storage/uploads/seller/proof_of_life';
+        $certificates_destination = '../storage/app/public/uploads/seller/certificates';
+        $product_image_destination  = '../storage/app/public/uploads/seller/product_image';
+        $proof_of_life_destination = '../storage/app/public/uploads/seller/proof_of_life';
 
         $certificates->move($certificates_destination, $new_certificate_name);
         $product_image->move($product_image_destination, $new_product_image_name);

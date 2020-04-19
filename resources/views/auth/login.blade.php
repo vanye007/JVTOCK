@@ -1,73 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<div class="login-sec login-light">
+  <div class="w-container">
+    <div>
+      <div class="w-row">
+        <div class="sign-in-col col-change w-col w-col-12">
+          <div class="login-div bg-color blue-height">
+            <h1 class="heading-5">Welcome Back!</h1>
+            <div class="text-block _1">Please login with your personal info</div>
+            <div class="w-form">
+              <form id="email-form" name="email-form" data-name="Email Form"  action="{{ route('login') }}" method="post">
+                  @csrf
+                <input type="email" class="form-field w-input" maxlength="256" name="email" data-name="Email 4" placeholder="Email" id="email-4" required="">
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <input type="password" class="form-field w-input" maxlength="256" name="password" data-name="Email 2" placeholder="Password" id="email-2" required="">
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                <div class="text-block _1">Forgot your Password?</div>
+                <input type="submit" value="Sign in" data-wait="Please wait..." class="button-2 sign-in-button white w-button"></form>
+              <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+              </div>
+              <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+              </div>
             </div>
+          </div>
         </div>
+        {{-- <div class="sign-up-col orange w-col w-col-6">
+          <div class="login-div _2 height">
+            <h1 class="heading-5 heading-2">Create Account</h1><a href="#" class="link-block-5 w-inline-block"></a><a href="#" class="link-block-6 w-inline-block"></a><a href="#" class="link-block-7 w-inline-block"></a>
+            <div class="text-block">Or Use your email for registration.</div>
+            <div class="w-form">
+              <form id="email-form2" name="email-form" data-name="Email Form">
+                <input type="text" class="form-field w-input" maxlength="256" name="name" data-name="Name" placeholder="Name" id="name2" required="">
+                <input type="email" class="form-field w-input" maxlength="256" name="email" data-name="Email" placeholder="Email" id="email2" required="">
+                <input type="password" class="form-field w-input" maxlength="256" name="Password" data-name="Password" placeholder="Password" id="Password2" required="">
+                <input type="submit" value="Sign Up" data-wait="Please wait..." class="button-2 signup w-button"></form>
+              <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+              </div>
+            </div>
+          </div>
+        </div> --}}
+
+      </div>
     </div>
+  </div>
 </div>
 @endsection
