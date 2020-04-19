@@ -108,8 +108,9 @@ class buyerController extends Controller
     $encrypted_session = $encrypted_session;
     $specification = product::find($id)->Specifications;
     $image =  product::where('id',$id)->value('image_path');
+    $product = product::where('id',$id)->get();
 
-    return view('external_broker.product-page',['specification'=>$specification])->with('product_name',$product_name)->with('product_id',$id)->with('session',$encrypted_session)->with('image',$image);
+    return view('external_broker.product-page',['specification'=>$specification,'product'=>$product])->with('product_name',$product_name)->with('product_id',$id)->with('session',$encrypted_session)->with('image',$image);
   }
 
   public function inquiry($product_id,$encrypted_session){
@@ -138,6 +139,6 @@ class buyerController extends Controller
   }
 
   public function Welcome(){
-    return view('external_broker.Welcome');
+    return view('external_broker.welcome');
   }
 }
