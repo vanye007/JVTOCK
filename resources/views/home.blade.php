@@ -135,71 +135,12 @@
         </div>
         <div class="w-col w-col-2">
           <div>
-            <div class="name-text">Our Cost</div>
+            <div class="name-text">Price per capacity</div>
           </div>
         </div>
         <div class="w-col w-col-2">
           <div>
             <div class="name-text">Sale Price</div>
-          </div>
-        </div>
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Current Supply</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Specifications</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Shipping routess</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Shipping terms</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Payment terms</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Prices per capacity</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Capacity upgrades</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Price</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Certificates</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Supply capacity</div>
           </div>
         </div>
 
@@ -209,27 +150,17 @@
           </div>
         </div>
 
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Port of origin</div>
-          </div>
-        </div>
 
         <div class="w-col w-col-2">
           <div>
-            <div class="name-text">Units per box</div>
+            <div class="name-text">Shipping routes</div>
           </div>
         </div>
 
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Proof of life</div>
-          </div>
-        </div>
       </div>
 
         @foreach ($suppliers->sortByDesc('id') as $key => $value)
-            <div class="w-row">
+            <div class="columns w-row">
           <div class="w-col w-col-2">
             <div>
               <a href="/supplier_info/{{$value->id}}" class="name-click w-inline-block">
@@ -268,11 +199,6 @@
             </div>
           </div>
 
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->specifications}}</div>
-            </div>
-          </div>
 
           <div class="w-col w-col-2">
             <div>
@@ -280,65 +206,6 @@
             </div>
           </div>
 
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->shipping_terms}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->payment_terms}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->prices_per_capacity}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->capacity_upgrades}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->price}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->certificates}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->current_inventory}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->port_of_origin}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->units_per_box}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->proof_of_life}}</div>
-            </div>
-          </div>
         </div>
 
         @endforeach
@@ -428,7 +295,7 @@
             <div id="{{$value->id}}" class="w-clearfix">
               <div class="cards-image-mask"><img src='{{asset("images/products/{$value->image_path}")}}' alt="" class="cards-image"></div>
               <h3 class="heading">{{$value->type}}</h3>
-              <p>{{$value->description}} </p>
+              <p>{!!  substr(strip_tags($value->description), 0, 150) !!} .... </p>
               {{-- <div class="price in-stock">In Stock</div> --}}
               <div class="price">${{$value->price}}</div>
               <a href="/product-info/{{$value->id}}" class="button w-button">Select</a>
