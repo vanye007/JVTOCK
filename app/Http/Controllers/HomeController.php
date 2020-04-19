@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\buyer;
@@ -123,5 +127,43 @@ class HomeController extends Controller
 
       return redirect()->back()->with('successMsg','Product updated');
     }
+
+    public function upload_product(Request $request){
+      // dd($request->all());
+      $type = $request->input('type');
+      $description = $request->input('description');
+      $price = $request->input('price');
+      $image = $request->file('image');
+
+      $validate = Validator::make($request->all(), [
+        'type' => 'required',
+        'description' => 'required',
+        'price' => 'required',
+        'file' => 'max:20480',
+      ]);
+
+      if ($validate->fails())
+      {
+          return redirect()->back()->withErrors($validate->errors());
+      }
+
+      $image_name = $image->getClientOriginalName();
+      // $file_extension = $proof->getClientOriginalExtension();
+      // $new_image_name = $type . '_' . $image_name;
+
+      $destinationPath = 'images/products';
+      $image->move($destinationPath, $image_name);
+
+      $product = new product();
+      $product->type = $type;
+      $product->description = $description;
+      $product->price = $price;
+      $product->image_path = $image_name;
+      $product->save();
+
+      return redirect()->back()->with('successMsg','Product updated');
+    }
+
+
 
 }

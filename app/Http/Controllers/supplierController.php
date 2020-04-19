@@ -67,7 +67,7 @@ class supplierController extends Controller
       'current_inventory' => 'required',
       'port_of_origin' => 'required',
       'units_per_box' => 'required',
-      'proof_of_life' => 'required|mimes:pdf,mov,mp4,webm',
+      // 'proof_of_life' => 'required|mimes:pdf,mov,mp4,webm',
       'file' => 'max:40480',
     ]);
 
@@ -109,18 +109,16 @@ class supplierController extends Controller
         $new_product_image_name = $id . '_' . $get_product_image_name;
         $new_proof_of_life_name = $id . '_' . $get_proof_of_life_name;
 
-
         //Move renamed Uploaded files to new destination
-        $certificates_destination = '../storage/app/public/uploads/seller/certificates';
-        $product_image_destination  = '../storage/app/public/uploads/seller/product_image';
-        $proof_of_life_destination = '../storage/app/public/uploads/seller/proof_of_life';
+        $certificates_destination = '/storage/app/uploads/supplier/certificates/';
+        $product_image_destination  = 'images/supplier/product_image/';
+        $proof_of_life_destination = '/storage/app/uploads/supplier/proof_of_life/';
 
         $certificates->move($certificates_destination, $new_certificate_name);
         $product_image->move($product_image_destination, $new_product_image_name);
         $proof_of_life->move($proof_of_life_destination, $new_proof_of_life_name);
 
         supplier::where('id',$id)->update(['certificates' => $new_certificate_name, 'product_image'=>$new_product_image_name, 'proof_of_life'=>$new_proof_of_life_name]);
-
       }
     }
 

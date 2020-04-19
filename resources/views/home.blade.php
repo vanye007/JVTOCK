@@ -2,6 +2,24 @@
 
 @section('content')
 
+  <!-- Modal -->
+<div class="modal fade" id="upload_product" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form method="post" action="/upload_product" enctype='multipart/form-data'>
+          @csrf
+          <input type="text" class="form-field w-input" maxlength="256" name="type"  placeholder="Product Name"  required="">
+          <input type="text" class="form-field w-input" maxlength="256" name="price"  placeholder="Price" required="">
+          <textarea style="width:100%;" placeholder="Product description" name="description" class="form-field w-input" maxlength="256" rows="10" ></textarea>
+          <input type="file" class="input-fields w-input" maxlength="256" name="image"  required="">
+          <button class="button w-button">Upload</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
   {{-- @guest
   <li class="nav-item">
       <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -415,18 +433,9 @@
               <div class="price">${{$value->price}}</div>
               <a href="/product-info/{{$value->id}}" class="button w-button">Select</a>
             </div>
-
           @endforeach
-
-
-          <div id="w-node-7b034b1f5649-0ddbcad8" class="div-block w-clearfix">
-            <div class="cards-image-mask"><img src="https://uploads-ssl.webflow.com/5db1c76aadcfe25e881680fa/5db86dc421496616bf357c25_placeholder.svg" alt="" class="cards-image"></div>
-            <h3 id="w-node-7b034b1f564c-0ddbcad8" class="heading">COVID-19 Test Kit</h3>
-            <p id="w-node-7b034b1f564e-0ddbcad8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. </p>
-            <div class="price in-stock">In Stock</div>
-            <div class="price">$5.99</div><a href="#" class="button w-button">Select</a></div>
         </div>
-      </div><a href="dashboard.html" class="button dash-button w-button">Edit</a></section>
+      </div><a  class="button dash-button w-button" data-toggle="modal" data-target="#upload_product">Upload Product</a></section>
   </div>
 
 </div>

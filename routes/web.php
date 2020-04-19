@@ -37,6 +37,9 @@ Route::get('/supplier_info/{id}','HomeController@supplier_info');
 Route::get('/buyer_info/{id}','HomeController@buyer_info');
 Route::get('/product-info/{id}','HomeController@retrieve_product');
 Route::post('/update_product/{id}','HomeController@update_product');
+Route::post('/upload_product','HomeController@upload_product');
+Route::get('/certificates/{id}/{value}','fileController@view_certificates');
+Route::get('/proof_of_life/{id}/{value}','fileController@view_proof_of_life');
 
 
 Route::get('/logout', function ()

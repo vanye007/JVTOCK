@@ -7,6 +7,13 @@
           <form id="email-form" action='{{url("/submit_supply")}}' method='post'  enctype='multipart/form-data'>
             @csrf
             <h1 class="supplier-form">Supplier Form</h1>
+            @if ($errors->any())
+              <label for="myfile" class="field-label">
+                  @foreach ($errors->all() as $error)
+                    {{ $error }}
+                  @endforeach
+              </label>
+            @endif
 
             <label for="name" class="field-label">Full Name </label>
             <input type="text" class="input-fields w-input" maxlength="256" name="name" data-name="name" id="name" required="">

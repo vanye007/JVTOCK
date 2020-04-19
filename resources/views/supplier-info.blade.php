@@ -25,11 +25,11 @@
         <br><strong>Current Inventory: </strong>{{$value->current_inventory}}
         <br><strong>Port of origin: </strong>{{$value->port_of_origin}}
         <br></p>
-        <a href="/storage/uploads/seller/certificates/{{$value->certificates}}"><strong>Certificates </strong>{{$value->certificates}}</p></a>
-        <a href="/storage/uploads/seller/proof_of_life/{{$value->proof_of_life}}"><strong>Proof of life </strong>{{$value->proof_of_lifes}}</p></a>
+        <a href='{{("/certificates/{$value->id}/{$value->certificates}")}}'><strong>Certificates </strong>{{$value->certificates}}</p></a>
+        <a href='{{("/proof_of_life/{$value->id}/{$value->proof_of_life}")}}'><strong>Proof of life </strong>{{$value->proof_of_lifes}}</p></a>
         <a href="#" class="button w-button">Edit Profile</a>
       </div>
-      <div class="hero-image-mask"><img src="/storage/uploads/seller/product_image/{{$image}}" alt="" class="hero-image"></div>
+      <div class="hero-image-mask"><img src="/images/supplier/product_image/{{$image}}" alt="" class="hero-image"></div>
 
 
     </div>
