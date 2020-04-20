@@ -45,10 +45,10 @@
             <br></strong></select>
             @endif --}}
 
-          <br> @foreach ($template as $key => $value)
-            <textarea style="width:100%;" class="form-field w-input" maxlength="256" rows="10" name="message" data-name="message">@if ($value->type == 'message'){{$value->message}}@endif
-            </textarea>
-          @endforeach<br>‍</p>
+            <textarea style="width:100%;" class="form-field w-input" maxlength="256" rows="10" name="message" data-name="message">@foreach ($template as $key => $value)@if ($value->type == 'message'){{$value->message}}@endif
+            @endforeach</textarea>
+          <br>
+          <br>‍</p>
 
           <p><strong class="bold-signiture">Kind Regards</strong>,<br>‍<br>{{$name}} from JVTOCK</p>
         </div>
