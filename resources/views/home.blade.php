@@ -32,6 +32,19 @@
       <div class="w-col w-col-7">
         <div class="dash-div-1">
           <h1 class="action-header dash-action">ACTION REQUIRED</h1>
+
+
+          @if (sizeof($buyer_actions)>0 || sizeof($supplier_actions))
+
+
+          @else
+
+            <div class="action-item-div">
+              <p class="paragraph-2 dash-parag">No action</p>
+            </div>
+
+
+          @endif
           @foreach ($buyer_actions as $key => $value)
               <a href="/buyer-database" class="link-block-4 dash-link w-inline-block">
                 <div class="action-item-div">
@@ -71,6 +84,7 @@
     </div>
   </div>
   <div class="section supplier-data-sec data-table buyer dash">
+  @if (sizeof($suppliers)>0)
     <div>
       <h1 class="supplier-database-header dash">Supplier Database</h1>
       <div class="columns w-row">
@@ -165,78 +179,110 @@
         </div>
 
         @endforeach
-  </div><a href="/supplier-database" class="button dash-button w-button">Edit</a></div>
-  <div class="section supplier-data-sec data-table buyer dash">
-    <h1 class="supplier-database-header dash">Buyer Database</h1>
-    <div class="w-row">
-      <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-        <div>
-          <div class="name-text">Name</div>
-        </div>
-      </div>
-      <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-        <div>
-          <div class="name-text">Country</div>
-        </div>
-      </div>
-      <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-        <div>
-          <div class="name-text">Product</div>
-        </div>
-      </div>
-      <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-        <div>
-          <div class="name-text">Demand</div>
-        </div>
-      </div>
-      <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-        <div>
-          <div class="name-text">Proof of funds</div>
-        </div>
-      </div>
-      <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-        <div>
-          <div class="name-text">LOI</div>
-        </div>
+
+
+  </div>
+
+  @else
+    <div style="float: none;" class="w-col w-col-12">
+      <div style="text-align:center;">
+        <div  class="name-text black-field mb-5"><h1 class="action-header dash-action">No Supplier Data </h1></div>
       </div>
     </div>
-
-    @foreach ($buyers->sortByDesc('id') as $key => $value)
-    <div class="w-row">
+  @endif
+  <a href="/supplier-database" class="button dash-button w-button">Edit</a></div>
+  <div class="section supplier-data-sec data-table buyer dash">
+    @if (sizeof($buyers)>0)
+      <h1 class="supplier-database-header dash">Buyer Database</h1>
+      <div class="w-row">
         <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
           <div>
-            <a href="supplier-name-info.html" class="name-click w-inline-block">
-              <div class="name-text black-field">{{$value->name}}</div>
-            </a>
+            <div class="name-text">Name</div>
+          </div>
+        </div>
+        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+          <div>
+            <div class="name-text">Country</div>
+          </div>
+        </div>
+        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+          <div>
+            <div class="name-text">Phone</div>
+          </div>
+        </div>
+        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+          <div>
+            <div class="name-text">Interested Product</div>
+          </div>
+        </div>
+        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+          <div>
+            <div class="name-text">Delivery Port</div>
           </div>
         </div>
 
         <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
           <div>
-            <div class="name-text black-field">{{$value->country_name}}</div>
+            <div class="name-text">Proof of Funds</div>
           </div>
         </div>
-
-        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-          <div>
-            <div class="name-text black-field">{{$value->type}}</div>
+      </div>
+      @foreach ($buyers->sortByDesc('id') as $key => $value)
+      <div class="w-row">
+          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+            <div>
+              <a href="/buyer_info/{{$value->id}}" class="name-click w-inline-block">
+                <div class="name-text black-field">{{$value->name}}</div>
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-          <div>
-            <div class="name-text black-field"> Null </div>
+          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+            <div>
+              <div class="name-text black-field">{{$value->country_name}}</div>
+            </div>
           </div>
-        </div>
 
-        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-          <div>
-            <div class="name-text black-field"> {{$value->proof}} </div>
+          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+            <div>
+              <div class="name-text black-field">{{$value->phone}}</div>
+            </div>
           </div>
-        </div>
-        </div>
 
-      @endforeach
+          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+            <div>
+              <div class="name-text black-field">@foreach ($inquiry as $key => $inq_value)
+                @if ($inq_value->buyer_id == $value->id)
+                  {{$inq_value->type}}
+                @endif
+              @endforeach</div>
+            </div>
+          </div>
+
+          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+            <div>
+              <div class="name-text black-field"> {{$value->delivery_port}} </div>
+            </div>
+          </div>
+
+          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+            <div>
+              <div class="name-text black-field"> {{$value->proof}} </div>
+            </div>
+          </div>
+          </div>
+
+        @endforeach
+
+    @else
+      <div style="float: none;" class="w-col w-col-12">
+        <div style="text-align:center;">
+          <div  class="name-text black-field mb-5"><h1 class="action-header dash-action">No Buyer Data </h1></div>
+        </div>
+      </div>
+
+    @endif
+
 
 
 <a href="/buyer-database" class="button dash-button w-button">Edit</a></div>
@@ -244,18 +290,29 @@
     <section id="cards-section" class="cards-section">
       <div class="centered-container w-container">
         <h2 class="items-of-interest-header">Inventory</h2>
-        <div class="cards-grid-container">
-          @foreach ($products as $key => $value)
-            <div id="{{$value->id}}" class="w-clearfix">
-              <div class="cards-image-mask"><img src='{{asset("images/products/{$value->image_path}")}}' alt="" class="cards-image"></div>
-              <h3 class="heading">{{$value->type}}</h3>
-              <p>{!!  substr(strip_tags($value->description), 0, 150) !!} .... </p>
-              {{-- <div class="price in-stock">In Stock</div> --}}
-              <div class="price">${{$value->price}}</div>
-              <a href="/product-info/{{$value->id}}" class="button w-button">Select</a>
+        @if (sizeof($products)>0)
+          <div class="cards-grid-container">
+            @foreach ($products as $key => $value)
+              <div id="{{$value->id}}" class="w-clearfix">
+                <div class="cards-image-mask"><img src='{{asset("images/products/{$value->image_path}")}}' alt="" class="cards-image"></div>
+                <h3 class="heading">{{$value->type}}</h3>
+                <p>{!!  substr(strip_tags($value->description), 0, 150) !!} .... </p>
+                {{-- <div class="price in-stock">In Stock</div> --}}
+                <div class="price">${{$value->price}}</div>
+                <a href="/product-info/{{$value->id}}" class="button w-button">Select</a>
+              </div>
+            @endforeach
+          </div>
+
+        @else
+          <div style="float: none;" class="w-col w-col-12">
+            <div style="text-align:center;">
+              <div  class="name-text black-field mb-5"><h1 class="action-header dash-action">No Inventory </h1></div>
             </div>
-          @endforeach
-        </div>
+          </div>
+
+        @endif
+
       </div><a  class="button dash-button w-button" data-toggle="modal" data-target="#upload_product">Upload Product</a></section>
   </div>
 

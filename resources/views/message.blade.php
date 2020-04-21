@@ -9,23 +9,23 @@
     </div>
     <div class="miss-pof-sec edit-template">
       <div class="w-row">
-        <div class="w-col w-col-2">
+        <div class="w-col w-col-2 col-sm-4">
           <div><a href="/get_message/contract" class="button edit-button w-button">Edit Contract</a></div>
         </div>
-        <div class="w-col w-col-2">
+        <div class="w-col w-col-2 col-sm-4">
           <div><a href="/get_message/loi" class="button edit-button w-button">Edit LOI</a></div>
         </div>
-        <div class="w-col w-col-2">
+        <div class="w-col w-col-2 col-sm-4">
           <div><a href="/get_message/message" class="button edit-button w-button">Edit Custom</a></div>
         </div>
-        <div class="w-col w-col-2">
+        <div class="w-col w-col-2 col-sm-4">
           <div><a href="/get_message/pol" class="button edit-button w-button">Edit POL</a></div>
         </div>
-        <div class="w-col w-col-2">
+        <div class="w-col w-col-2 col-sm-4">
           <div><a href="/get_message/pof" class="button edit-button w-button">Edit POF</a></div>
         </div>
       </div>
-      <div class="template-cont w-container"><img src="images/jvtock-logo.png" width="150" alt="" class="image-2">
+      <div class="template-cont w-container"><img src="{{asset('images/jvtock-logo.png')}}" width="150" alt="" class="image-2">
         {{-- <a href="#" class="button short-button w-button">Edit Template</a> --}}
         <div class="div-block-2">
         <form method="post" action='/message/{{$type}}'>

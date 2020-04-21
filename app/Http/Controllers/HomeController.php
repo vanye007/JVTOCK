@@ -39,9 +39,7 @@ class HomeController extends Controller
     }
     private function retrieve_buyer(){
       $buyer = buyer::join('countries','buyer.country_id',"=", 'countries.id')
-                    ->join('inquiry','buyer.id',"=",'inquiry.buyer_id')
-                    ->join('product','inquiry.product_id',"=",'product.id')
-                    ->select('buyer.*', 'product.type','countries.country_name')
+                    ->select('buyer.*','countries.country_name')
                     ->get();
       return $buyer;
     }
@@ -57,6 +55,12 @@ class HomeController extends Controller
     private function all_products(){
       $products = product::get();
       return $products;
+    }
+
+    private function inquiry(){
+      $inquiry = inquiry::join('product','inquiry.product_id','=','product.id')
+                        ->get();
+      return $inquiry;
     }
 
     private function get_template(){
@@ -75,15 +79,17 @@ class HomeController extends Controller
         $buyer_actions = action_required::where('visited','no')->where('type','buyer')->get();
         $supplier_actions = action_required::where('visited','no')->where('type','supplier')->get();
 
+        $inquiry = $this->inquiry();
         $name = Auth::user()->name;
 
-        return view('home',['suppliers'=>$suppliers,'buyers'=>$buyers, 'products'=>$products, 'template'=>$template,'buyer_actions'=>$buyer_actions, 'supplier_actions'=>$supplier_actions])->with('name',$name);
+        return view('home',['suppliers'=>$suppliers,'buyers'=>$buyers, 'products'=>$products, 'template'=>$template,'buyer_actions'=>$buyer_actions, 'supplier_actions'=>$supplier_actions,'inquiry'=>$inquiry])->with('name',$name);
     }
 
     public function buyer_database(){
       $buyers = $this->retrieve_buyer();
+      $inquiry = $this->inquiry();
       action_required::where('type','buyer')->update(['visited' => 'yes']);
-      return view('buyer-database',['buyers'=>$buyers]);
+      return view('buyer-database',['buyers'=>$buyers,'inquiry'=>$inquiry]);
     }
 
     public function edit_template(){
@@ -119,6 +125,15 @@ class HomeController extends Controller
 
 
       return view('supplier-info',['supplier'=>$supplier])->with('image',$image_name);
+    }
+
+    public function buyer_info($id){
+      $buyer = buyer::join('countries','buyer.country_id',"=",'countries.id')
+                    ->where('buyer.id',$id)
+                    ->select('buyer.*','countries.country_name')
+                    ->get();
+      $inquiry = $this->inquiry();
+      return view('buyer-info',['buyer'=>$buyer, 'inquiry'=>$inquiry]);
     }
 
     public function retrieve_product($id){

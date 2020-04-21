@@ -20,22 +20,23 @@
       </div>
       <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
         <div>
-          <div class="name-text">Product</div>
+          <div class="name-text">Phone</div>
         </div>
       </div>
       <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
         <div>
-          <div class="name-text">Demand</div>
+          <div class="name-text">Interested Product</div>
         </div>
       </div>
       <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
         <div>
-          <div class="name-text">Proof of funds</div>
+          <div class="name-text">Delivery Port</div>
         </div>
       </div>
+
       <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
         <div>
-          <div class="name-text">LOI</div>
+          <div class="name-text">Proof of Funds</div>
         </div>
       </div>
     </div>
@@ -44,7 +45,7 @@
     <div class="w-row">
         <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
           <div>
-            <a href="supplier-name-info.html" class="name-click w-inline-block">
+            <a href="/buyer_info/{{$value->id}}" class="name-click w-inline-block">
               <div class="name-text black-field">{{$value->name}}</div>
             </a>
           </div>
@@ -58,13 +59,23 @@
 
         <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
           <div>
-            <div class="name-text black-field">{{$value->type}}</div>
+            <div class="name-text black-field">{{$value->phone}}</div>
           </div>
         </div>
 
         <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
           <div>
-            <div class="name-text black-field"> Null </div>
+            <div class="name-text black-field">@foreach ($inquiry as $key => $inq_value)
+              @if ($inq_value->buyer_id == $value->id)
+                {{$inq_value->type}}
+              @endif
+            @endforeach</div>
+          </div>
+        </div>
+
+        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+          <div>
+            <div class="name-text black-field"> {{$value->delivery_port}} </div>
           </div>
         </div>
 
@@ -73,7 +84,8 @@
             <div class="name-text black-field"> {{$value->proof}} </div>
           </div>
         </div>
-    </div>
+        </div>
+
       @endforeach
 
   </div>
