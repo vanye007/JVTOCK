@@ -25,12 +25,14 @@
       <div>
         <h1 class="dashboard-header">dashboard</h1>
       </div>
+
+      
     </div>
   </div>
-  <div class="_1st-sect">
+  <div class="container">
     <div class="w-row">
       <div class="w-col w-col-7">
-        <div class="dash-div-1">
+        <div class="dash-div-1 mb-4">
           <h1 class="action-header dash-action">ACTION REQUIRED</h1>
 
 
@@ -182,6 +184,8 @@
 
 
   </div>
+
+
 
   @else
     <div style="float: none;" class="w-col w-col-12">

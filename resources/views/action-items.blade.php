@@ -8,37 +8,36 @@
     <h1 class="action-header">ACTION REQUIRED</h1>
     <p class="paragraph-2 address">Please address the below actions</p>
   </div>
-  <div class="action-section list">
-    <a href="edit-template.html" class="link-block-4 w-inline-block">
-      <div class="action-item-div">
-        <p class="paragraph-2">New buyer entered: Missing POF</p>
-      </div>
-    </a>
-  </div>
-  <div class="action-section list list2">
+  @if (sizeof($buyer_actions)>0 || sizeof($supplier_actions))
+
+
+  @else
+    <div class="action-section list">
     <div class="action-item-div">
-      <a href="edit-template.html" class="link-block-4 w-inline-block">
+      <p class="paragraph-2 dash-parag">No action</p>
+    </div>
+  </div>
+
+
+  @endif
+  @foreach ($buyer_actions as $key => $value)
+    <div class="action-section list">
+      <a href="/buyer-database" class="link-block-4 dash-link w-inline-block">
         <div class="action-item-div">
-          <p class="paragraph-2">New Supplier entered: Missing POL</p>
+          <p class="paragraph-2 dash-parag">New buyer entered</p>
         </div>
       </a>
     </div>
-  </div>
-  <div class="action-section list list2">
-    <a href="edit-template.html" class="link-block-4 w-inline-block">
+  @endforeach
+
+  @foreach ($supplier_actions as $key => $value)
+    <div class="action-section list">
+    <a href="/supplier-database" class="link-block-4 dash-link w-inline-block">
       <div class="action-item-div">
-        <p class="paragraph-2">Suspected match between buyer and seller</p>
+        <p class="paragraph-2 dash-parag">New buyer entered: Missing POF</p>
       </div>
     </a>
   </div>
-  <div class="action-section list list2">
-    <div class="action-item-div">
-      <a href="edit-template.html" class="link-block-4 w-inline-block">
-        <div class="action-item-div">
-          <p class="paragraph-2">Pending paperwork for deal #2211</p>
-        </div>
-      </a>
-    </div>
-  </div>
+  @endforeach
 
 @endsection

@@ -111,7 +111,9 @@ class HomeController extends Controller
     }
 
     public function action_items(){
-      return view('action-items');
+      $buyer_actions = action_required::where('visited','no')->where('type','buyer')->get();
+      $supplier_actions = action_required::where('visited','no')->where('type','supplier')->get();
+      return view('action-items',['buyer_actions'=>$buyer_actions,'supplier_actions'=>$supplier_actions]);
     }
 
     public function supplier_info($id){
