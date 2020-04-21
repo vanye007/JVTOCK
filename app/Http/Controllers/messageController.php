@@ -76,4 +76,60 @@ class messageController extends Controller
       });
       return redirect()->back()->with('successMsg','Mail Sent');
     }
+
+    public function message(Request $request, $type){
+      $from_name = Auth::user()->name;
+      $userId = Auth::id();
+      $to_name = 'vanye';
+      $to_email = $request->input('email');
+      $the_message = '';
+
+      if ($type == 'message') {
+        $the_message = $request->input('message');
+      }
+
+      if ($type == 'contract') {
+        $the_message = $request->input('contract');
+      }
+
+      if ($type == 'loi') {
+        $the_message = $request->input('loi');
+      }
+
+      if ($type == 'custom') {
+        $the_message = $request->input('custom');
+      }
+
+      if ($type == 'pol') {
+        $the_message = $request->input('pol');
+      }
+
+      if ($type == 'pof') {
+        $the_message = $request->input('pof');
+      }
+
+      $message = template::where('user_id',$userId)->where('type',$type)->first();
+
+      if ($message === null) {
+         $message = new template();
+         $message->user_id = $userId;
+         $message->type = $type;
+         $message->message = $the_message;
+         $message->save();
+      }else{
+        template::where('user_id',$userId)->where('type',$type)->update(['message' => $the_message]);
+      }
+
+      $data = array('to_name'=>$to_name, 'the_message'=> $the_message, 'from_name'=>$from_name);
+      Mail::send('layouts.mail.mail', $data, function($message) use ($to_name, $to_email){
+        $from_name = Auth::user()->name;
+        $from_email = Auth::user()->email;
+        $message->to($to_email, $to_name)
+                ->subject('JVTOCK Notification');
+        $message->from($from_email,$from_name);
+      });
+      return redirect()->back()->with('successMsg','Mail Sent');
+
+
+    }
 }

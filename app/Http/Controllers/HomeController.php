@@ -15,6 +15,7 @@ use App\countries;
 use App\inquiry;
 use App\product;
 use App\template;
+use App\action_required;
 
 class HomeController extends Controller
 {
@@ -33,6 +34,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function welcome(){
+      return view('welcome');
+    }
     private function retrieve_buyer(){
       $buyer = buyer::join('countries','buyer.country_id',"=", 'countries.id')
                     ->join('inquiry','buyer.id',"=",'inquiry.buyer_id')
@@ -68,14 +72,17 @@ class HomeController extends Controller
         $suppliers = $this->retrieve_supplier();
         $products = $this->all_products();
         $template = $this->get_template();
+        $buyer_actions = action_required::where('visited','no')->where('type','buyer')->get();
+        $supplier_actions = action_required::where('visited','no')->where('type','supplier')->get();
 
         $name = Auth::user()->name;
 
-        return view('home',['suppliers'=>$suppliers,'buyers'=>$buyers, 'products'=>$products, 'template'=>$template])->with('name',$name);
+        return view('home',['suppliers'=>$suppliers,'buyers'=>$buyers, 'products'=>$products, 'template'=>$template,'buyer_actions'=>$buyer_actions, 'supplier_actions'=>$supplier_actions])->with('name',$name);
     }
 
     public function buyer_database(){
       $buyers = $this->retrieve_buyer();
+      action_required::where('type','buyer')->update(['visited' => 'yes']);
       return view('buyer-database',['buyers'=>$buyers]);
     }
 
@@ -88,6 +95,7 @@ class HomeController extends Controller
 
     public function supplier_database(){
       $suppliers = $this->retrieve_supplier();
+      action_required::where('type','supplier')->update(['visited' => 'yes']);
       return view('supplier-database',['suppliers'=>$suppliers]);
     }
 
@@ -164,6 +172,13 @@ class HomeController extends Controller
       return redirect()->back()->with('successMsg','Product updated');
     }
 
+
+    public function get_message_template($type){
+      $name = Auth::user()->name;
+      $id = Auth::user()->id;
+      $template = template::where('user_id',$id)->where('type',$type)->get();
+      return view('message',['template'=>$template])->with('type',$type)->with('name',$name);
+    }
 
 
 }

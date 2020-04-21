@@ -11,9 +11,17 @@ use Session;
 use App\product;
 use App\supplier;
 use App\countries;
+use App\action_required;
 
 class supplierController extends Controller
 {
+
+  public function action_required(){
+    $action = new action_required();
+    $action->type = 'supplier';
+    $action->visited = 'no';
+    $action->save();
+  }
 
   public function supplier(){
     $countries = countries::get();
@@ -117,7 +125,8 @@ class supplierController extends Controller
         $certificates->move($certificates_destination, $new_certificate_name);
         $product_image->move($product_image_destination, $new_product_image_name);
         $proof_of_life->move($proof_of_life_destination, $new_proof_of_life_name);
-
+        
+        $this->action_required();
         supplier::where('id',$id)->update(['certificates' => $new_certificate_name, 'product_image'=>$new_product_image_name, 'proof_of_life'=>$new_proof_of_life_name]);
       }
     }

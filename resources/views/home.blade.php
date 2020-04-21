@@ -20,37 +20,6 @@
   </div>
 </div>
 
-  {{-- @guest
-  <li class="nav-item">
-      <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-  </li>
-  @if (Route::has('register'))
-      <li class="nav-item">
-          <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-      </li>
-  @endif
-@else
-
-  <li class="nav-item dropdown">
-      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-          {{ Auth::user()->name }} <span class="caret"></span>
-      </a>
-
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ route('logout') }}"
-             onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">
-              {{ __('Logout') }}
-          </a>
-
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-          </form>
-      </div>
-  </li>
-@endguest --}}
-
-
   <div class="title">
     <div class="w-container">
       <div>
@@ -63,42 +32,29 @@
       <div class="w-col w-col-7">
         <div class="dash-div-1">
           <h1 class="action-header dash-action">ACTION REQUIRED</h1>
-          <a href="/edit-template" class="link-block-4 dash-link w-inline-block">
-            <div class="action-item-div">
-              <p class="paragraph-2 dash-parag">New buyer entered: Missing POF</p>
-            </div>
-          </a>
-          <a href="/edit-template" class="link-block-4 dash-link w-inline-block">
-            <div class="action-item-div">
-              <p class="paragraph-2 dash-parag">New Supplier entered: Missing POL</p>
-            </div>
-          </a>
-          <a href="/edit-template" class="link-block-4 dash-link w-inline-block">
-            <div class="action-item-div">
-              <p class="paragraph-2 dash-parag">Suspected match between buyer and seller</p>
-            </div>
-          </a>
-          <a href="/edit-template" class="link-block-4 dash-link w-inline-block">
-            <div class="action-item-div">
-              <p class="paragraph-2 dash-parag">Pending paperwork for deal #2211</p>
-            </div>
-          </a>
-          <a href="/edit-template" class="link-block-4 dash-link w-inline-block">
-            <div class="action-item-div">
-              <p class="paragraph-2 dash-parag">New buyer entered: Missing POF</p>
-            </div>
-          </a>
-          <a href="/edit-template" class="link-block-4 dash-link w-inline-block">
-            <div class="action-item-div">
-              <p class="paragraph-2 dash-parag">New buyer entered: Missing POF</p>
-            </div>
-          </a><a href="/action-items" class="button dash-button action-sec w-button">Edit</a></div>
+          @foreach ($buyer_actions as $key => $value)
+              <a href="/buyer-database" class="link-block-4 dash-link w-inline-block">
+                <div class="action-item-div">
+                  <p class="paragraph-2 dash-parag">New buyer entered</p>
+                </div>
+              </a>
+          @endforeach
+
+          @foreach ($supplier_actions as $key => $value)
+            <a href="/supplier-database" class="link-block-4 dash-link w-inline-block">
+              <div class="action-item-div">
+                <p class="paragraph-2 dash-parag">New buyer entered: Missing POF</p>
+              </div>
+            </a>
+          @endforeach
+
+          </div>
         {{-- <div class="dash-div-1 spaces"><img src="images/simple-pie-chart-1600.png" width="470" srcset="images/simple-pie-chart-1600-p-500.png 500w, images/simple-pie-chart-1600-p-800.png 800w, images/simple-pie-chart-1600-p-1080.png 1080w, images/simple-pie-chart-1600.png 1600w" sizes="(max-width: 767px) 77vw, (max-width: 991px) 49vw, 470px" alt="" class="image-3"></div> --}}
       </div>
       <div class="w-col w-col-5">
         <div class="dash-div-1">
           <h1 class="heading-4 tt">Template Message</h1>
-          <div class="template-cont dash w-container"><img src="images/jvtock-logo.png" width="150" alt="" class="image-2"><a href="/edit-template" class="button short-button dash-button w-button">Send Message</a>
+          <div class="template-cont dash w-container"><img src="images/jvtock-logo.png" width="150" alt="" class="image-2"><a href="/get_message/message" class="button short-button dash-button w-button">Send Message</a>
             <div class="div-block-2">
               <p>@foreach ($template as $key => $value)
                 @if ($value->type == 'message')
@@ -114,7 +70,7 @@
       </div>
     </div>
   </div>
-  <div class="_1st-sect _2nd-sec supplier_database">
+  <div class="section supplier-data-sec data-table buyer dash">
     <div>
       <h1 class="supplier-database-header dash">Supplier Database</h1>
       <div class="columns w-row">
@@ -209,9 +165,7 @@
         </div>
 
         @endforeach
-
-
-    </div><a href="/supplier-database" class="button dash-button w-button">Edit</a></div>
+  </div><a href="/supplier-database" class="button dash-button w-button">Edit</a></div>
   <div class="section supplier-data-sec data-table buyer dash">
     <h1 class="supplier-database-header dash">Buyer Database</h1>
     <div class="w-row">

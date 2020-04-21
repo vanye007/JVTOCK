@@ -11,8 +11,6 @@
             <h2>{{$product_name}}</h2>
             <p>@foreach ($product as $key => $value)
               {{$value->description}}
-
-            
             @endforeach</p>
             {{-- @foreach ($specification as $key => $value)
               <p>{{$value->description}}</p>

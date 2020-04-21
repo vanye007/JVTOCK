@@ -13,9 +13,19 @@ use App\buyer;
 use App\product;
 use App\inquiry;
 use App\countries;
+use App\action_required;
 
 class buyerController extends Controller
 {
+  public function action_required(){
+    $action = new action_required();
+    $action->type = 'buyer';
+    $action->visited = 'no';
+    $action->save();
+
+  }
+
+
   public function products(){
     $products = product::get();
     return $products;
@@ -98,6 +108,9 @@ class buyerController extends Controller
         //retrieve products from the products database
         $products = $this->products();
         $encrypted_session = Crypt::encryptString($session_id);
+
+        $this->action_required();
+
 
         return view('external_broker.inventory', ['products'=>$products])->with('session',$encrypted_session);
       }
