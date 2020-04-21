@@ -11,7 +11,7 @@
             <h1 class="heading-5">Welcome Back!</h1>
             <div class="text-block _1">Please login with your personal info</div>
             <div class="w-form">
-              <form id="email-form" name="email-form" data-name="Email Form"  action="{{ route('login') }}" method="post">
+              <form class="px-5" id="email-form" name="email-form" data-name="Email Form"  action="{{ route('login') }}" method="post">
                   @csrf
                 <input type="email" class="form-field w-input" maxlength="256" name="email" data-name="Email 4" placeholder="Email" id="email-4" required="">
                 @error('email')
@@ -26,7 +26,7 @@
                     </span>
                 @enderror
                 <div class="text-block _1">Forgot your Password?</div>
-                <input type="submit" value="Sign in" data-wait="Please wait..." class="button-2 sign-in-button white w-button"></form>
+                <input style="margin:auto;display:block;" type="submit" value="Sign in" data-wait="Please wait..." class="button-2 sign-in-button white w-button mt-4"></form>
               <div class="w-form-done">
                 <div>Thank you! Your submission has been received!</div>
               </div>
