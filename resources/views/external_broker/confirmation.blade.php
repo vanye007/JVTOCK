@@ -1,14 +1,20 @@
 @extends('external_broker.template')
 @section('content')
   <body class="buyer-dash-body">
-    <div data-collapse="medium" data-animation="over-right" data-duration="400" class="dashboard-nav w-nav">
-      <div data-collapse="medium" data-animation="over-right" data-duration="400" class="dashboard-nav w-nav">
-        @include('external_broker.nav')
+    <section id="" class=" centered p-5" style="width:100%">
+      <div class="col-md-12 align-middle confirm" >
+        @if(isset($buyer))
+          <p style="text-align:center;"><img src="{{asset('images/jvtock-logo.png')}}" width="140" alt=""></p>
+            <p style="text-align:center;" class="confirm_text">Thank you! Confirmation of your order request for information has been placed. Our team will get back to you as soon as possible.</p>
+            <P><a href="/buyer" class="nav-links w-nav-link"><i class="fa fa-angle-left"></i>Iterms of Interest</a></p>
+        @endif
+
+        @if(isset($supplier))
+          <p style="text-align:center;"><img src="{{asset('images/jvtock-logo.png')}}" width="140" alt=""></p>
+            <p style="text-align:center;" class="confirm_text">Thank you for reaching out to us, We have recieved your supply information. Our customer representative will get back to you shortly.</p>
+            <P><a href="https://jvtock.com/" class="nav-links w-nav-link"><i class="fa fa-angle-left"></i>Visit our webpage</a></p>
+        @endif
       </div>
-    </div>
-    <section id="feature-section" class="feature-section-2">
-      <p class="confirmation-request">Thank you! Confirmation of your order request for information has been placed. Our team will get back to you as soon as possible.</p>
     </section>
-    <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
   </body>
 @endsection

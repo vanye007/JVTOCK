@@ -20,6 +20,9 @@ Route::get('/product-page/{id}/{encrypted_session}/{name}','buyerController@prod
 Route::get('/inquiry/{id}/{session}','buyerController@inquiry');
 Route::get('/mail','buyerController@mail');
 
+Route::get('/test',function(){
+  return view('external_broker.confirmation');
+});
 
 
 

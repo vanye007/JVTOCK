@@ -68,7 +68,7 @@ class buyerController extends Controller
       'name' => 'required',
       'email' => 'required',
       'phone' => 'required',
-      'proof' => 'required|mimes:png,jpeg,pdf,doc',
+      'proof' => 'required|mimes:png,jpeg,pdf,doc,docx',
       'file' => 'max:20480',
     ]);
 
@@ -129,6 +129,7 @@ class buyerController extends Controller
   public function inquiry($product_id,$encrypted_session){
     //retrieve the product id
     $product_id = $product_id;
+    $buyer = 'Thank you! Confirmation of your order request for information has been placed. Our team will get back to you as soon as possible.';
 
     //decrypt the ecnvrypted session and find the correspending user id from the databse
     $decrypted_session = Crypt::decryptString($encrypted_session);
@@ -140,7 +141,7 @@ class buyerController extends Controller
     $inquiry->product_id = $product_id;
 
     if($inquiry->save()){
-      return view('external_broker.confirmation');
+      return view('external_broker.confirmation')->with('buyer',$buyer);
     }
 
 

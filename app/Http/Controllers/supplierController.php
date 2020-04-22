@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 use Session;
 use App\product;
 use App\supplier;
@@ -30,6 +31,7 @@ class supplierController extends Controller
   }
 
   public function submit_supply(Request $request){
+    $the_message = 'This is to confirm that we have recieved your supply information. Our customer representative will get back to you shortly';
 
     $name = $request->input('name');
     $email = $request->input('email');
@@ -69,8 +71,8 @@ class supplierController extends Controller
       'prices_per_capacity' => 'required',
       'capacity_upgrades' => 'required',
       'price' => 'required',
-      'certificates' => 'required|mimes:png,jpeg,pdf,doc',
-      'product_image' => 'required|mimes:png,jpeg,pdf,doc',
+      'certificates' => 'required|mimes:png,jpeg,pdf,doc,docx',
+      'product_image' => 'required|mimes:png,jpeg,pdf,doc,docx',
       'supply_capacity' => 'required',
       'current_inventory' => 'required',
       'port_of_origin' => 'required',
@@ -125,9 +127,20 @@ class supplierController extends Controller
         $certificates->move($certificates_destination, $new_certificate_name);
         $product_image->move($product_image_destination, $new_product_image_name);
         $proof_of_life->move($proof_of_life_destination, $new_proof_of_life_name);
-        
+
         $this->action_required();
         supplier::where('id',$id)->update(['certificates' => $new_certificate_name, 'product_image'=>$new_product_image_name, 'proof_of_life'=>$new_proof_of_life_name]);
+
+        $data = array('to_name'=>$name, 'the_message'=> $the_message, 'from_name'=>'Chris');
+        Mail::send('layouts.mail.supplier_confirmation', $data, function($message) use ($name, $email){
+          $from_name ='JVTOCK';
+          $from_email = 'info@jvtock.com';
+          $message->to($email, $name)
+                  ->subject('JVTOCK Notification');
+          $message->from($from_email,$from_name);
+        });
+
+        return view('external_broker.confirmation')->with('supplier',$the_message);
       }
     }
 

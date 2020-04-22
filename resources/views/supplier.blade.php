@@ -14,7 +14,6 @@
                   @endforeach
               </label>
             @endif
-
             <label for="name" class="field-label">Full Name </label>
             <input type="text" class="input-fields w-input" maxlength="256" name="name" data-name="name" id="name" required="">
             <label for="name" class="field-label">Email </label>
@@ -47,6 +46,11 @@
             <input type="text" class="input-fields w-input" maxlength="256" name="capacity_upgrades" data-name="capacity_upgrades" id="capacity_upgrades" required="">
 
             <label for="Proof-Of-Life-6" class="field-label">Certification</label>
+            @if($errors->has('certificates'))
+              <label for="myfile" class="field-label bg-danger text-white p-3">
+                  {{ $errors->first('certificates') }}
+              </label>
+            @endif
             <input type="file" class="input-fields w-input" maxlength="256" name="certificates" data-name="certificates" id="certificates" required="">
             <label for="Proof-Of-Life-6" class="field-label">Product Image</label>
             <input type="file" class="input-fields w-input" maxlength="256" name="product_image" data-name="product_image" id="product_image" required="">
@@ -62,6 +66,11 @@
             <label for="Proof-Of-Life-6" class="field-label">Pieces/units per Box (boxes per carton, cartons per pallet. Associated dimensions and weight)</label>
             <input type="text" class="input-fields w-input" maxlength="256" name="units_per_box" data-name="units_per_box" id="units_per_box" required="">
             <label for="Proof-Of-Life-6" class="field-label">Proof of life</label>
+            @if($errors->has('proof_of_life'))
+              <label for="myfile" class="field-label bg-danger text-white p-3">
+                  {{ $errors->first('proof_of_life') }}
+              </label>
+            @endif
             <input type="file" class="input-fields w-input" maxlength="256" name="proof_of_life" data-name="proof_of_life" id="proof_of_life" required="">
             <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button w-button">
           </form>
