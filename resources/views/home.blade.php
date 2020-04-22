@@ -26,7 +26,7 @@
         <h1 class="dashboard-header">dashboard</h1>
       </div>
 
-      
+
     </div>
   </div>
   <div class="container">
@@ -302,7 +302,7 @@
                 <h3 class="heading">{{$value->type}}</h3>
                 <p>{!!  substr(strip_tags($value->description), 0, 150) !!} .... </p>
                 {{-- <div class="price in-stock">In Stock</div> --}}
-                <div class="price">${{$value->price}}</div>
+                <div class="price">{{$value->price}}</div>
                 <a href="/product-info/{{$value->id}}" class="button w-button">Select</a>
               </div>
             @endforeach

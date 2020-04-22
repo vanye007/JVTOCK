@@ -120,13 +120,17 @@ class supplierController extends Controller
         $new_proof_of_life_name = $id . '_' . $get_proof_of_life_name;
 
         //Move renamed Uploaded files to new destination
-        $certificates_destination = '/storage/app/uploads/supplier/certificates/';
-        $product_image_destination  = 'images/supplier/product_image/';
-        $proof_of_life_destination = '/storage/app/uploads/supplier/proof_of_life/';
+        $certificates_destination = 'uploads/supplier/certificates/';
+        $product_image_destination  = 'uploads/supplier/product_image/';
+        $proof_of_life_destination = 'uploads/supplier/proof_of_life/';
 
-        $certificates->move($certificates_destination, $new_certificate_name);
-        $product_image->move($product_image_destination, $new_product_image_name);
-        $proof_of_life->move($proof_of_life_destination, $new_proof_of_life_name);
+        // $certificates->move($certificates_destination, $new_certificate_name);
+        // $product_image->move($product_image_destination, $new_product_image_name);
+        // $proof_of_life->move($proof_of_life_destination, $new_proof_of_life_name);
+
+        $certificates->storeAs($certificates_destination,$new_certificate_name);
+        $product_image->storeAs($product_image_destination, $new_product_image_name);
+        $proof_of_life->storeAs($proof_of_life_destination,$new_proof_of_life_name);
 
         $this->action_required();
         supplier::where('id',$id)->update(['certificates' => $new_certificate_name, 'product_image'=>$new_product_image_name, 'proof_of_life'=>$new_proof_of_life_name]);

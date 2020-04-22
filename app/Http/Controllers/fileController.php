@@ -13,7 +13,7 @@ class fileController extends Controller
 
   public function view_certificates($id,$name)
     {
-        $file = storage_path('app/uploads/supplier/certificates/') . $id .'_'.$name;
+        $file = storage_path('uploads/supplier/certificates/') . $id .'_'.$name;
 
         if (file_exists($file)) {
 
@@ -31,7 +31,7 @@ class fileController extends Controller
 
     public function view_proof_of_life($id,$name)
       {
-          $file = storage_path('app/uploads/supplier/proof_of_life/') . $id . '_'.$name;
+          $file = storage_path('uploads/supplier/proof_of_life/') . $id . '_'.$name;
 
           if (file_exists($file)) {
 
@@ -48,21 +48,21 @@ class fileController extends Controller
       }
 
 
-        public function view_proof_of_funds($id,$name)
-          {
-              $file = storage_path('app/uploads/buyer/certificates/') . $id . '_' .$name;
+      public function view_proof_of_funds($id,$name)
+        {
+            $file = storage_path('uploads/buyer/certificates/') . $id . '_' .$name;
 
-              if (file_exists($file)) {
+            if (file_exists($file)) {
 
-                $headers = [
-                    'Content-Type' => 'application/pdf',
-                    'Content-Type' => 'image/png',
-                    'Content-Type' => 'image/jpeg'
-                ];
+              $headers = [
+                  'Content-Type' => 'application/pdf',
+                  'Content-Type' => 'image/png',
+                  'Content-Type' => 'image/jpeg'
+              ];
 
-                  return response()->download($file, 'Test File', $headers, 'inline');
-              } else {
-                  abort(404, 'File not found!');
-              }
-          }
+                return response()->download($file, 'Test File', $headers, 'inline');
+            } else {
+                abort(404, 'File not found!');
+            }
+        }
 }
