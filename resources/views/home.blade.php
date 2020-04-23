@@ -2,23 +2,7 @@
 
 @section('content')
 
-  <!-- Modal -->
-<div class="modal fade" id="upload_product" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <form method="post" action="/upload_product" enctype='multipart/form-data'>
-          @csrf
-          <input type="text" class="form-field w-input" maxlength="256" name="type"  placeholder="Product Name"  required="">
-          <input type="text" class="form-field w-input" maxlength="256" name="price"  placeholder="Price" required="">
-          <textarea style="width:100%;" placeholder="Product description" name="description" class="form-field w-input" maxlength="256" rows="10" ></textarea>
-          <input type="file" class="input-fields w-input" maxlength="256" name="image"  required="">
-          <button class="button w-button">Upload</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+
 
   <div class="title">
     <div class="w-container">
@@ -29,7 +13,7 @@
 
     </div>
   </div>
-  <div class="container">
+  <div class="section mt-0  data-table buyer dash">
     <div class="w-row">
       <div class="w-col w-col-7">
         <div class="dash-div-1 mb-4">
@@ -86,102 +70,47 @@
     </div>
   </div>
   <div class="section supplier-data-sec data-table buyer dash">
-  @if (sizeof($suppliers)>0)
     <div>
-      <h1 class="supplier-database-header dash">Supplier Database</h1>
-      <div class="columns w-row">
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Name</div>
-          </div>
-        </div>
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Country</div>
-          </div>
-        </div>
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Product</div>
-          </div>
-        </div>
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Price per capacity</div>
-          </div>
-        </div>
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Sale Price</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Current inventory</div>
-          </div>
-        </div>
-
-
-        <div class="w-col w-col-2">
-          <div>
-            <div class="name-text">Shipping routes</div>
-          </div>
-        </div>
-
+  @if (sizeof($suppliers)>0)
+    <div style="float: none;" class="w-col w-col-12">
+      <div style="text-align:center;">
+        <div  class="name-text black-field mb-5"><h1 class="action-header dash-action">Supplier Data </h1></div>
       </div>
-
+    </div>
+    <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Country</th>
+          <th scope="col">Product</th>
+          <th scope="col">Prices/capacity</th>
+          <th scope="col">Sales price</th>
+            <th scope="col">Supply capacity</th>
+          <th scope="col">Shipping routes</th>
+          <th scope="col">Current inventory</th>
+          <th scope="col">Port of origin</th>
+          <th scope="col">Units per box</th>
+        </tr>
+      </thead>
+      <tbody>
         @foreach ($suppliers->sortByDesc('id') as $key => $value)
-            <div class="columns w-row">
-          <div class="w-col w-col-2">
-            <div>
-              <a href="/supplier_info/{{$value->id}}" class="name-click w-inline-block">
-                <div class="name-text black-field">{{$value->name}}</div>
-              </a>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->country_name}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->type}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->prices_per_capacity}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->price}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->current_inventory}}</div>
-            </div>
-          </div>
-
-
-          <div class="w-col w-col-2">
-            <div>
-              <div class="name-text black-field">{{$value->shipping_routes}}</div>
-            </div>
-          </div>
-
-        </div>
-
+          <tr>
+            <th scope="row"><a href="/supplier_info/{{$value->id}}">{{$value->name}}</a></th>
+            <td>{{$value->country_name}}</td>
+            <td>{{$value->type}}</td>
+            <td>{{$value->prices_per_capacity}}</td>
+            <td>{{$value->price}}</td>
+            <td>{{$value->supply_capacity}}</td>
+            <td>{{$value->shipping_routes}}</td>
+            <td>{{$value->current_inventory}}</td>
+            <td>{{$value->port_of_origin}}</td>
+            <td>{{$value->units_per_box}}</td>
+          </tr>
         @endforeach
-
+      </tbody>
+    </table>
+  </div>
 
   </div>
 
@@ -194,89 +123,45 @@
       </div>
     </div>
   @endif
-  <a href="/supplier-database" class="button dash-button w-button">Edit</a></div>
+  <a href="/supplier-database" class="button dash-button w-button">Explore</a></div>
   <div class="section supplier-data-sec data-table buyer dash">
     @if (sizeof($buyers)>0)
-      <h1 class="supplier-database-header dash">Buyer Database</h1>
-      <div class="w-row">
-        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-          <div>
-            <div class="name-text">Name</div>
-          </div>
-        </div>
-        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-          <div>
-            <div class="name-text">Country</div>
-          </div>
-        </div>
-        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-          <div>
-            <div class="name-text">Phone</div>
-          </div>
-        </div>
-        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-          <div>
-            <div class="name-text">Interested Product</div>
-          </div>
-        </div>
-        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-          <div>
-            <div class="name-text">Delivery Port</div>
-          </div>
-        </div>
-
-        <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-          <div>
-            <div class="name-text">Proof of Funds</div>
-          </div>
+      <div style="float: none;" class="w-col w-col-12">
+        <div style="text-align:center;">
+          <div  class="name-text black-field mb-5"><h1 class="action-header dash-action">Buyer Data </h1></div>
         </div>
       </div>
-      @foreach ($buyers->sortByDesc('id') as $key => $value)
-      <div class="w-row">
-          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-            <div>
-              <a href="/buyer_info/{{$value->id}}" class="name-click w-inline-block">
-                <div class="name-text black-field">{{$value->name}}</div>
-              </a>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-            <div>
-              <div class="name-text black-field">{{$value->country_name}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-            <div>
-              <div class="name-text black-field">{{$value->phone}}</div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-            <div>
-              <div class="name-text black-field">@foreach ($inquiry as $key => $inq_value)
+      <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Country</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Interested product</th>
+            <th scope="col">Delivery port</th>
+            <th scope="col">Proof of funds</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach ($buyers->sortByDesc('id') as $key => $value)
+            <tr>
+              <th scope="row"><a href="/buyer_info/{{$value->id}}">{{$value->name}}</a></th>
+              <td>{{$value->country_name}}</td>
+              <td>{{$value->phone}}</td>
+              <td>@foreach ($inquiry as $key => $inq_value)
                 @if ($inq_value->buyer_id == $value->id)
                   {{$inq_value->type}}
                 @endif
-              @endforeach</div>
-            </div>
-          </div>
+              @endforeach</td>
+              <td>{{$value->delivery_port}}</td>
+              <td>{{$value->proof}}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
 
-          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-            <div>
-              <div class="name-text black-field"> {{$value->delivery_port}} </div>
-            </div>
-          </div>
-
-          <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
-            <div>
-              <div class="name-text black-field"> {{$value->proof}} </div>
-            </div>
-          </div>
-          </div>
-
-        @endforeach
+    </div>
 
     @else
       <div style="float: none;" class="w-col w-col-12">
@@ -289,7 +174,7 @@
 
 
 
-<a href="/buyer-database" class="button dash-button w-button">Edit</a></div>
+<a href="/buyer-database" class="button dash-button w-button">Explore</a></div>
   <div id="item-of-interest" class="items-of-interest-div dash-inventory">
     <section id="cards-section" class="cards-section">
       <div class="centered-container w-container">
@@ -300,7 +185,7 @@
               <div id="{{$value->id}}" class="w-clearfix">
                 <div class="cards-image-mask"><img src='{{asset("images/products/{$value->image_path}")}}' alt="" class="cards-image"></div>
                 <h3 class="heading">{{$value->type}}</h3>
-                <p>{!!  substr(strip_tags($value->description), 0, 150) !!} .... </p>
+                <p>{!!  substr(strip_tags($value->description), 0, 40) !!} .... </p>
                 {{-- <div class="price in-stock">In Stock</div> --}}
                 <div class="price">{{$value->price}}</div>
                 <a href="/product-info/{{$value->id}}" class="button w-button">Select</a>

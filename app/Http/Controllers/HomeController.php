@@ -150,7 +150,7 @@ class HomeController extends Controller
 
       product::where('id',$id)->update(['type' => $type,'description'=>$description, 'price'=>$price]);
 
-      return redirect()->back()->with('successMsg','Product updated');
+      return redirect()->back()->with('notification','Product updated');
     }
 
     public function upload_product(Request $request){
@@ -186,7 +186,7 @@ class HomeController extends Controller
       $product->image_path = $image_name;
       $product->save();
 
-      return redirect()->back()->with('successMsg','Product updated');
+      return redirect()->back()->with('notification','New product added');
     }
 
 

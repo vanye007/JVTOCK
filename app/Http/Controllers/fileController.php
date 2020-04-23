@@ -11,58 +11,68 @@ class fileController extends Controller
       $this->middleware('auth');
   }
 
-  public function view_certificates($id,$name)
+  private function get_content_type($name){
+    $headers = [];
+    if (strpos($name, 'pdf') !== false) {
+        $headers = [
+            'Content-Type' => 'application/pdf',
+        ];
+    }
+
+    if (strpos($name, 'docx') !== false) {
+        $headers = [
+          'Content-Type' => 'application/msword',
+        ];
+    }
+
+    if (strpos($name, 'png') !== false) {
+        $headers = [
+          'Content-Type' => 'image/png',
+        ];
+    }
+
+    if (strpos($name, 'jpeg') !== false) {
+        $headers = [
+          'Content-Type' => 'image/jpg',
+        ];
+    }
+
+    return $headers;
+  }
+
+  public function view_certificates($name)
     {
-        $file = storage_path('uploads/supplier/certificates/') . $id .'_'.$name;
+        $file = storage_path('/app/uploads/supplier/certificates/') .$name;
+        $headers = $this->get_content_type($name);
 
         if (file_exists($file)) {
-
-            $headers = [
-                'Content-Type' => 'application/pdf',
-                'Content-Type' => 'image/png',
-                'Content-Type' => 'image/jpeg'
-            ];
-
             return response()->download($file, 'Test File', $headers, 'inline');
         } else {
             abort(404, 'File not found!');
         }
     }
 
-    public function view_proof_of_life($id,$name)
-      {
-          $file = storage_path('uploads/supplier/proof_of_life/') . $id . '_'.$name;
-
-          if (file_exists($file)) {
-
-            $headers = [
-                'Content-Type' => 'application/pdf',
-                'Content-Type' => 'image/png',
-                'Content-Type' => 'image/jpeg'
-            ];
-
-              return response()->download($file, 'Test File', $headers, 'inline');
-          } else {
-              abort(404, 'File not found!');
-          }
-      }
-
-
-      public function view_proof_of_funds($id,$name)
-        {
-            $file = storage_path('uploads/buyer/certificates/') . $id . '_' .$name;
-
-            if (file_exists($file)) {
-
-              $headers = [
-                  'Content-Type' => 'application/pdf',
-                  'Content-Type' => 'image/png',
-                  'Content-Type' => 'image/jpeg'
-              ];
-
-                return response()->download($file, 'Test File', $headers, 'inline');
-            } else {
-                abort(404, 'File not found!');
-            }
+  public function view_proof_of_life($name)
+    {
+        $file = storage_path('/app/uploads/supplier/proof_of_life/') .$name;
+        $headers = $this->get_content_type($name);
+        if (file_exists($file)) {
+            return response()->download($file, 'Test File', $headers, 'inline');
+        } else {
+            abort(404, 'File not found!');
         }
+    }
+
+
+  public function view_proof_of_funds($name)
+    {
+        $file = storage_path('/app/uploads/buyer/proof_of_funds/') .$name;
+        $headers = $this->get_content_type($name);
+
+        if (file_exists($file)) {
+            return response()->download($file,  null, $headers, null);
+        } else {
+            abort(404, 'File not found!');
+        }
+    }
 }

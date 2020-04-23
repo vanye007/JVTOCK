@@ -19,25 +19,25 @@ class messageController extends Controller
         $this->middleware('auth');
     }
 
-    public function submitEnquiry(){
-      $name = request('name');
-      $email = request('email');
-      $clinicName = request('clinic');
-      $phone = request('phone');
-      $enquiry = request('message');
-
-      $to_name = 'FMS veterinary';
-      $to_email = 'sales.bc@fmsmeds.com';
-
-      $data = array('name'=>$name,'email'=> $email, 'clinicName'=> $clinicName, 'phone'=> $phone, 'name' =>$name, 'clinicName'=>$clinicName, 'enquiry'=>$enquiry);
-      Mail::send('mail.mail', $data, function($message) use ($to_name, $to_email){
-        $message->to($to_email, $to_name)
-                ->subject('Customer Inquiry (FMS Medical)');
-        $message->from('info@fmsmeds.com','Clients');
-
-      });
-      return redirect()->back()->with('successMsg','We have recieved your mail, our customer service representative will get back to you shortly.');
-    }
+    // public function submitEnquiry(){
+    //   $name = request('name');
+    //   $email = request('email');
+    //   $clinicName = request('clinic');
+    //   $phone = request('phone');
+    //   $enquiry = request('message');
+    //
+    //   $to_name = 'FMS veterinary';
+    //   $to_email = 'sales.bc@fmsmeds.com';
+    //
+    //   $data = array('name'=>$name,'email'=> $email, 'clinicName'=> $clinicName, 'phone'=> $phone, 'name' =>$name, 'clinicName'=>$clinicName, 'enquiry'=>$enquiry);
+    //   Mail::send('mail.mail', $data, function($message) use ($to_name, $to_email){
+    //     $message->to($to_email, $to_name)
+    //             ->subject('Customer Inquiry (FMS Medical)');
+    //     $message->from('info@fmsmeds.com','Clients');
+    //
+    //   });
+    //   return redirect()->back()->with('successMsg','We have recieved your mail, our customer service representative will get back to you shortly.');
+    // }
 
 
     public function send_message(Request $request){
@@ -74,7 +74,7 @@ class messageController extends Controller
                 ->subject('JVTOCK');
         $message->from($from_email,$from_name);
       });
-      return redirect()->back()->with('successMsg','Mail Sent');
+      return redirect()->back()->with('notification','Mail Sent');
     }
 
     public function message(Request $request, $type){
@@ -128,7 +128,7 @@ class messageController extends Controller
                 ->subject('JVTOCK Notification');
         $message->from($from_email,$from_name);
       });
-      return redirect()->back()->with('successMsg','Mail Sent');
+      return redirect()->back()->with('notification','Mail Sent');
 
 
     }

@@ -17,9 +17,9 @@
               {{$inq_value->type}}
             @endif
           @endforeach</p>
-        <p>
+        <a href='{{url("/view_proof_of_funds/{$value->proof}")}}'><p>
         <br><strong>Proof of funds: </strong>{{$value->proof}}
-        <br></p>
+        <br></p></a>
         <a href="#" class="button w-button">Edit Profile</a>
 
       </div>
