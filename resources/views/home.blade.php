@@ -115,7 +115,6 @@
   </div>
 
 
-
   @else
     <div style="float: none;" class="w-col w-col-12">
       <div style="text-align:center;">
@@ -123,7 +122,7 @@
       </div>
     </div>
   @endif
-  <a href="/supplier-database" class="button dash-button w-button">Explore</a></div>
+  <a href="/supplier-database" class="button dash-button w-button">Explore</a></div></div>
   <div class="section supplier-data-sec data-table buyer dash">
     @if (sizeof($buyers)>0)
       <div style="float: none;" class="w-col w-col-12">
@@ -171,10 +170,12 @@
       </div>
 
     @endif
+    <a href="/buyer-database" class="button dash-button w-button">Explore</a></div>
+  </div>
 
 
 
-<a href="/buyer-database" class="button dash-button w-button">Explore</a></div>
+
   <div id="item-of-interest" class="items-of-interest-div dash-inventory">
     <section id="cards-section" class="cards-section">
       <div class="centered-container w-container">
@@ -205,7 +206,7 @@
       </div><a  class="button dash-button w-button" data-toggle="modal" data-target="#upload_product">Upload Product</a></section>
   </div>
 
-</div>
+
 
 
 @endsection
