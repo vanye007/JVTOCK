@@ -31,6 +31,9 @@
                 <option value="{{$value->id}}" >{{$value->country_name}}</option>
               @endforeach
             </select>
+            {{-- <input type="file" name="proof" id="file" class="inputfile w-input" required />
+            <label class="p-3 mt-2 input-fields w-input" for="file">Proof of funds</label> --}}
+
             <label for="myfile" class="field-label">Proof of funds:</label>
             <input type="file" class="input-fields w-input" name="proof">
             @if ($errors->any())

@@ -29,8 +29,8 @@
         <input type="text" class="form-field w-input" maxlength="256" name="type"  placeholder="Product Name"  required="">
         <input type="text" class="form-field w-input" maxlength="256" name="price"  placeholder="Price" required="">
         <textarea style="width:100%;" placeholder="Product description" name="description" class="form-field w-input" maxlength="256" rows="10" ></textarea>
-        <input type="file" name="image" id="file" class="inputfile" required />
-        <label class="p-3 mt-2" for="file">Choose an image</label>
+        <input type="file" name="image" id="file" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" required />
+        <label class="p-3 mt-2" for="file"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose an image&hellip;</span></label>
         {{-- <input type="file" class="input-fields w-input inputfile" maxlength="256" name="image"  required="">
         <label for="file">Choose a file</label> --}}
         <button class="button w-button mt-4">Upload</button>
@@ -81,4 +81,5 @@
 
 <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.4.1.min.220afd743d.js?site=5e854119fc8197562bad8342" type="text/javascript" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="{{ asset('/js/admin/admin.js') }}" defer></script>
+<script src="{{ asset('/js/index.js') }}" defer></script>
 </html>
