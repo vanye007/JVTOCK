@@ -1366,6 +1366,11 @@ th{
 }
 
 @media screen and (max-width: 479px) {
+  .section {
+    margin-top: 100px;
+    margin-right: 24px;
+    margin-left: 15px;
+  }
   .items-of-interest-div {
     margin-right: 20px;
     margin-left: 20px;
