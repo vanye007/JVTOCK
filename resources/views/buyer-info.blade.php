@@ -13,9 +13,19 @@
         <br><strong>Email:</strong> {{$value->email}}
         <br><strong>Phone:</strong> {{$value->phone}}
         <p><strong>Interested Products: </strong>  @foreach ($inquiry as $key => $inq_value)
+
+          @if (count($inquiry) > 1)
+            @if ($inq_value->buyer_id == $value->id)
+              | {{$inq_value->type}}
+            @endif
+
+          @else
             @if ($inq_value->buyer_id == $value->id)
               {{$inq_value->type}}
             @endif
+
+          @endif
+
           @endforeach</p>
         <a href='{{url("/view_proof_of_funds/{$value->proof}")}}'><p>
         <br><strong>Proof of funds: </strong>{{$value->proof}}
