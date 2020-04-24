@@ -17,7 +17,7 @@
             <div id="{{$value->id}}" class="w-clearfix">
               <div class="cards-image-mask"><img src='{{asset("images/products/{$value->image_path}")}}' alt="" class="cards-image"></div>
               <h3 class="heading">{{$value->type}}</h3>
-              <p>{!!  substr(strip_tags($value->description), 0, 40) !!} .... </p>
+              <p>{!!  substr(strip_tags($value->description), 0, 38) !!}..</p>
               {{-- <div class="price in-stock">In Stock</div> --}}
               <div class="price">${{$value->price}}</div>
               <a href="/product-info/{{$value->id}}" class="button w-button">Select</a>
