@@ -16,6 +16,15 @@ use App\inquiry;
 use App\product;
 use App\template;
 use App\action_required;
+use App\supplier_info;
+use App\business_info;
+use App\facility_info;
+use App\product_info;
+use App\product_certs;
+use App\product_audit;
+use App\units_per_package;
+use App\packages_per_carton;
+use App\audit_log;
 
 class HomeController extends Controller
 {
@@ -45,11 +54,15 @@ class HomeController extends Controller
     }
 
     private function retrieve_supplier(){
-      $supplier = supplier::join('countries','supplier.country_id',"=",'countries.id')
-                          ->join('product','supplier.product_id',"=",'product.id')
-                          ->select('supplier.*', 'product.type','countries.country_name')
-                          ->get();
-      return $supplier;
+      $suppliers = supplier_info::join('business_infos','supplier_infos.id','=','business_infos.supplier_infos_id')
+                                ->leftjoin('facility_infos','business_infos.id','=','facility_infos.business_infos_id')
+                                ->leftjoin('product_infos','facility_infos.id','=','product_infos.facility_infos_id')
+                                ->leftjoin('countries','facility_infos.country_id','=','countries.id')
+                                ->leftjoin('product_certs','product_infos.id','=','product_certs.product_infos_id')
+                                ->leftjoin('product_audits','product_infos.id','=','product_audits.product_infos_id')
+                                ->select('supplier_infos.id as supplier_id','supplier_infos.firstname as firstname','business_infos.*','facility_infos.*','product_infos.*','countries.*','product_certs.*','product_audits.*')
+                                ->get();
+      return $suppliers;
     }
 
     private function all_products(){
@@ -117,16 +130,22 @@ class HomeController extends Controller
     }
 
     public function supplier_info($id){
-      $supplier = supplier::join('countries','supplier.country_id',"=",'countries.id')
-                          ->join('product','supplier.product_id',"=",'product.id')
-                          ->where('supplier.id',$id)
-                          ->get();
-      $image_name = supplier::where('id',$id)->value('product_image');
+      $supplier_info = supplier_info::find($id);
+      $business_info = supplier_info::find($id)->business_info;
+      $facility_info = supplier_info::find($id)->facility_info;
+      $facility_id = supplier_info::find($id)->facility_info->pluck('id');
+      $products = facility_info::join('product_infos','facility_infos.id',"=",'product_infos.facility_infos_id')
+                                ->leftjoin('product_certs','product_infos.id',"=",'product_certs.product_infos_id')
+                                ->leftjoin('product_audits','product_infos.id',"=",'product_audits.product_infos_id')
+                                ->leftjoin('packages_per_cartons','product_infos.id',"=",'packages_per_cartons.product_infos_id')
+                                ->leftjoin('units_per_packages','product_infos.id','=','units_per_packages.product_infos_id')
+                                ->select('product_infos.*','product_certs.*','product_audits.*','packages_per_cartons.*','units_per_packages.*','packages_per_cartons.length as plength', 'packages_per_cartons.width as pwidth','packages_per_cartons.height as pheight', 'packages_per_cartons.weight as pweight')
+                                ->where('facility_infos.id',$facility_id)
+                                ->get();
 
-      // $image = Storage::disk('public')->get('uploads/seller/product_image/2_b6-min.jpg');
+      $countries = countries::get();
 
-
-      return view('supplier-info',['supplier'=>$supplier])->with('image',$image_name);
+      return view('supplier-info',['supplier_info'=>$supplier_info,'business_info'=>$business_info,'facility_info'=>$facility_info,'countries'=>$countries,'products'=>$products])->with('id',$id);
     }
 
     public function buyer_info($id){
@@ -195,6 +214,21 @@ class HomeController extends Controller
       $id = Auth::user()->id;
       $template = template::where('user_id',$id)->where('type',$type)->get();
       return view('message',['template'=>$template])->with('type',$type)->with('name',$name);
+    }
+
+    public function approve_product($id){
+      $userId = $name = Auth::user()->id;
+      $product_id = $id;
+
+      $log = new audit_log();
+      $log->user_id = $userId;
+      $log->product_audit_id = $product_id;
+      $log->save();
+
+      product_audit::where('id',$id)->update(['status'=>'approved']);
+      return redirect()->back()->with('notification','Product approved');
+
+
     }
 
 

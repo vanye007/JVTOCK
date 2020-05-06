@@ -119,6 +119,7 @@ class buyerController extends Controller
     }
 
   public function product_specs($id,$encrypted_session,$name){
+  
     $product_name = $name;
     $encrypted_session = $encrypted_session;
     $specification = product::find($id)->Specifications;

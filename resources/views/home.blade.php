@@ -69,52 +69,52 @@
       </div>
     </div>
   </div>
-  <div class="section supplier-data-sec data-table buyer dash">
-    <div>
-  @if (sizeof($suppliers)>0)
-    <div style="float: none;" class="w-col w-col-12">
-      <div style="text-align:center;">
-        <div  class="name-text black-field mb-5"><h1 class="action-header dash-action">Supplier Data </h1></div>
+
+<div class="section supplier-data-sec data-table buyer dash">
+  <div>
+    @if (sizeof($suppliers)>0)
+      <div style="float: none;" class="w-col w-col-12">
+        <div style="text-align:center;">
+          <div  class="name-text black-field mb-5"><h1 class="action-header dash-action">Supplier Data </h1></div>
+        </div>
       </div>
-    </div>
-    <div class="table-responsive">
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Country</th>
-          <th scope="col">Product</th>
-          <th scope="col">Prices/capacity</th>
-          <th scope="col">Sales price</th>
-            <th scope="col">Supply capacity</th>
-          <th scope="col">Shipping routes</th>
-          <th scope="col">Current inventory</th>
-          <th scope="col">Port of origin</th>
-          <th scope="col">Units per box</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach ($suppliers->sortByDesc('id') as $key => $value)
+      <div class="table-responsive">
+      <table  id="example" class="table">
+        <thead class="thead-dark">
           <tr>
-            <th scope="row"><a href="/supplier_info/{{$value->id}}">{{$value->name}}</a></th>
-            <td>{{$value->country_name}}</td>
-            <td>{{$value->type}}</td>
-            <td>{{$value->prices_per_capacity}}</td>
-            <td>{{$value->price}}</td>
-            <td>{{$value->supply_capacity}}</td>
-            <td>{{$value->shipping_routes}}</td>
-            <td>{{$value->current_inventory}}</td>
-            <td>{{$value->port_of_origin}}</td>
-            <td>{{$value->units_per_box}}</td>
+            <th scope="col">Name</th>
+            <th scope="col">Country</th>
+            <th scope="col">Region</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Supply Capacity</th>
+            <th scope="col">Inventory</th>
+            <th scope="col">Shipping Terms</th>
+            <th scope="col">Payment Terms</th>
+            <th scope="col">Port of origin</th>
+            <th scope="col">Status</th>
           </tr>
-        @endforeach
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @foreach ($suppliers->sortByDesc('id') as $key => $value)
+            <tr>
+              <th scope="row"><a href="/supplier_info/{{$value->id}}">{{$value->firstname}}</a></th>
+              <td>{{$value->country_name}}</td>
+              <td>{{$value->region}}</td>
+              <td>{{$value->name}}</td>
+              <td>{{$value->price}}</td>
+              <td>{{$value->capacity}}</td>
+              <td>{{$value->inventory}}</td>
+              <td>{{$value->shipping_terms}}</td>
+              <td>{{$value->payment_terms}}</td>
+              <td>{{$value->port_of_origin}}</td>
+              <td>{{$value->status}}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
   </div>
-
-  </div>
-
-
   @else
     <div style="float: none;" class="w-col w-col-12">
       <div style="text-align:center;">
@@ -122,7 +122,9 @@
       </div>
     </div>
   @endif
-  <a href="/supplier-database" class="button dash-button w-button">Explore</a></div></div>
+  <a href="/supplier-database" class="button dash-button w-button">Explore</a>
+  </div>
+</div>
   <div class="section supplier-data-sec data-table buyer dash">
     @if (sizeof($buyers)>0)
       <div style="float: none;" class="w-col w-col-12">
@@ -172,8 +174,6 @@
     @endif
     <a href="/buyer-database" class="button dash-button w-button">Explore</a></div>
   </div>
-
-
 
 
   <div id="item-of-interest" class="items-of-interest-div dash-inventory">

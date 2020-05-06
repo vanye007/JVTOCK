@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\supplier;
 use App\pre_referral;
+use App\supplier_info;
+use App\referral;
 
 
 class referralController extends Controller
@@ -41,41 +43,46 @@ class referralController extends Controller
      return $decrypt;
    }
 
-   private function get_referral_link($id){
-     $id = $this->encrypt($id);
-     $link = url('/supplier_form' .'/'.$id);
+   private function get_referral_link($supplier_id){
+     $supplier_id = $this->encrypt($supplier_id);
+     $link = url('/supplier_business_info' .'/'.$supplier_id);
      return $link;
    }
 
    public function referral(Request $request,$id){
-     $name = $request->input('name');
+     $firstname = $request->input('firstname');
+     $lastname = $request->input('lastname');
      $email = $request->input('email');
      $phone = $request->input('phone');
+
      $userId = Auth::user()->id;
      $from_name = Auth::user()->name;
 
-     $referal_link = $this->get_referral_link($id);
 
 
-     $pre_referral = new pre_referral();
-     $pre_referral->user_id = $userId;
-     $pre_referral->name = $name;
-     $pre_referral->email = $email;
-     $pre_referral->phone = $phone;
-     $pre_referral->save();
+     $supplier = new supplier_info();
+     $supplier->firstname = $firstname;
+     $supplier->lastname = $lastname;
+     $supplier->email = $email;
+     $supplier->phone = $phone;
+     $supplier->save();
 
+     $referral = new referral();
+     $referral->user_id = $id;
+     $referral->supplier_info_id = $supplier->id;
+     $referral->save();
 
-     $data = array('to_name'=>$name, 'referral_link'=> $referal_link, 'from_name'=>$from_name);
-     Mail::send('layouts.mail.referral', $data, function($message) use ($name, $email){
+     $referal_link = $this->get_referral_link($supplier->id);
+
+     $data = array('to_name'=>$firstname, 'referral_link'=> $referal_link, 'from_name'=>$from_name);
+     Mail::send('layouts.mail.referral', $data, function($message) use ($firstname, $email){
        $from_email = Auth::user()->email;
        $from_name = Auth::user()->name;
-       $message->to($email, $name)
+       $message->to($email, $firstname)
                ->subject('JVTOCK Supplier form');
        $message->from($from_email,$from_name);
      });
-
      return redirect()->back()->with('notification','Referral Mail Sent');
-
    }
 
 

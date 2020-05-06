@@ -40,9 +40,9 @@ class fileController extends Controller
     return $headers;
   }
 
-  public function view_certificates($name)
+  public function view_certificates($name,$id)
     {
-        $file = storage_path('/app/uploads/supplier/certificates/') .$name;
+        $file = storage_path('/app/uploads/supplier/').$id .'/' .$name;
         $headers = $this->get_content_type($name);
 
         if (file_exists($file)) {

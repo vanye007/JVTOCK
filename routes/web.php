@@ -11,20 +11,30 @@
 |
 */
 
+
+Route::post('/buyer_request','buyerController@buyer_request');
+Route::post('/submit_supply','supplierController@submit_supply');
+Route::post('/submit_referral_supply/{id}','supplierController@submit_referral_supply');
+Route::post('/supplier_info','supplierController@supplier_info');
+Route::post('/business_info','supplierController@submit_business_info');
+Route::post('/submit_product_info','supplierController@submit_product_info');
+Route::post('/packages','supplierController@store_package_info');
+
 Route::get('/', 'buyerController@Welcome');
 Route::get('/buyer', 'buyerController@index');
 Route::get('/supplier', 'supplierController@supplier');
-Route::post('/buyer_request','buyerController@buyer_request');
-Route::post('/submit_supply','supplierController@submit_supply');
 Route::get('/product-page/{id}/{encrypted_session}/{name}','buyerController@product_specs');
 Route::get('/inquiry/{id}/{session}','buyerController@inquiry');
 Route::get('/mail','buyerController@mail');
 Route::get('/supplier_form/{id}','supplierController@supplier');
-Route::post('/submit_referral_supply/{id}','supplierController@submit_referral_supply');
+Route::get('/supplier_business_info/{id}','supplierController@get_business_info_page');
 
-Route::get('/test',function(){
-  return view('external_broker.confirmation');
-});
+
+
+//
+// Route::get('/test',function(){
+//   return view('external_broker.confirmation');
+// });
 
 
 
@@ -43,14 +53,16 @@ Route::get('/buyer_info/{id}','HomeController@buyer_info')->middleware('isUserAp
 Route::get('/product-info/{id}','HomeController@retrieve_product')->middleware('isUserApprove');
 Route::post('/update_product/{id}','HomeController@update_product')->middleware('isUserApprove');
 Route::post('/upload_product','HomeController@upload_product')->middleware('isUserApprove');
+Route::get('approve_product/{id}','HomeController@approve_product');
 
-Route::get('/certificates/{value}','fileController@view_certificates')->middleware('isUserApprove');
+Route::get('/certificates/{value}/{id}','fileController@view_certificates')->middleware('isUserApprove');
 Route::get('/proof_of_life/{value}','fileController@view_proof_of_life')->middleware('isUserApprove');
 Route::get('/view_proof_of_funds/{name}','fileController@view_proof_of_funds')->middleware('isUserApprove');
 
 
 Route::post('/send_message','messageController@send_message')->middleware('isUserApprove');
 Route::post('/message/{type}','messageController@message');
+
 
 
 Route::post('/supplier_referral/{id}','referralController@referral')->middleware('isUserApprove');

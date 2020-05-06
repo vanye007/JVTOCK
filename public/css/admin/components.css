@@ -18,6 +18,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.info p{
+  text-transform: capitalize !important;
+}
 .w-icon-slider-right:before {
   content: "\e600";
 }

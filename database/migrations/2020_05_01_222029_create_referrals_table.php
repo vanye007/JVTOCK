@@ -17,8 +17,8 @@ class CreateReferralsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->Integer('supplier_id')->unsigned();
-            $table->foreign('supplier_id')->references('id')->on('supplier')->onDelete('cascade');
+            $table->bigInteger('supplier_info_id')->unsigned();
+            $table->foreign('supplier_info_id')->references('id')->on('supplier_infos')->onDelete('cascade');
             $table->timestamps();
         });
     }
