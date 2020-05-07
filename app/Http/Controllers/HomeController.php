@@ -60,13 +60,13 @@ class HomeController extends Controller
                                 ->leftjoin('countries','facility_infos.country_id','=','countries.id')
                                 ->leftjoin('product_certs','product_infos.id','=','product_certs.product_infos_id')
                                 ->leftjoin('product_audits','product_infos.id','=','product_audits.product_infos_id')
-                                ->select('supplier_infos.id as supplier_id','supplier_infos.firstname as firstname','business_infos.*','facility_infos.*','product_infos.*','countries.*','product_certs.*','product_audits.*')
+                                ->select('supplier_infos.id as supplier_id','supplier_infos.firstname as firstname','supplier_infos.lastname as lastname','supplier_infos.email','business_infos.*','facility_infos.*','product_infos.*','countries.*','product_certs.*','product_audits.*')
                                 ->get();
       return $suppliers;
     }
 
     private function all_products(){
-      $products = product::get();
+      $products = product::where('deleted',0)->get();
       return $products;
     }
 
@@ -203,17 +203,18 @@ class HomeController extends Controller
       $product->description = $description;
       $product->price = $price;
       $product->image_path = $image_name;
+      $product->deleted = 0;
       $product->save();
 
       return redirect()->back()->with('notification','New product added');
     }
 
 
-    public function get_message_template($type){
+    public function get_message_template($type, $email = null){
       $name = Auth::user()->name;
       $id = Auth::user()->id;
       $template = template::where('user_id',$id)->where('type',$type)->get();
-      return view('message',['template'=>$template])->with('type',$type)->with('name',$name);
+      return view('message',['template'=>$template])->with('type',$type)->with('name',$name)->with('email',$email);
     }
 
     public function approve_product($id){
@@ -228,7 +229,11 @@ class HomeController extends Controller
       product_audit::where('id',$id)->update(['status'=>'approved']);
       return redirect()->back()->with('notification','Product approved');
 
+    }
 
+    public function delete_product($id){
+      product::where('id',$id)->update(['deleted'=>1]);
+      return redirect()->back()->with('notification','Product deleted');
     }
 
 

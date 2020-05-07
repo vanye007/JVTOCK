@@ -19,22 +19,19 @@
         <div class="dash-div-1 mb-4">
           <h1 class="action-header dash-action">ACTION REQUIRED</h1>
 
-
-          @if (sizeof($buyer_actions)>0 || sizeof($supplier_actions))
-
+          @if (sizeof($buyer_actions)>0 || sizeof($supplier_actions) > 0)
 
           @else
-
             <div class="action-item-div">
               <p class="paragraph-2 dash-parag">No action</p>
             </div>
 
-
           @endif
+
           @foreach ($buyer_actions as $key => $value)
               <a href="/buyer-database" class="link-block-4 dash-link w-inline-block">
                 <div class="action-item-div">
-                  <p class="paragraph-2 dash-parag">New buyer entered</p>
+                  <p class="paragraph-2 dash-parag"> {{$buyer_actions->count()}} New buyer entered</p>
                 </div>
               </a>
           @endforeach
@@ -42,7 +39,7 @@
           @foreach ($supplier_actions as $key => $value)
             <a href="/supplier-database" class="link-block-4 dash-link w-inline-block">
               <div class="action-item-div">
-                <p class="paragraph-2 dash-parag">New buyer entered: Missing POF</p>
+                <p class="paragraph-2 dash-parag"> {{$supplier_actions->count()}} New supplier enter</p>
               </div>
             </a>
           @endforeach
@@ -79,10 +76,11 @@
         </div>
       </div>
       <div class="table-responsive">
-      <table  id="example" class="table">
+      <table  id="supplier" class="table">
         <thead class="thead-dark">
           <tr>
             <th scope="col">Name</th>
+            <th scope="col">Email</th>
             <th scope="col">Country</th>
             <th scope="col">Region</th>
             <th scope="col">Product</th>
@@ -98,7 +96,8 @@
         <tbody>
           @foreach ($suppliers->sortByDesc('id') as $key => $value)
             <tr>
-              <th scope="row"><a href="/supplier_info/{{$value->id}}">{{$value->firstname}}</a></th>
+              <th scope="row"><a href="/supplier_info/{{$value->supplier_id}}">{{$value->firstname}} {{($value->lastname)}}</a></th>
+              <td  data-toggle="modal" data-target="#auto_email" class="get_email">{{$value->email}}</td>
               <td>{{$value->country_name}}</td>
               <td>{{$value->region}}</td>
               <td>{{$value->name}}</td>
@@ -108,7 +107,11 @@
               <td>{{$value->shipping_terms}}</td>
               <td>{{$value->payment_terms}}</td>
               <td>{{$value->port_of_origin}}</td>
-              <td>{{$value->status}}</td>
+              @if ($value->status == 'pending')
+                  <td class="text-warning"><b>{{$value->status}}</b></td>
+              @else
+                  <td class="text-success"><b>{{$value->status}}</b></td>
+              @endif
             </tr>
           @endforeach
         </tbody>
@@ -133,7 +136,7 @@
         </div>
       </div>
       <div class="table-responsive">
-      <table class="table">
+      <table id="buyer" class="table">
         <thead class="thead-dark">
           <tr>
             <th scope="col">Name</th>

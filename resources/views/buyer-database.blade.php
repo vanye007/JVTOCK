@@ -8,7 +8,7 @@
   </div>
   <div class="section supplier-data-sec data-table buyer " style="padding-top:0px;">
     <div class="table-responsive">
-    <table class="table">
+    <table id="buyer" class="table">
       <thead class="thead-dark">
         <tr>
           <th scope="col">Name</th>

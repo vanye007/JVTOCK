@@ -64,9 +64,9 @@ class fileController extends Controller
     }
 
 
-  public function view_proof_of_funds($name)
+  public function view_proof_of_funds($name,$id)
     {
-        $file = storage_path('/app/uploads/buyer/proof_of_funds/') .$name;
+        $file = storage_path('/app/uploads/buyer/') .$id .'/' .$name;
         $headers = $this->get_content_type($name);
 
         if (file_exists($file)) {

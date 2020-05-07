@@ -5,7 +5,9 @@
        <h2 style="text-align:center">{{$value->type}}</h2>
       <div class="flex-container-2 w-container mt-4">
        <div class="col-md-12 float-left ">
-        <div class="col-md-7 float-left pt-2 mb-4"><img src='{{("/images/products/{$value->image_path}")}}' alt="" class="feature-image"></div>
+        <div class="col-md-7 float-left pt-2 mb-4"><img src='{{("/images/products/{$value->image_path}")}}' alt="" class="feature-image">
+            <button type="button" id="{{$value->id}}"  class="btn btn-danger delete_product mt-4" style="display:block;margin:auto;"  data-toggle="modal" data-target="#del_product">Delete Product</button>
+        </div>
         <div class="col-md-5 float-left border p-2">
         <form action="/update_product/{{$value->id}}" method="post" >
           @csrf

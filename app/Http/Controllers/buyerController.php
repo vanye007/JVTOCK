@@ -27,7 +27,7 @@ class buyerController extends Controller
 
 
   public function products(){
-    $products = product::get();
+    $products = product::where('deleted',0)->get();
     return $products;
   }
 
@@ -97,7 +97,8 @@ class buyerController extends Controller
         $new_file_name = $id . '_' . $file_name;
 
         //Move renamed Uploaded File to uploads/buyer/proof_of_funds
-        $destinationPath = 'uploads/buyer/proof_of_funds/';
+        $buyer_folder = $id;
+        $destinationPath = 'uploads/buyer/'.$buyer_folder;
         $proof->storeAs($destinationPath,$new_file_name);
 
         // $proof->move($destinationPath,$new_file_name);
@@ -119,7 +120,7 @@ class buyerController extends Controller
     }
 
   public function product_specs($id,$encrypted_session,$name){
-  
+
     $product_name = $name;
     $encrypted_session = $encrypted_session;
     $specification = product::find($id)->Specifications;

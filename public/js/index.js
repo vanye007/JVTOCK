@@ -34,3 +34,25 @@
 		.on( 'blur', function(){ $input.removeClass( 'has-focus' ); });
 	});
 })( jQuery, window, document );
+
+$(document).ready(function() {
+    $('#supplier').DataTable();
+		$('#buyer').DataTable();
+
+		$('.get_email').click(function(){
+			var email = $(this).html();
+
+			$('#client_email').html(email);
+			//append email to buttons
+			$('#contract_t').attr('href','/get_message/contract/' + email );
+			$('#loi_t').attr('href','/get_message/loi/' + email );
+			$('#custom_t').attr('href','/get_message/custom/' + email );
+			$('#pol_t').attr('href','/get_message/pol/' + email );
+			$('#pof_t').attr('href','/get_message/pof/' + email );
+		})
+
+		$('.delete_product').click(function(){
+			var id = $(this).attr('id');
+			$('#delete_product').attr('href','/delete_product/'+id);
+		})
+} );

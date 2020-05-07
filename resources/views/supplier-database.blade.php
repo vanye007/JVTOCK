@@ -54,7 +54,7 @@
         <div style="float: none;" class="w-col w-col-12">
         </div>
         <div class="table-responsive">
-        <table  id="example" class="table">
+        <table  id="supplier" class="table">
           <thead class="thead-dark">
             <tr>
               <th scope="col">Name</th>
@@ -73,7 +73,7 @@
           <tbody>
             @foreach ($suppliers->sortByDesc('id') as $key => $value)
               <tr>
-                <th scope="row"><a href="/supplier_info/{{$value->supplier_id}}">{{$value->firstname}}</a></th>
+                <th scope="row"><a href="/supplier_info/{{$value->supplier_id}}">{{$value->firstname}} {{$value->lastname}}</a></th>
                 <td>{{$value->country_name}}</td>
                 <td>{{$value->region}}</td>
                 <td>{{$value->name}}</td>

@@ -81,6 +81,11 @@ class supplierController extends Controller
       $message->from($from_email,$from_name);
     });
 
+    $action = new action_required();
+    $action->type = 'supplier';
+    $action->visited = 'no';
+    $action->save();
+
     return view('external_broker.business_info',['countries'=>$countries])->with('supplier_info',$supplier_id_fk);
   }
 
@@ -221,7 +226,6 @@ class supplierController extends Controller
     $audit->audit_date = $audit_date;
     $audit->status = 'pending';
     $audit->save();
-
 
     $product_id_fk = Crypt::encryptString($product_id_fk);
 

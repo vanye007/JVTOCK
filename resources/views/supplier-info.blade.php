@@ -1,13 +1,10 @@
 @extends('layouts.app')
 @section('content')
-
   <header id="hero" class="hero-2">
     <div>
       <h1 class="supplier-database-header">Supplier</h1>
     </div>
-
     <div class="flex-container w-container col-md-12">
-
       <div class="col-md-4 info">
         <h3>Supplier info</h3>
         <p><strong>Firsname:</strong> {{$supplier_info['firstname']}}</p>
@@ -41,13 +38,6 @@
         <p><strong>Post Code: </strong>{{$value->postal_code}}</p>
         @endforeach
       </div>
-
-      {{-- <div class="hero-image-mask col-md-4"><img src="/images/supplier/product_image/{{$image}}" alt="" class="hero-image"></div> --}}
-
-        {{-- <a href="#" class="button w-button col-md-6">Edit Profile</a> --}}
-
-        {{-- <a href='{{("/certificates/{$value->certificates}")}}'><strong>Certificates </strong>{{$value->certificates}}</p></a>
-        <a href='{{("/proof_of_life/{$value->proof_of_life}")}}'><strong>Proof of life </strong>{{$value->proof_of_lifes}}</p></a> --}}
     </div>
     <div>
       <h1 class="supplier-database-header">Products</h1>

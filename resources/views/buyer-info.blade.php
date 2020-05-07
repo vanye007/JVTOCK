@@ -27,7 +27,7 @@
           @endif
 
           @endforeach</p>
-        <a href='{{url("/view_proof_of_funds/{$value->proof}")}}'><p>
+        <a href='{{url("/view_proof_of_funds/{$value->proof}/{$value->id}")}}'><p>
         <br><strong>Proof of funds: </strong>{{$value->proof}}
         <br></p></a>
         <a href="#" class="button w-button">Edit Profile</a>
