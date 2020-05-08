@@ -24,6 +24,8 @@
             <input type="file" class="input-fields w-input" maxlength="256" name="certificates" data-name="certificates" id="certificates" required="">
             <label for="name" class="field-label">Product Image </label>
             <input type="file" class="input-fields w-input" maxlength="256" name="image" data-name="image" id="image" required="">
+            {{-- <label for="name" class="field-label">Proof of life (Product video) </label>
+            <input type="file" class="input-fields w-input" maxlength="256" name="pof" data-name="image" id="image" required=""> --}}
             <label for="name" class="field-label">Price</label>
             <input type="text" class="input-fields w-input" maxlength="256" name="price" data-name="price" id="price" required="">
             <label for="name" class="field-label">Volume </label>

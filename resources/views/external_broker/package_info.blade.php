@@ -6,7 +6,7 @@
         <div class="w-form">
           <form id="package-form" action='/packages' method='post'>
             @csrf
-            <h1 class="supplier-form">Units Per Package information</h1>
+            <h1 class="supplier-form">Units / Package information</h1>
             @if ($errors->any())
               <label for="myfile" class="field-label">
                   @foreach ($errors->all() as $error)
@@ -24,7 +24,7 @@
             <br>
             <hr>
             <br>
-            <h1 class="supplier-form">Packages Per Carton</h1>
+            <h1 class="supplier-form">Packages / Carton information</h1>
             <label for="name" class="field-label">Length</label>
             <input type="text" class="input-fields w-input" maxlength="256" name="carton_length" data-name="carton_length" required="">
             <label for="name" class="field-label">Width </label>

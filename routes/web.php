@@ -28,6 +28,7 @@ Route::get('/inquiry/{id}/{session}','buyerController@inquiry');
 Route::get('/mail','buyerController@mail');
 Route::get('/supplier_form/{id}','supplierController@supplier');
 Route::get('/supplier_business_info/{id}','supplierController@get_business_info_page');
+Route::get('/add_more_product','supplierController@add_more_product');
 
 
 
@@ -59,7 +60,7 @@ Route::get('delete_product/{id}','HomeController@delete_product');
 
 
 Route::get('/certificates/{value}/{id}','fileController@view_certificates')->middleware('isUserApprove');
-Route::get('/proof_of_life/{value}','fileController@view_proof_of_life')->middleware('isUserApprove');
+Route::get('/proof_of_life/{value}/{id}','fileController@view_proof_of_life')->middleware('isUserApprove');
 Route::get('/view_proof_of_funds/{name}/{id}','fileController@view_proof_of_funds')->middleware('isUserApprove');
 
 

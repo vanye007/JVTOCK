@@ -36,7 +36,6 @@ class fileController extends Controller
           'Content-Type' => 'image/jpg',
         ];
     }
-
     return $headers;
   }
 
@@ -52,9 +51,9 @@ class fileController extends Controller
         }
     }
 
-  public function view_proof_of_life($name)
+  public function view_proof_of_life($name,$id)
     {
-        $file = storage_path('/app/uploads/supplier/proof_of_life/') .$name;
+        $file = storage_path('/app/uploads/supplier/').$id .'/' .$name;
         $headers = $this->get_content_type($name);
         if (file_exists($file)) {
             return response()->download($file, 'Test File', $headers, 'inline');
@@ -62,7 +61,6 @@ class fileController extends Controller
             abort(404, 'File not found!');
         }
     }
-
 
   public function view_proof_of_funds($name,$id)
     {

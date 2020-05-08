@@ -4,7 +4,7 @@
     <div>
       <h1 class="supplier-database-header">Supplier</h1>
     </div>
-    <div class="flex-container w-container col-md-12">
+    <div class="flex-container w-container col-md-12 w-col-12">
       <div class="col-md-4 info">
         <h3>Supplier info</h3>
         <p><strong>Firsname:</strong> {{$supplier_info['firstname']}}</p>
@@ -42,9 +42,9 @@
     <div>
       <h1 class="supplier-database-header">Products</h1>
     </div>
-    <div class="flex-container w-container col-md-12">
+    <div class="flex-container w-container col-md-12 w-col-12">
     @foreach ($products as $key => $value)
-      <div class="col-md-6">
+      <div class="col-md-6 w-col-6">
         <img class="mb-3 mt-2" src='{{asset("images/uploads/supplier/{$id}/{$value->image}")}}'></img>
         <p><strong>Name:</strong> {{$value->name}}</p>
         <p><strong>Description:</strong> {{$value->description}}</p>
@@ -53,6 +53,7 @@
         <p><strong>Inventory:</strong> {{$value->inventory}}</p>
         <p><strong>Supply Capacity:</strong> {{$value->capacity}}</p>
         <p><strong>Certificates:</strong> <a href="/certificates/{{$value->path}}/{{$id}}">{{$value->certificates}} </a></p>
+        <p><strong>Proof of life:</strong> <a href="/proof_of_life/{{$value->pof}}/{{$id}}">{{$value->pof}} </a></p>
         <p><strong>Units/Pack:</strong> Length {{$value->length}} | Width {{$value->width}} | Height {{$value->height}} | weight {{$value->weight}}</p>
         <p><strong>Packages/Carton:</strong> Length {{$value->plength}} | Width {{$value->pwidth}} | Height {{$value->pheight}} | weight {{$value->pweight}}</p>
         <p><strong>Audit Date:</strong> {{$value->audit_date}}</p>

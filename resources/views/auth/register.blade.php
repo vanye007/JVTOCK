@@ -29,7 +29,7 @@
             </span>
         @enderror
         <input type="password" class="form-field w-input" maxlength="256" name="password_confirmation" data-name="Password" placeholder="Password" id="Password" required="">
-        <button type="submit" class="button-2 signup w-button">
+        <button type="submit" class="button-2 signup w-button mt-4" style="display:block;margin:auto">
             {{ __('Register') }}
         </button>
       </form>

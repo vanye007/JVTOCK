@@ -47,7 +47,7 @@
     <div class="section supplier-data-sec data-table ">
       <div class="w-row">
         <div class="w-col w-col-2 col-sm-4">
-          <div><a  class="button edit-button w-button" data-toggle="modal" data-target="#supplier_form">Send supplier form</a></div>
+          <div><a  class="button edit-button w-button" data-toggle="modal" data-target="#supplier_form">Referral form</a></div>
         </div>
       </div>
       @if (sizeof($suppliers)>0)

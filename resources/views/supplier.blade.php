@@ -6,8 +6,6 @@
         <div class="w-form">
 
 
-
-
           <form id="email-form" action='@if ($referral_id !== null){{url("/submit_referral_supply/{$referral_id}")}}@else{{url("/submit_supply")}}@endif' method='post'  enctype='multipart/form-data'>
             @csrf
             <h1 class="supplier-form">Supplier Form</h1>
