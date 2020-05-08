@@ -244,7 +244,7 @@ class supplierController extends Controller
     $product->facility_infos_id = $facility_info_id;
     $product->name = $name;
     $product->image = $image_name;
-    $product->pof = 'null';
+    // $product->pof = 'null';
     $product->description = $description;
     $product->price = $price;
     $product->volume = $volume;
