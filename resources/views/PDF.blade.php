@@ -50,6 +50,7 @@
           <tr>
             <th scope="col" class="orange">Name</th>
             <th scope="col">Description</th>
+            <td>Certificate</td>
             <th scope="col">Price</th>
             <th scope="col">Volume</th>
             <th scope="col">Supply Capacity</th>
@@ -61,6 +62,7 @@
             <tr>
               <td class="orange">{{$value->name}}</td>
               <td>{{$value->description}}</td>
+              <td>{{$value->certificates}}</td>
               <td>{{$value->sale_price}}</td>
               <td>{{$value->volume}}</td>
               <td>{{$value->capacity}}</td>

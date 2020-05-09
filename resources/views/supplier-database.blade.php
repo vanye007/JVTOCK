@@ -74,6 +74,7 @@
             @foreach ($suppliers->sortByDesc('id') as $key => $value)
               <tr>
                 <th scope="row"><a href="/supplier_info/{{$value->supplier_id}}">{{$value->firstname}} {{$value->lastname}}</a></th>
+                <td  data-toggle="modal" data-target="#auto_email" class="get_email">{{$value->email}}</td>
                 <td>{{$value->country_name}}</td>
                 <td>{{$value->region}}</td>
                 <td>{{$value->name}}</td>

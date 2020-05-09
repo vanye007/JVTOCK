@@ -21,6 +21,7 @@
             <textarea name="description"  value="{{ old('description') }}" class="input-fields w-input">
             </textarea>
             <label for="name" class="field-label">Product Certificates </label>
+            <input type="text" class="input-fields w-input" maxlength="256" placeholder="Certificate type" name="cert_type"  value="{{ old('cert_type') }}" data-name="cert_type" id="cert_name" required="">
             <input type="file" class="input-fields w-input" maxlength="256" name="certificates"  value="{{ old('certificates') }}" data-name="certificates" id="certificates" required="">
             <label for="name" class="field-label">Product Image </label>
             <input type="file" class="input-fields w-input" maxlength="256" name="image"  value="{{ old('image') }}" data-name="image" id="image" required="">
@@ -32,7 +33,7 @@
             <input type="text" class="input-fields w-input" maxlength="256" name="volume"  value="{{ old('volume') }}" data-name="volume" id="volume" required="">
             <label for="name" class="field-label">Inventory</label>
             <input type="text" class="input-fields w-input" maxlength="256" name="inventory"  value="{{ old('inventory') }}" data-name="inventory" id="inventory" required="">
-            <label for="name" class="field-label">Capacity </label>
+            <label for="name" class="field-label">Supply Capacity </label>
             <input type="text" class="input-fields w-input" maxlength="256" name="capacity"  value="{{ old('capacity') }}" data-name="capacity" id="capacity" required="">
             <label for="name" class="field-label">Select Audit Date </label>
             <input type="date" class="input-fields w-input" maxlength="256" name="date" data-name="date" id="date"  value="{{ old('date') }}" required="">

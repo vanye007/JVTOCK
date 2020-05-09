@@ -197,6 +197,7 @@ class supplierController extends Controller
 
 
   public function submit_product_info(Request $request){
+
     $facility_info_id = $request->input('facility_info');
     //save facility info id in section. it will be used when the user adds another product
     $request->session()->put('facility_info', $facility_info_id);
@@ -214,6 +215,7 @@ class supplierController extends Controller
     $capacity = $request->input('capacity');
     $audit_date = $request->input('date');
     $certificates = $request->file('certificates');
+    $cert_type = $request->input('cert_type');
     $certs_name = $certificates->getClientOriginalName();
 
     $validate = Validator::make($request->all(), [
@@ -230,7 +232,7 @@ class supplierController extends Controller
 
     if ($validate->fails())
     {
-        return redirect()->back()->withErrors($validate->errors());
+        return redirect()->back()->withErrors($validate->errors())->withInput();
     }
 
     $supplier_folder = $request->session()->get('supplier_session');
@@ -257,7 +259,7 @@ class supplierController extends Controller
     $product_id_fk =  $product->id;
     $certificates = new product_certs();
     $certificates->product_infos_id = $product_id_fk;
-    $certificates->certificates = $certs_name;
+    $certificates->certificates = $cert_type;
     $certificates->path = $certs_name;
     $certificates->save();
 
@@ -271,11 +273,11 @@ class supplierController extends Controller
 
     $product_price = new product_price();
     $product_price->product_infos_id = $product_id_fk;
-    $product_price->sales_price = 'null';
+    $product_price->sale_price = 'null';
     $product_price->save();
 
     $product_id_fk = Crypt::encryptString($product_id_fk);
-    return view('external_broker.package_info')->with('product_info_fk',$product_id_fk)->withInput();
+    return view('external_broker.package_info')->with('product_info_fk',$product_id_fk);
   }
 
  public function store_package_info(Request $request){

@@ -29,6 +29,7 @@ class pdfController extends Controller
      $products = product_info::join('product_certs','product_infos.id',"=",'product_certs.product_infos_id')
                             ->leftjoin('product_audits','product_infos.id',"=",'product_audits.product_infos_id')
                             ->leftjoin('product_prices','product_infos.id',"=",'product_prices.product_infos_id')
+                            ->leftjoin('product_certs','product_infos.id',"=",'product_certs.product_infos_id')
                             ->where('status','approved')
                             ->get();
 

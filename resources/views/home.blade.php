@@ -182,7 +182,7 @@
   <div id="item-of-interest" class="items-of-interest-div dash-inventory">
     <section id="cards-section" class="cards-section">
       <div class="centered-container w-container">
-        <h2 class="items-of-interest-header">Inventory</h2>
+        <h2 class="items-of-interest-header">Inventory (Front end)</h2>
         @if (sizeof($products)>0)
           <div class="cards-grid-container">
             @foreach ($products as $key => $value)
