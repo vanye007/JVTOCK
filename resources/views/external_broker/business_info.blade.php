@@ -15,7 +15,7 @@
               </label>
             @endif
             {{-- Check if business info variable is not null. This is used to validate  --}}
-            @if (count($business_info)>0)
+            @if (isset($business_info) && count($business_info)>0)
               @foreach ($business_info as $key => $b_value)
                 <select class="input-fields w-input" name="country">
                     <option selected="selected">SELECT COUNTRY</option>
@@ -51,7 +51,7 @@
             <hr>
             <br>
             <h1 class="supplier-form">Facility information</h1>
-            @if (count($facility_info)>0)
+            @if (isset($facility_info) && count($facility_info)>0)
               @foreach ($facility_info as $key => $f_value)
                 <select class="input-fields w-input" name="facility_country">
                     <option selected="selected">SELECT FACILITY COUNTRY</option>

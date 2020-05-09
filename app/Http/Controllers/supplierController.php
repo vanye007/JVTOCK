@@ -59,8 +59,8 @@ class supplierController extends Controller
     $email = $request->input('email');
     $phone = $request->input('phone');
     $countries = countries::get();
-    $supplier_id_fk = '';
-    $business_info = '';
+    $supplier_id_fk = [''];
+    $business_info = [''];
 
     //validate to check if supplier exist
     $check_supplier = supplier_info::where('email',$email)->exists();
@@ -110,7 +110,7 @@ class supplierController extends Controller
 
 
 
-    return view('external_broker.business_info',['countries'=>$countries,'business_info'=>$business_info])->with('supplier_info_fk',$supplier_id_fk);
+    return view('external_broker.business_info',['countries'=>$countries])->with('supplier_info_fk',$supplier_id_fk);
   }
 
   // this is for the referall form sent to the supplier
