@@ -55,13 +55,19 @@ Route::get('/buyer_info/{id}','HomeController@buyer_info')->middleware('isUserAp
 Route::get('/product-info/{id}','HomeController@retrieve_product')->middleware('isUserApprove');
 Route::post('/update_product/{id}','HomeController@update_product')->middleware('isUserApprove');
 Route::post('/upload_product','HomeController@upload_product')->middleware('isUserApprove');
-Route::get('approve_product/{id}','HomeController@approve_product');
-Route::get('delete_product/{id}','HomeController@delete_product');
+Route::get('approve_product/{id}','HomeController@approve_product')->middleware('isUserApprove');
+Route::get('delete_product/{id}','HomeController@delete_product')->middleware('isUserApprove');
+Route::post('/update_sales_price','HomeController@update_selling_price')->middleware('isUserApprove');
 
 
 Route::get('/certificates/{value}/{id}','fileController@view_certificates')->middleware('isUserApprove');
 Route::get('/proof_of_life/{value}/{id}','fileController@view_proof_of_life')->middleware('isUserApprove');
 Route::get('/view_proof_of_funds/{name}/{id}','fileController@view_proof_of_funds')->middleware('isUserApprove');
+Route::get('export/inventory','pdfController@inventory');
+
+Route::get('/images/{id}/{filename}', 'HomeController@displayImage')->name('image.displayImage');
+
+
 
 
 Route::post('/send_message','messageController@send_message')->middleware('isUserApprove');

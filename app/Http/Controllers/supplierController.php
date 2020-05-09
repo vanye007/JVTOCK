@@ -22,6 +22,7 @@ use App\product_certs;
 use App\product_audit;
 use App\units_per_package;
 use App\packages_per_carton;
+use App\product_price;
 
 class supplierController extends Controller
 {
@@ -108,14 +109,15 @@ class supplierController extends Controller
     }
 
 
-    return view('external_broker.business_info',['countries'=>$countries])->with('supplier_info_fk',$supplier_id_fk);
+
+    return view('external_broker.business_info',['countries'=>$countries,'business_info'=>$business_info])->with('supplier_info_fk',$supplier_id_fk);
   }
 
   // this is for the referall form sent to the supplier
   public function get_business_info_page($id){
     $countries = countries::get();
     $supplier_id_fk = $id;
-    return view('external_broker.business_info',['countries'=>$countries])->with('supplier_info',$supplier_id_fk);
+    return view('external_broker.business_info',['countries'=>$countries,])->with('supplier_info',$supplier_id_fk);
   }
 
   public function submit_business_info(Request $request){
@@ -267,8 +269,13 @@ class supplierController extends Controller
     $audit->status = 'pending';
     $audit->save();
 
+    $product_price = new product_price();
+    $product_price->product_infos_id = $product_id_fk;
+    $product_price->sales_price = 'null';
+    $product_price->save();
+
     $product_id_fk = Crypt::encryptString($product_id_fk);
-    return view('external_broker.package_info')->with('product_info_fk',$product_id_fk);
+    return view('external_broker.package_info')->with('product_info_fk',$product_id_fk)->withInput();
   }
 
  public function store_package_info(Request $request){

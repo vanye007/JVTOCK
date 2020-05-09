@@ -25,6 +25,9 @@ use App\product_audit;
 use App\units_per_package;
 use App\packages_per_carton;
 use App\audit_log;
+use App\product_price;
+use File;
+use Response;
 
 class HomeController extends Controller
 {
@@ -139,7 +142,8 @@ class HomeController extends Controller
                                 ->leftjoin('product_audits','product_infos.id',"=",'product_audits.product_infos_id')
                                 ->leftjoin('packages_per_cartons','product_infos.id',"=",'packages_per_cartons.product_infos_id')
                                 ->leftjoin('units_per_packages','product_infos.id','=','units_per_packages.product_infos_id')
-                                ->select('product_infos.*','product_certs.*','product_audits.*','packages_per_cartons.*','units_per_packages.*','packages_per_cartons.length as plength', 'packages_per_cartons.width as pwidth','packages_per_cartons.height as pheight', 'packages_per_cartons.weight as pweight')
+                                ->join('product_prices','product_infos.id','=','product_prices.product_infos_id')
+                                ->select('product_prices.sale_price','product_prices.id as sales_price_id','product_infos.*', 'product_infos.id as product_id','product_certs.*','product_audits.*','packages_per_cartons.*','units_per_packages.*','packages_per_cartons.length as plength', 'packages_per_cartons.width as pwidth','packages_per_cartons.height as pheight', 'packages_per_cartons.weight as pweight')
                                 ->where('facility_infos.id',$facility_id)
                                 ->get();
 
@@ -234,6 +238,34 @@ class HomeController extends Controller
     public function delete_product($id){
       product::where('id',$id)->update(['deleted'=>1]);
       return redirect()->back()->with('notification','Product deleted');
+    }
+
+    public function update_selling_price(Request $request){
+      $id = $request->input('sales_id');
+      $price = $request->input('sale_price');
+
+      product_price::where('id',$id)->update(['sale_price'=>$price]);
+      return redirect()->back()->with('notification','Sales price updated');
+    }
+
+    public function displayImage($id,$filename){
+
+        $path = storage_path('app/uploads/supplier/' .$id .'/'. $filename);
+
+
+        if (!File::exists($path)) {
+            abort(404);
+        }
+
+        $file = File::get($path);
+
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 
 

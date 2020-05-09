@@ -16,6 +16,7 @@
   <div class="section mt-0  data-table buyer dash">
     <div class="w-row">
       <div class="w-col w-col-7">
+          <a href="/export/inventory"><button type="button" class="btn btn-primary btn-lg mb-3 mt-2">Export Inventory</button></a>
         <div class="dash-div-1 mb-4">
           <h1 class="action-header dash-action">ACTION REQUIRED</h1>
 
@@ -43,8 +44,8 @@
               </div>
             </a>
           @endforeach
-
           </div>
+
         {{-- <div class="dash-div-1 spaces"><img src="images/simple-pie-chart-1600.png" width="470" srcset="images/simple-pie-chart-1600-p-500.png 500w, images/simple-pie-chart-1600-p-800.png 800w, images/simple-pie-chart-1600-p-1080.png 1080w, images/simple-pie-chart-1600.png 1600w" sizes="(max-width: 767px) 77vw, (max-width: 991px) 49vw, 470px" alt="" class="image-3"></div> --}}
       </div>
       <div class="w-col w-col-5">
@@ -55,15 +56,14 @@
               <p>@foreach ($template as $key => $value)
                 @if ($value->type == 'message')
                   {{$value->message}}
-
                 @endif
-
               @endforeach<br>‍</p>
               <p><strong class="bold-signiture">Kind Regards</strong>,<br>‍<br>{{$name}} from JVTOCK</p>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -206,7 +206,7 @@
 
         @endif
 
-      </div><a  class="button dash-button w-button" data-toggle="modal" data-target="#upload_product">Upload Product</a></section>
+      </div><a href="" class="button dash-button w-button" data-toggle="modal" data-target="#upload_product">Upload Product</a></section>
   </div>
 
 

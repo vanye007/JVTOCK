@@ -83,7 +83,11 @@
                 <td>{{$value->shipping_terms}}</td>
                 <td>{{$value->payment_terms}}</td>
                 <td>{{$value->port_of_origin}}</td>
-                <td>{{$value->status}}</td>
+                @if ($value->status == 'pending')
+                    <td class="text-warning"><b>{{$value->status}}</b></td>
+                @else
+                    <td class="text-success"><b>{{$value->status}}</b></td>
+                @endif
               </tr>
             @endforeach
           </tbody>

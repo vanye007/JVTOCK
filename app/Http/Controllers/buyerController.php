@@ -68,13 +68,13 @@ class buyerController extends Controller
       'name' => 'required',
       'email' => 'required',
       'phone' => 'required',
-      'proof' => 'required|mimes:png,jpeg,pdf,doc,docx',
+      'proof' => 'required|mimes:png,jpeg,doc,docx',
       'file' => 'max:20480',
     ]);
 
     if ($validate->fails())
     {
-        return redirect()->back()->withErrors($validate->errors());
+        return redirect()->back()->withErrors($validate->errors())->withInput();;
     }
 
     //Store buyer details in the database
