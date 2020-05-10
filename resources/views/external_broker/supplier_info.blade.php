@@ -3,6 +3,7 @@
   <div class="supplier-input-section">
     <div class="supplier-input-cont w-container">
       <div class="supplier-input-div">
+        <a href="https://jvtock.com"><img style="display:block;margin:auto;" src="{{asset('images/jvtock-logo.png')}}" width="70" alt=""></a>
         <div class="w-form">
           <form id="email-form" action='@if ($referral_id !== null){{url("/submit_referral_supply/{$referral_id}")}}@else{{url("/supplier_info")}}@endif' method='post'>
             @csrf
