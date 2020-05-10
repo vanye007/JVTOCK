@@ -26,15 +26,24 @@ class pdfController extends Controller
    */
 
    public function inventory(){
-     $products = product_info::join('product_certs','product_infos.id',"=",'product_certs.product_infos_id')
-                            ->leftjoin('product_audits','product_infos.id',"=",'product_audits.product_infos_id')
-                            ->leftjoin('product_prices','product_infos.id',"=",'product_prices.product_infos_id')
-                            ->leftjoin('product_certs','product_infos.id',"=",'product_certs.product_infos_id')
-                            ->where('status','approved')
-                            ->get();
+     $check = product_info::all();
+     if ($check->isEmpty()) {
+        return redirect()->back()->with('notification','No supplier inventory');
+       // code...
+     } else {
+       $products = product_info::join('product_certs','product_infos.id',"=",'product_certs.product_infos_id')
+                              ->leftjoin('product_audits','product_infos.id',"=",'product_audits.product_infos_id')
+                              ->leftjoin('product_prices','product_infos.id',"=",'product_prices.product_infos_id')
+                              ->leftjoin('product_certs','product_infos.id',"=",'product_certs.product_infos_id')
+                              ->where('status','approved')
+                              ->get();
 
-      $pdf = \PDF::loadView('PDF',['products'=>$products]);
-      return $pdf->download('inventory.pdf');
+        $pdf = \PDF::loadView('PDF',['products'=>$products]);
+        return $pdf->download('inventory.pdf');
+       // code...
+     }
+
+
    }
 
 }
