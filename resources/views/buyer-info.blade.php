@@ -25,37 +25,17 @@
             @endif
 
           @endif
-
           @endforeach</p>
-        <a href='{{url("/view_proof_of_funds/{$value->proof}/{$value->id}")}}'><p>
-        <br><strong>Proof of funds: </strong>{{$value->proof}}
-        <br></p></a>
-        <a href="#" class="button w-button">Edit Profile</a>
-
+        <p>
+        <br><strong>Proof of funds: </strong><a href='{{url("/view_proof_of_funds/{$value->proof}/{$value->id}")}}'>{{$value->proof}}</a>
+        <br><strong>Audit Status (Approved): </strong>{{$value->approved}}
+        <br></p>
+        @if ($value->approved == 'no')
+          <a href="/approve_buyer/{{$value->id}}" class="btn btn-success">Approve</a>
+        @else
+          <a href="/reject_buyer/{{$value->id}}" class="btn btn-warning">Reject</a>
+        @endif
       </div>
-
-
-      {{-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img class="d-block w-100" src="..." alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="..." alt="Second slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100" src="..." alt="Third slide">
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div> --}}
 
   <div class="col-md-4 hero-image-mask"><img src="/images/cart.png" alt="" class="hero-image"></div>
         @endforeach

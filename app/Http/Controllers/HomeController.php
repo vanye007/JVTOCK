@@ -249,14 +249,10 @@ class HomeController extends Controller
     }
 
     public function displayImage($id,$filename){
-
         $path = storage_path('app/uploads/supplier/' .$id .'/'. $filename);
-
-
         if (!File::exists($path)) {
             abort(404);
         }
-
         $file = File::get($path);
 
         $type = File::mimeType($path);
@@ -267,6 +263,16 @@ class HomeController extends Controller
 
         return $response;
     }
+
+  public function approve_buyer($id){
+    buyer::where('id',$id)->update(['approved'=>'yes']);
+    return redirect()->back()->with('notification','Buyer approved');
+  }
+
+  public function reject_buyer($id){
+    buyer::where('id',$id)->update(['approved'=>'no']);
+    return redirect()->back()->with('notification','Buyer declined');
+  }
 
 
 }

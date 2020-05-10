@@ -17,6 +17,7 @@
           <th scope="col">Interested product</th>
           <th scope="col">Delivery port</th>
           <th scope="col">Proof of funds</th>
+            <th scope="col">Audited (Approved)</th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +33,7 @@
             @endforeach</td>
             <td>{{$value->delivery_port}}</td>
             <td>{{$value->proof}}</td>
+            <td>{{$value->approved}}</td>
           </tr>
         @endforeach
       </tbody>

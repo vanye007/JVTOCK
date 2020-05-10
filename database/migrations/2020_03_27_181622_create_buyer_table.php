@@ -22,6 +22,7 @@ class CreateBuyerTable extends Migration
             $table->unsignedInteger('country_id');
             $table->string('proof')->null();
             $table->string('delivery_port');
+            $table->string('approved');
             $table->timestamps();
 
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');

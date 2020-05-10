@@ -86,6 +86,7 @@ class buyerController extends Controller
     $buyer->phone = $phone;
     $buyer->proof = $proof;
     $buyer->delivery_port = $port;
+    $buyer->approved = 'no';
 
     if ($buyer->save()) {
       //retrieve the buyers id
