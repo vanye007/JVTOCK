@@ -58,8 +58,8 @@
         <p><strong>Supply Capacity:</strong> {{$value->capacity}}</p>
         <p><strong>Certificates:</strong> <a href="/certificates/{{$value->path}}/{{$id}}">{{$value->certificates}} </a></p>
         {{-- <p><strong>Proof of life:</strong> <a href="/proof_of_life/{{$value->pof}}/{{$id}}">{{$value->pof}} </a></p> --}}
-        <p><strong>Units/Pack:</strong> Length {{$value->length}} | Width {{$value->width}} | Height {{$value->height}} | weight {{$value->weight}}</p>
-        <p><strong>Packages/Carton:</strong> Length {{$value->plength}} | Width {{$value->pwidth}} | Height {{$value->pheight}} | weight {{$value->pweight}}</p>
+        <p><strong>Units / Package:</strong> Length {{$value->length}} | Width {{$value->width}} | Height {{$value->height}} | weight {{$value->weight}}</p>
+        <p><strong>Packages / Carton:</strong> Length {{$value->plength}} | Width {{$value->pwidth}} | Height {{$value->pheight}} | weight {{$value->pweight}}</p>
         <p><strong>Audit Date:</strong> {{$value->audit_date}}</p>
         <p><strong>JVTOCK Sales price</strong>
           <form method="post" action="/update_sales_price" enctype='multipart/form-data'>
