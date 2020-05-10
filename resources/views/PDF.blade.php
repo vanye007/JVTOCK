@@ -50,7 +50,7 @@
           <tr>
             <th scope="col" class="orange">Name</th>
             <th scope="col">Description</th>
-            <td>Certificate</td>
+            <td scope="col">Certificate</td>
             <th scope="col">Price</th>
             <th scope="col">Volume</th>
             <th scope="col">Supply Capacity</th>
