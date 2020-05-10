@@ -69,10 +69,10 @@
             <button  class="btn btn-primary">Update</button>
           </form>
         </p>
-        <p style="text-align:center;"><strong>Audit Status</strong></p>
+        <p style=""><strong>Audit Status</strong>: {{$value->status}}</p>
 
         @if ($value->status == 'pending')
-            <a href="/approve_product/{{$value->product_id}}"><button style="Width:100%" type="button" class="btn btn-secondary">Pending</button></a>
+            <a href="/approve_product/{{$value->product_id}}"><button style="Width:100%" type="button" class="btn btn-primary">Approve</button></a>
         @else
           {{-- <a href="/approve_product/{{$value->id}}"><button style="Width:100%" type="button" class="btn btn-secondary">Pending</button></a> --}}
           <button style="Width:100%" type="button" class="btn btn-success">Approved</button>
