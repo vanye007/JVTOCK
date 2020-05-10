@@ -235,6 +235,12 @@ class HomeController extends Controller
 
     }
 
+  public function reject_product($id){
+    product_audit::where('id',$id)->update(['status'=>'pending']);
+    return redirect()->back()->with('notification','Product rejected');
+
+  }
+
     public function delete_product($id){
       product::where('id',$id)->update(['deleted'=>1]);
       return redirect()->back()->with('notification','Product deleted');

@@ -75,7 +75,7 @@
             <a href="/approve_product/{{$value->product_id}}"><button style="Width:100%" type="button" class="btn btn-primary">Approve</button></a>
         @else
           {{-- <a href="/approve_product/{{$value->id}}"><button style="Width:100%" type="button" class="btn btn-secondary">Pending</button></a> --}}
-          <button style="Width:100%" type="button" class="btn btn-success">Approved</button>
+          <a href="/reject_product/{{$value->product_id}}">  <button style="Width:100%" type="button" class="btn btn-warning">Reject</button></a>
         @endif
         {{-- <a href="#" class="button w-button col-md-6">Edit Profile</a> --}}
       </div>

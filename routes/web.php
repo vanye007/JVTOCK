@@ -56,6 +56,7 @@ Route::get('/product-info/{id}','HomeController@retrieve_product')->middleware('
 Route::post('/update_product/{id}','HomeController@update_product')->middleware('isUserApprove');
 Route::post('/upload_product','HomeController@upload_product')->middleware('isUserApprove');
 Route::get('approve_product/{id}','HomeController@approve_product')->middleware('isUserApprove');
+Route::get('/reject_product/{id}','HomeController@reject_product')->middleware('isUserApprove');
 Route::get('delete_product/{id}','HomeController@delete_product')->middleware('isUserApprove');
 Route::post('/update_sales_price','HomeController@update_selling_price')->middleware('isUserApprove');
 Route::get('/approve_buyer/{id}','HomeController@approve_buyer')->middleware('isUserApprove');
