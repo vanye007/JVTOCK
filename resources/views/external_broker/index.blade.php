@@ -19,6 +19,7 @@
   <div class="buyer-input-section">
     <div class="buyer-input-cont w-container">
       <div class="buyer-input-form">
+        <a href="https://jvtock.com"><img style="display:block;margin:auto;" src="{{asset('images/jvtock-logo.png')}}" width="70" alt=""></a>
         <div class="w-form">
           <form id="email-form"  action='{{url("/buyer_request")}}' method='post'  enctype='multipart/form-data'>
             @csrf
