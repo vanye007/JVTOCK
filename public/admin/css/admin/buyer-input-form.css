@@ -1,0 +1,116 @@
+.supplier-input-section {
+  margin-top: 80px;
+}
+
+.supplier-input-div {
+  margin-bottom: 60px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 2px 2px 20px -10px #000;
+}
+
+.input-fields {
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #434343;
+  border-radius: 10px;
+}
+
+.body {
+  background-color: #f5f5f5;
+}
+
+.field-label {
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: 'Open Sans', sans-serif;
+  color: #434343;
+  font-weight: 400;
+}
+
+.submit-button {
+  display: block;
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 20px 100px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #2068e3;
+  border-radius: 10px;
+  background-color: transparent;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+  font-family: 'Open Sans', sans-serif;
+  color: #214ee5;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.submit-button:hover {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#2068e3), color-stop(75%, #4f85f2));
+  background-image: linear-gradient(180deg, #2068e3, #4f85f2 75%);
+  color: #fff;
+}
+
+.supplier-form {
+  padding-top: 30px;
+  padding-bottom: 45px;
+  font-family: 'Open Sans', sans-serif;
+  color: #434343;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.missing-field-note {
+  padding-right: 0px;
+  padding-left: 0px;
+  font-family: 'Open Sans', sans-serif;
+  color: #434343;
+  text-align: center;
+}
+
+.missing-field-note.data {
+  text-align: left;
+}
+
+.form {
+  padding-top: 25px;
+}
+
+@media screen and (max-width: 767px) {
+  .supplier-input-div {
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .input-fields {
+    width: 75%;
+  }
+  .field-label {
+    width: 75%;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .submit-button {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+  .supplier-form {
+    font-size: 30px;
+  }
+  .missing-field-note {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+

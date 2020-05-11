@@ -1,0 +1,137 @@
+.buyer-input-section {
+  margin-top: 80px;
+}
+
+.buyer-input-form {
+  margin-bottom: 60px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 2px 2px 20px -10px #000;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-image: linear-gradient(90deg, #c23d04, #ea9b47);
+    display: block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.supplier-input-div {
+    margin-bottom: 60px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 2px 2px 20px -10px #000;
+}
+
+.supplier-form {
+    padding-top: 30px;
+    padding-bottom: 45px;
+    font-family: 'Open Sans', sans-serif;
+    color: #434343;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.buyer-header {
+  padding-top: 30px;
+  padding-bottom: 45px;
+  font-family: 'Open Sans', sans-serif;
+  color: #434343;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.field-label {
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: 'Open Sans', sans-serif;
+  color: #434343;
+  font-weight: 400;
+}
+
+.input-fields {
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #434343;
+  border-radius: 10px;
+}
+
+.submit-button {
+  display: block;
+  margin-top: 40px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 20px 100px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #2068e3;
+  border-radius: 10px;
+  background-color: transparent;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+  font-family: 'Open Sans', sans-serif;
+  color: #214ee5;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.submit-button:hover {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#2068e3), color-stop(75%, #4f85f2));
+  background-image: linear-gradient(180deg, #2068e3, #4f85f2 75%);
+  color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .buyer-input-form {
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .buyer-header {
+    font-size: 30px;
+  }
+  .field-label {
+    width: 75%;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .input-fields {
+    width: 75%;
+  }
+  .submit-button {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+}
