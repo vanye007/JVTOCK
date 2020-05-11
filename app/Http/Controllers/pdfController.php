@@ -38,8 +38,6 @@ class pdfController extends Controller
                               ->where('status','approved')
                               ->get();
 
-        return $products;
-
         $pdf = \PDF::loadView('PDF',['products'=>$products]);
         return $pdf->download('inventory.pdf');
        // code...
