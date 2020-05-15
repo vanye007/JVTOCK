@@ -58,6 +58,7 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">Name</th>
+              <th scope="col">Email</th>
               <th scope="col">Country</th>
               <th scope="col">Region</th>
               <th scope="col">Product</th>
