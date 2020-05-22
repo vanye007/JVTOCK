@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-
     <div class="miss-pof-sec">
       <div class="div-block-2">
         <h1 class="heading-4 tt">Template Message</h1>
@@ -20,13 +19,11 @@
             @endforeach</textarea>
           <br>
           <br>‍</p>
-
           <p><strong class="bold-signiture">Kind Regards</strong>,<br>‍<br>{{$name}} from JVTOCK</p>
         </div>
       </div><button style="margin:auto;display:block;"  class="button short-button send w-button w-col-2">Send</button>
     </form>
 
     </div>
-
 
 @endsection

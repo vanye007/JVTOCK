@@ -121,6 +121,7 @@
                       </table>
                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 10px;"> </p>
                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 10px;">{{$the_message ?? ''}}</p>
+                          <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 10px;">{{$upload_link ?? ''}}</p>
                     </td>
                   </tr>
                   <tr>

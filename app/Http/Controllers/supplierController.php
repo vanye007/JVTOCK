@@ -23,6 +23,9 @@ use App\product_audit;
 use App\units_per_package;
 use App\packages_per_carton;
 use App\product_price;
+use App\supplier_docs;
+use Redirect;
+use App\valid_upload_link;
 
 class supplierController extends Controller
 {
@@ -328,5 +331,50 @@ class supplierController extends Controller
   public function add_more_product(Request $request){
     $facility_id = $request->session()->get('facility_info');
     return view('external_broker.product_info')->with('facility_info',$facility_id);
+  }
+
+  //validate if the user id exist before displaying upload page
+  public function retrieve_upload_page($id){
+    $id = Crypt::decryptString($id);
+    $name = 'loi';
+    // $supplier = supplier_info::where('id',$id)->exists();
+    $valid_link = valid_upload_link::where('supplier_infos_id',$id)->where('name',$name)->where('uploaded','no')->exists();
+    $id = Crypt::encryptString($id);
+    if($valid_link){
+      return view('external_broker.uploads.loi')->with('id',$id);
+    }else{
+      return Redirect::to('https://www.jvtock.com');
+    }
+  }
+
+  public function update_valid_link($id,$name){
+      valid_upload_link::where('supplier_infos_id',$id)->where('name',$name)->where('uploaded','no')->update(['uploaded' => 'yes']);
+  }
+
+  public function submit_loi(Request $request){
+    $id = $request->input('id');
+    $id = Crypt::decryptString($id);
+    $name = 'loi';
+    $loi = $request->file('loi');
+    $file_name = $loi->getClientOriginalName();
+
+    $valid_link = valid_upload_link::where('supplier_infos_id',$id)->where('name',$name)->where('uploaded','no')->exists();
+    if($valid_link){
+      $destination = 'uploads/supplier/'.$id;
+      $supplier_doc = new supplier_docs();
+      $supplier_doc->supplier_infos_id = $id;
+      $supplier_doc->name = $name;
+      $supplier_doc->path = $file_name;
+      $supplier_doc->save();
+
+      $loi->storeAs($destination,$file_name);
+      $this->update_valid_link($id,$name);
+      return redirect()->back()->with('success','LOI successfully uploaded');
+
+    }else{
+
+        return Redirect::to('https://www.jvtock.com');
+    }
+
   }
 }

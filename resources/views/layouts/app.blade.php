@@ -11,6 +11,7 @@
   <link href="{{asset('css/normalize.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('css/components.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('css/admin/jvtock-broker-system.css')}}" rel="stylesheet" type="text/css">
+  <link href="{{asset('css/html-template-038da6.css')}}" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({  google: {    families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic"]  }});</script>
   <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->

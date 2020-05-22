@@ -28,6 +28,8 @@ use App\audit_log;
 use App\product_price;
 use File;
 use Response;
+use App\supplier_docs;
+use App\valid_upload_links;
 
 class HomeController extends Controller
 {
@@ -146,10 +148,10 @@ class HomeController extends Controller
                                 ->select('product_prices.sale_price','product_prices.id as sales_price_id','product_infos.*', 'product_infos.id as product_id','product_certs.*','product_audits.*','packages_per_cartons.*','units_per_packages.*','packages_per_cartons.length as plength', 'packages_per_cartons.width as pwidth','packages_per_cartons.height as pheight', 'packages_per_cartons.weight as pweight')
                                 ->where('facility_infos.id',$facility_id)
                                 ->get();
-
+      $docs =  supplier_docs::where('supplier_infos_id',$id)->get();
       $countries = countries::get();
 
-      return view('supplier-info',['supplier_info'=>$supplier_info,'business_info'=>$business_info,'facility_info'=>$facility_info,'countries'=>$countries,'products'=>$products])->with('id',$id);
+      return view('supplier-info',['supplier_info'=>$supplier_info,'business_info'=>$business_info,'facility_info'=>$facility_info,'countries'=>$countries,'products'=>$products,'docs'=>$docs])->with('id',$id);
     }
 
     public function buyer_info($id){
@@ -279,6 +281,24 @@ class HomeController extends Controller
     buyer::where('id',$id)->update(['approved'=>'no']);
     return redirect()->back()->with('notification','Buyer declined');
   }
+
+
+  public function display_template($type){
+    $name = Auth::user()->name;
+    $id = Auth::user()->id;
+    // $template = template::leftjoin('template_msg','template.id','=','template_msg.template_id')
+    //                     ->where('template.user_id',$id)
+    //                     ->where('template.type',$type)
+    //                     ->get();
+
+    $suppliers = supplier_info::join('business_infos','supplier_infos_id','=','business_infos.supplier_infos_id')
+                                ->join('countries','business_infos.country_id','=','countries.id')
+                                ->get();
+
+    return view('template.'.$type,['suppliers'=>$suppliers])->with('type',$type)->with('name',$name);
+  }
+
+
 
 
 }

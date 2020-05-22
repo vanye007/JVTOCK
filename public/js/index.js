@@ -55,4 +55,12 @@ $(document).ready(function() {
 			var id = $(this).attr('id');
 			$('#delete_product').attr('href','/delete_product/'+id);
 		})
+
+		$('#supplier_list').on('change', function() {
+
+		  var details = $('#supplier_list option:selected').html();
+			$('#supplier_details').val(details);
+		});
+
+
 } );

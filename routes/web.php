@@ -19,6 +19,7 @@ Route::post('/supplier_info','supplierController@supplier_info');
 Route::post('/business_info','supplierController@submit_business_info');
 Route::post('/submit_product_info','supplierController@submit_product_info');
 Route::post('/packages','supplierController@store_package_info');
+Route::post('/supplier_loi','supplierController@submit_loi');
 
 Route::get('/', 'buyerController@Welcome');
 Route::get('/buyer', 'buyerController@index');
@@ -29,6 +30,8 @@ Route::get('/mail','buyerController@mail');
 Route::get('/supplier_form/{id}','supplierController@supplier');
 Route::get('/supplier_business_info/{id}','supplierController@get_business_info_page');
 Route::get('/add_more_product','supplierController@add_more_product');
+Route::get('/upload/supplier/loi/{id}','supplierController@retrieve_upload_page');
+
 
 
 
@@ -69,12 +72,15 @@ Route::get('/view_proof_of_funds/{name}/{id}','fileController@view_proof_of_fund
 Route::get('export/inventory','pdfController@inventory');
 
 Route::get('/images/{id}/{filename}', 'HomeController@displayImage')->name('image.displayImage');
+Route::get('/template/{type}','HomeController@display_template')->middleware('isUserApprove');
 
 
 
 
 Route::post('/send_message','messageController@send_message')->middleware('isUserApprove');
 Route::post('/message/{type}','messageController@message');
+Route::post('/send_loi','messageController@loi_message');
+Route::post('/send_mndnc','messageController@mndnc_message');
 
 
 
