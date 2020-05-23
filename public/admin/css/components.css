@@ -379,6 +379,8 @@ textarea.w-select {
 .w-select[multiple] {
   height: auto;
 }
+
+
 .w-form-label {
   display: inline-block;
   cursor: pointer;
@@ -503,6 +505,8 @@ textarea.w-select {
   margin-right: 8px;
   width: 20px;
 }
+
+
 .w-icon-file-upload-uploading {
   height: 20px;
 }

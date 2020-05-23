@@ -11,5 +11,5 @@
             <div class="edit-text">Inventory</div></a>
             <a href="/buyer-database" class="link-block _3rd-link _5th w-inline-block"><img src="{{asset('images/cart.png')}}" width="50" alt="" class="image">
               <div class="edit-text">Buyer Data</div></a>
-
+            
             </div>

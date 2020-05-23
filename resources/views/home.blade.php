@@ -17,10 +17,28 @@
     <div class="w-row">
       <div class="w-col w-col-7">
           <a href="/export/inventory"><button type="button" class="btn btn-primary btn-lg mb-3 mt-2">Export Inventory</button></a>
+          @if(Auth::user()->email == "wvanye@gmail.com" || Auth::user()->email == "ctkruger@gmail.com")
+              <a href="/users"><button type="button" class="btn btn-info btn-lg mb-3 mt-2">Admins</button></a>
+          @endif
         <div class="dash-div-1 mb-4">
           <h1 class="action-header dash-action">ACTION REQUIRED</h1>
 
           @if (sizeof($buyer_actions)>0 || sizeof($supplier_actions) > 0)
+            @if (sizeof($buyer_actions)>0)
+              <a href="/buyer-database" class="link-block-4 dash-link w-inline-block">
+                <div class="action-item-div">
+                  <p class="paragraph-2 dash-parag"> {{$buyer_actions->count()}} New buyer entered</p>
+                </div>
+              </a>
+            @endif
+
+            @if (sizeof($supplier_actions)>0)
+                  <a href="/supplier-database" class="link-block-4 dash-link w-inline-block">
+                    <div class="action-item-div">
+                      <p class="paragraph-2 dash-parag"> {{$supplier_actions->count()}} New supplier enter</p>
+                    </div>
+                  </a>
+            @endif
 
           @else
             <div class="action-item-div">
@@ -29,21 +47,7 @@
 
           @endif
 
-          @foreach ($buyer_actions as $key => $value)
-              <a href="/buyer-database" class="link-block-4 dash-link w-inline-block">
-                <div class="action-item-div">
-                  <p class="paragraph-2 dash-parag"> {{$buyer_actions->count()}} New buyer entered</p>
-                </div>
-              </a>
-          @endforeach
 
-          @foreach ($supplier_actions as $key => $value)
-            <a href="/supplier-database" class="link-block-4 dash-link w-inline-block">
-              <div class="action-item-div">
-                <p class="paragraph-2 dash-parag"> {{$supplier_actions->count()}} New supplier enter</p>
-              </div>
-            </a>
-          @endforeach
           </div>
 
         {{-- <div class="dash-div-1 spaces"><img src="images/simple-pie-chart-1600.png" width="470" srcset="images/simple-pie-chart-1600-p-500.png 500w, images/simple-pie-chart-1600-p-800.png 800w, images/simple-pie-chart-1600-p-1080.png 1080w, images/simple-pie-chart-1600.png 1600w" sizes="(max-width: 767px) 77vw, (max-width: 991px) 49vw, 470px" alt="" class="image-3"></div> --}}
@@ -140,6 +144,7 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">Name</th>
+            <th scope="col">Email</th>
             <th scope="col">Country</th>
             <th scope="col">Phone</th>
             <th scope="col">Interested product</th>
@@ -151,6 +156,7 @@
             @foreach ($buyers->sortByDesc('id') as $key => $value)
             <tr>
               <th scope="row"><a href="/buyer_info/{{$value->id}}">{{$value->name}}</a></th>
+              <td data-toggle="modal" data-target="#auto_email" class="get_email">{{$value->email}}</td>
               <td>{{$value->country_name}}</td>
               <td>{{$value->phone}}</td>
               <td>@foreach ($inquiry as $key => $inq_value)

@@ -30,6 +30,8 @@ use File;
 use Response;
 use App\supplier_docs;
 use App\valid_upload_links;
+use App\buyer_doc;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -160,7 +162,9 @@ class HomeController extends Controller
                     ->select('buyer.*','countries.country_name')
                     ->get();
       $inquiry = $this->inquiry();
-      return view('buyer-info',['buyer'=>$buyer, 'inquiry'=>$inquiry]);
+      $docs = buyer_doc::where('buyer_id',$id)->get();
+
+      return view('buyer-info',['buyer'=>$buyer, 'inquiry'=>$inquiry,'docs'=>$docs])->with('id',$id);
     }
 
     public function retrieve_product($id){
@@ -297,6 +301,64 @@ class HomeController extends Controller
 
     return view('template.'.$type,['suppliers'=>$suppliers])->with('type',$type)->with('name',$name);
   }
+
+
+  public function upload_doc(Request $request, $type = null){
+    $id = $request->input('id');
+    $doc_name = $request->input('type');
+    $file = $request->file('document');
+    $file_name = $file->getClientOriginalName();
+
+
+    if ($type == 'supplier') {
+      $supplier_doc = new supplier_docs();
+      $supplier_doc->supplier_infos_id = $id;
+      $supplier_doc->name = $doc_name;
+      $supplier_doc->path = $file_name;
+      $supplier_doc->save();
+
+      $destination = 'uploads/supplier/'.$id;
+
+      $file->storeAs($destination,$file_name);
+
+      if ($supplier_doc) {
+        return redirect()->back()->with('notification','Document uploaded');
+      }
+    }else {
+      $buyer_doc = new buyer_doc();
+      $buyer_doc->buyer_id = $id;
+      $buyer_doc->name = $doc_name;
+      $buyer_doc->path = $file_name;
+      $buyer_doc->save();
+
+      $destination = 'uploads/buyer/'.$id;
+
+      $file->storeAs($destination,$file_name);
+      if ($buyer_doc) {
+        return redirect()->back()->with('notification','Document uploaded');
+      }
+    }
+
+  }
+
+public function users(){
+  $users = User::get();
+  return view('users',['users'=>$users]);
+}
+
+public function approve_user($id){
+  User::where('id',$id)->update(['approve' => 'yes']);
+  return redirect()->back()->with('notification','User approved');
+}
+
+public function revoke_user($id){
+  User::where('id',$id)->update(['approve' => 'no']);
+  return redirect()->back()->with('notification','User approved');
+}
+
+public function mndnc_custom_email($email){
+  return view ('template.mndnc')->with('to_email',$email);
+}
 
 
 

@@ -73,4 +73,21 @@ class fileController extends Controller
             abort(404, 'File not found!');
         }
     }
+
+    public function view_doc($name,$id,$client){
+      $file = '';
+      if ($file == 'supplier') {
+        $file = storage_path('/app/uploads/supplier/').$id .'/' .$name;
+      } else {
+        $file = storage_path('/app/uploads/buyer/').$id .'/' .$name;
+      }
+
+
+      $headers = $this->get_content_type($name);
+      if (file_exists($file)) {
+          return response()->download($file, 'Test File', $headers, 'inline');
+      } else {
+          abort(404, 'File not found!');
+      }
+    }
 }

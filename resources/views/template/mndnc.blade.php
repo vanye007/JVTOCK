@@ -20,7 +20,7 @@
         <br><br>Name:            _________________________________
         <br><br>Date:              _________________________________
         <br><br>Signature:     _________________________________<br><br>
-        <br><br>Mail To:    <input Type='email' name="email" placeholder="Client email" required /><br><br>
+        <br><br>Mail To:    <input Type='email' name="email" placeholder="Client email" value="{{$to_email ?? ''}}" required /><br><br>
       </p>
         <button style="display:block;margin:auto;" class="btn btn-primary">Send</button>
     </div>

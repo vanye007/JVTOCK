@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class superAdmin
 {
@@ -15,6 +16,9 @@ class superAdmin
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if (Auth::check() && Auth::user()->email == "wvanye@gmail.com" || Auth::user()->email == "ctkruger@gmail.com") {
+            return $next($request);
+        }
+
     }
 }

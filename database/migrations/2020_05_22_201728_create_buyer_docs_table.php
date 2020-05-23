@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateBuyerDocsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('buyer_docs', function (Blueprint $table) {
+          $table->bigIncrements('id');
+          $table->unsignedInteger('buyer_id');
+          $table->string('name');
+          $table->string('path');
+          $table->timestamps();
+
+          $table->foreign('buyer_id')->references('id')->on('buyer')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('buyer_docs');
+    }
+}

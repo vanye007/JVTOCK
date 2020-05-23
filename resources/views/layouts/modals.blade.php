@@ -33,18 +33,22 @@
         {{-- <div class=" col-sm-12">
           <div><a id="contract_t" href="" class="button edit-button w-button">Contract Template</a></div>
         </div> --}}
-        <div class="col-sm-12">
+        {{-- <div class="col-sm-12">
           <div><a id="loi_t" href="" class="button edit-button w-button">LOI Template</a></div>
-        </div>
+        </div> --}}
         <div class=" col-sm-12">
-          <div><a id="custom_t" href="" class="button edit-button w-button">Custom Template</a></div>
+          <div><a id="message" href="" class="button edit-button w-button">Send Mail</a></div>
         </div>
-        <div class="col-sm-12">
+
+        <div class=" col-sm-12">
+          <div><a id="mndnc" href="" class="button edit-button w-button">Send MNDNC</a></div>
+        </div>
+        {{-- <div class="col-sm-12">
           <div><a id="pol_t" href="" class="button edit-button w-button">POL Template</a></div>
         </div>
         <div class=" col-sm-12">
           <div><a id="pof_t" href="" class="button edit-button w-button">POF template</a></div>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>
@@ -94,6 +98,30 @@
         <p style="text-align:center">Are you sure you want to delete product</p>
         <a id="delete_product" href=""><button type="button" class=" col-md-4 float-right  btn btn-danger">Yes</button></a>
         <button type="button" data-dismiss="modal" class="btn col-md-4 float-left col btn-success">No</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Modal -->
+{{-- upload documents --}}
+<div class="modal fade" id="upload_doc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-body">
+      <h1 class="supplier-database-header">Upload Document</h1>
+      <h4 style="text-align:center;" id="client_email"> </h4>
+      <div class="row">
+      <div class="col-md-12">
+        <form action="/upload_doc" id="upload_doc_form" method="POST" enctype='multipart/form-data'>
+            @csrf
+            <input type="hidden" name="id" value="{{$id ?? ''}}" />
+            <input type="text" class="form-field w-input" maxlength="256" name="type"  placeholder="document name"  required="">
+            <input type="file" class="form-field w-input" name="document" required/>
+            <button class="btn btn-primary mt-4">Submit</button>
+        </form>
       </div>
       </div>
     </div>

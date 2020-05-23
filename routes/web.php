@@ -70,9 +70,11 @@ Route::get('/certificates/{value}/{id}','fileController@view_certificates')->mid
 Route::get('/proof_of_life/{value}/{id}','fileController@view_proof_of_life')->middleware('isUserApprove');
 Route::get('/view_proof_of_funds/{name}/{id}','fileController@view_proof_of_funds')->middleware('isUserApprove');
 Route::get('export/inventory','pdfController@inventory');
+Route::get('/view_doc/{name}/{id}/{client}','fileController@view_doc')->middleware('isUserApprove');
 
 Route::get('/images/{id}/{filename}', 'HomeController@displayImage')->name('image.displayImage');
 Route::get('/template/{type}','HomeController@display_template')->middleware('isUserApprove');
+Route::get('/get_mndnc_email/{email}','HomeController@mndnc_custom_email')->middleware('isUserApprove');
 
 
 
@@ -81,6 +83,12 @@ Route::post('/send_message','messageController@send_message')->middleware('isUse
 Route::post('/message/{type}','messageController@message');
 Route::post('/send_loi','messageController@loi_message');
 Route::post('/send_mndnc','messageController@mndnc_message');
+// Route::post('/upload_doc','HomeController@upload_doc')->middleware('isUserApprove');
+Route::post('/upload_doc/{type}','HomeController@upload_doc')->middleware('isUserApprove');
+
+Route::get('/users','HomeController@users')->middleware('superAdmin');
+Route::get('/approve_user/{id}','HomeController@approve_user')->middleware('superAdmin');
+Route::get('/revoke_user/{id}','HomeController@revoke_user')->middleware('superAdmin');
 
 
 

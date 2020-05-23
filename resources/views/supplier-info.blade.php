@@ -4,15 +4,18 @@
     <div>
       <h1 class="supplier-database-header">Supplier Informations</h1>
     </div>
-    <div class="flex-container w-container container col-md-12 w-col-12">
-      <div class="col-md-4 info">
+    <div class="col-md-12 m-3 action_btns">
+      <button id="supplier_upload" class="btn"  data-toggle="modal" data-target="#upload_doc">Upload Doc</button>
+    </div>
+    <div class="w-container container col-md-12 w-col-12">
+      <div class="col-md-3 info float-left">
         <h3>Supplier details</h3>
         <p><strong>Firsname:</strong> {{$supplier_info['firstname']}}</p>
         <p><strong>Lastname:</strong> {{$supplier_info['lastname']}}</p>
         <p><strong>Email:</strong> {{$supplier_info['email']}} </p>
         <p><strong>Phone: </strong>{{$supplier_info['phone']}}</p>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3 float-left">
         <h3>Business info</h3>
         @foreach ($business_info as $key => $value)
         <p><strong>Country: </strong>@foreach ($countries as $key => $country_value)
@@ -25,7 +28,7 @@
         <p><strong>Post Code: </strong>{{$value->postal_code}}</p>
         @endforeach
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3 float-left">
         <h3>Facility info</h3>
         @foreach ($facility_info as $key => $value)
         <p><strong>Country: </strong>@foreach ($countries as $key => $country_value)
@@ -37,6 +40,16 @@
         <p><strong>Address:</strong> {{$value->address}}</p>
         <p><strong>Post Code: </strong>{{$value->postal_code}}</p>
         @endforeach
+      </div>
+      <div class="col-md-3 float-left">
+        <h3>Legal Documents</h3>
+        @foreach ($docs as $key => $value)
+          <a href="/view_doc/{{$value->path}}/{{$value->supplier_infos_id}}/supplier"><p>{{$value->name}}</p></a>
+        @endforeach
+
+        <p></p>
+        <p></p>
+        <p></p>
       </div>
     </div>
     <div>

@@ -49,6 +49,8 @@ $(document).ready(function() {
 			$('#custom_t').attr('href','/get_message/custom/' + email );
 			$('#pol_t').attr('href','/get_message/pol/' + email );
 			$('#pof_t').attr('href','/get_message/pof/' + email );
+			$('#message').attr('href','/get_message/message/' + email);
+			$('#mndnc').attr('href','/get_mndnc_email/' + email);
 		})
 
 		$('.delete_product').click(function(){
@@ -61,6 +63,14 @@ $(document).ready(function() {
 		  var details = $('#supplier_list option:selected').html();
 			$('#supplier_details').val(details);
 		});
+
+		$('#supplier_upload').click(function(){
+			 $('#upload_doc_form').attr('action', '/upload_doc/supplier');
+		})
+
+		$('#buyer_upload').click(function(){
+			 $('#upload_doc_form').attr('action', '/upload_doc/buyer');
+		})
 
 
 } );

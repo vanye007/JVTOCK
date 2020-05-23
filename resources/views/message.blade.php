@@ -11,17 +11,20 @@
           <div><a href="/get_message/contract" class="button edit-button w-button">Edit Contract</a></div>
         </div> --}}
         <div class="w-col w-col-3 col-sm-4">
-          <div><a href="/get_message/loi" class="button edit-button w-button @if ($type == 'loi') active @endif">LOI Template</a></div>
+          <div><a href="/template/loi" class="button edit-button w-button @if ($type == 'loi') active @endif">LOI Template</a></div>
         </div>
         <div class="w-col w-col-3 col-sm-4">
-          <div><a href="/get_message/message" class="button edit-button w-button @if ($type == 'message') active @endif">Custom Template</a></div>
+          <div><a href="/template/mndnc" class="button edit-button w-button @if ($type == 'loi') active @endif">MNDNC Template</a></div>
         </div>
         <div class="w-col w-col-3 col-sm-4">
+          <div><a href="/get_message/message" class="button edit-button w-button @if ($type == 'message') active @endif">SEND MAIL</a></div>
+        </div>
+        {{-- <div class="w-col w-col-3 col-sm-4">
           <div><a href="/get_message/pol" class="button edit-button w-button @if ($type == 'pol') active @endif">Edit Template</a></div>
-        </div>
-        <div class="w-col w-col-3 col-sm-4">
+        </div> --}}
+        {{-- <div class="w-col w-col-3 col-sm-4">
           <div><a href="/get_message/pof" class="button edit-button w-button @if ($type == 'pof') active @endif">Edit Template</a></div>
-        </div>
+        </div> --}}
       </div>
       <div class="template-cont w-container"><img src="{{asset('images/jvtock-logo.png')}}" width="150" alt="" class="image-2">
         <div class="div-block-2">

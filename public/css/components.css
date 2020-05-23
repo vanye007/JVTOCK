@@ -18,6 +18,21 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.get_email{
+  cursor: pointer;
+  color: #007bff;
+}
+
+
+td{
+  text-transform: lowercase !important;
+}
+
+.action_btns button{
+  margin: auto;
+  display: block;
+}
 .w-icon-slider-right:before {
   content: "\e600";
 }
