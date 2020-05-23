@@ -16,7 +16,7 @@
         <br>Name: <input type="text" name="admin_name" placeholder="JVTOCK REP" required />
         <br>‍<br><br>Date:<input Type='date' name="date_b" required />
         <br><br>Signature:       ________________________________
-        <br><br><br>For:<input Type='text' name="client_info" placeholder="Client Info" required />
+        <br><br><br>For:<input Type='text' name="client_info" class="form-field w-input" placeholder="Client Info" required />
         <br><br>Name:            _________________________________
         <br><br>Date:              _________________________________
         <br><br>Signature:     _________________________________<br><br>

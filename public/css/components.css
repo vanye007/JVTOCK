@@ -29,6 +29,13 @@ td{
   text-transform: lowercase !important;
 }
 
+input{
+  border-style: solid;
+border-width: 1px;
+border-color: #1b2f53;
+
+border: 1.5px solid #ec6238 !important;
+}
 .action_btns button{
   margin: auto;
   display: block;
