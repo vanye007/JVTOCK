@@ -153,6 +153,7 @@
           </tr>
         </thead>
         <tbody>
+          
             @foreach ($buyers->sortByDesc('id') as $key => $value)
             <tr>
               <th scope="row"><a href="/buyer_info/{{$value->id}}">{{$value->name}}</a></th>
