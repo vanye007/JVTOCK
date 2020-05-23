@@ -353,7 +353,7 @@ public function approve_user($id){
 
 public function revoke_user($id){
   User::where('id',$id)->update(['approve' => 'no']);
-  return redirect()->back()->with('notification','User approved');
+  return redirect()->back()->with('notification','User revoked');
 }
 
 public function mndnc_custom_email($email){
