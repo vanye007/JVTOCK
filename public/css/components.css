@@ -36,9 +36,9 @@ input[type=email] {
 input{
   border-style: solid;
 border-width: 1px;
-/* border-color: #1b2f53; */
+border-color: #1b2f53;
 
-border: 1.5px solid #ec6238 !important;
+/* border: 1.5px solid #ec6238 !important; */
 text-transform: capitalize;
 }
 .action_btns button{
