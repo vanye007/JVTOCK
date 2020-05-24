@@ -41,6 +41,8 @@ $(document).ready(function() {
 
 		$('.get_email').click(function(){
 			var email = $(this).html();
+			var who = $(this).attr('data-name');
+			var id = $(this).attr('id');
 
 			$('#client_email').html(email);
 			//append email to buttons
@@ -50,7 +52,8 @@ $(document).ready(function() {
 			$('#pol_t').attr('href','/get_message/pol/' + email );
 			$('#pof_t').attr('href','/get_message/pof/' + email );
 			$('#message').attr('href','/get_message/message/' + email);
-			$('#mndnc').attr('href','/get_mndnc_email/' + email);
+
+			$('#mndnc').attr('href','/get_mndnc_email/' + who + '/'  + email + '/' + id);
 		})
 
 		$('.delete_product').click(function(){

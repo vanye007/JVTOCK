@@ -47,7 +47,7 @@ class messageController extends Controller
       //the current user email
       $data = array('to_name'=>$to_name, 'the_message'=> $the_message, 'from_name'=>$from_name);
       Mail::send('layouts.mail.mail', $data, function($message) use ($to_name, $to_email){
-        $from_email = 'wvanye@gmail.com';
+        $from_email = Auth::user()->email;
         $from_name = 'vanye';
         $message->to($to_email, $to_name)
                 ->subject('JVTOCK');
@@ -60,7 +60,7 @@ class messageController extends Controller
     public function message(Request $request, $type){
       $from_name = Auth::user()->name;
       $userId = Auth::id();
-      $to_name = 'vanye';
+      $to_name = 'Client';
       $to_email = $request->input('email');
       $the_message = '';
       $subject = $request->input('subject');

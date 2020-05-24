@@ -61,6 +61,8 @@ class buyerController extends Controller
     $email = $request->input('email');
     $phone = $request->input('phone');
     $country_id = $request->input('countries');
+    $address = $request->input('address');
+    $region = $request->input('region');
     $port = $request->input('delivery_port');
     $session_id = Session::getId();
 
@@ -82,6 +84,8 @@ class buyerController extends Controller
     $buyer->name = $name;
     $buyer->session = $session_id;
     $buyer->country_id = $country_id;
+    $buyer->address = $address;
+    $buyer->region = $region;
     $buyer->email = $email;
     $buyer->phone = $phone;
     $buyer->proof = $proof;

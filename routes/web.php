@@ -74,7 +74,7 @@ Route::get('/view_doc/{name}/{id}/{client}','fileController@view_doc')->middlewa
 
 Route::get('/images/{id}/{filename}', 'HomeController@displayImage')->name('image.displayImage');
 Route::get('/template/{type}','HomeController@display_template')->middleware('isUserApprove');
-Route::get('/get_mndnc_email/{email}','HomeController@mndnc_custom_email')->middleware('isUserApprove');
+Route::get('/get_mndnc_email/{client}/{email}/{id}','HomeController@mndnc_custom_email')->middleware('isUserApprove');
 
 
 

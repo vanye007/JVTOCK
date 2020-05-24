@@ -356,8 +356,19 @@ public function revoke_user($id){
   return redirect()->back()->with('notification','User revoked');
 }
 
-public function mndnc_custom_email($email){
-  return view ('template.mndnc')->with('to_email',$email);
+public function mndnc_custom_email($who,$email,$id){
+  $name = '';
+  $address = '';
+  if ($who == 'supplier') {
+      $name = supplier_info::where('id',$id)->value('firstname');
+      $address = business_info::where('supplier_infos_id',$id)->value('address');
+  }
+
+  if ($who == 'buyer') {
+      $name = buyer::where('id',$id)->value('name');
+      $address = buyer::where('id',$id)->value('address');
+  }
+  return view ('template.mndnc')->with('to_email',$email)->with('name',$name)->with('address',$address);
 }
 
 

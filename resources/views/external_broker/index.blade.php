@@ -27,12 +27,15 @@
             <label for="name" class="field-label">Full Name</label><input type="text" class="input-fields w-input" maxlength="256" name="name" value="{{ old('name') }}" data-name="Name" id="name" required="">
             <label for="email" class="field-label">Email</label><input type="email" class="input-fields w-input" maxlength="256" name="email" value="{{ old('email') }}" data-name="Email 5" id="email-5" required="">
             <label for="phone" class="field-label">Phone</label><input type="number" class="input-fields w-input" maxlength="256" name="phone" value="{{ old('phone') }}" data-name="Phone" id="phone" required="">
+
             <select class="input-fields w-input" name="countries">
               <option value="audi" selected>Select country</option>
               @foreach ($countries as $key => $value)
                 <option value="{{$value->id}}" >{{$value->country_name}}</option>
               @endforeach
             </select>
+            <label for="phone" class="field-label">Address</label><input type="text" class="input-fields w-input" maxlength="256" name="address" value="{{ old('address') }}" data-name="address" id="address" required="">
+            <label for="phone" class="field-label">Region</label><input type="text" class="input-fields w-input" maxlength="256" name="region" value="{{ old('region') }}" data-name="region" id="region" required="">
             {{-- <input type="file" name="proof" id="file" class="inputfile w-input" required />
             <label class="p-3 mt-2 input-fields w-input" for="file">Proof of funds</label> --}}
 

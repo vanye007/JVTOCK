@@ -87,6 +87,7 @@
             <th scope="col">Email</th>
             <th scope="col">Country</th>
             <th scope="col">Region</th>
+            <th scope="col">address</th>
             <th scope="col">Product</th>
             <th scope="col">Price</th>
             <th scope="col">Supply Capacity</th>
@@ -101,9 +102,10 @@
           @foreach ($suppliers->sortByDesc('id') as $key => $value)
             <tr>
               <th scope="row"><a href="/supplier_info/{{$value->supplier_id}}">{{$value->firstname}} {{($value->lastname)}}</a></th>
-              <td  data-toggle="modal" data-target="#auto_email" class="get_email">{{$value->email}}</td>
+              <td  data-toggle="modal" id="{{$value->id}}" data-name="supplier"  data-target="#auto_email" class="get_email">{{$value->email}}</td>
               <td>{{$value->country_name}}</td>
               <td>{{$value->region}}</td>
+              <td>{{$value->address}}</td>
               <td>{{$value->name}}</td>
               <td>{{$value->price}}</td>
               <td>{{$value->capacity}}</td>
@@ -146,6 +148,8 @@
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Country</th>
+            <th scope="col">Region</th>
+            <th scope="col">Address</th>
             <th scope="col">Phone</th>
             <th scope="col">Interested product</th>
             <th scope="col">Delivery port</th>
@@ -153,12 +157,14 @@
           </tr>
         </thead>
         <tbody>
-          
+
             @foreach ($buyers->sortByDesc('id') as $key => $value)
             <tr>
               <th scope="row"><a href="/buyer_info/{{$value->id}}">{{$value->name}}</a></th>
-              <td data-toggle="modal" data-target="#auto_email" class="get_email">{{$value->email}}</td>
+              <td data-toggle="modal" id="{{$value->id}}" data-name="buyer" data-target="#auto_email" class="get_email">{{$value->email}}</td>
               <td>{{$value->country_name}}</td>
+              <td>{{$value->region}}</td>
+              <td>{{$value->address}}</td>
               <td>{{$value->phone}}</td>
               <td>@foreach ($inquiry as $key => $inq_value)
                 @if ($inq_value->buyer_id == $value->id)

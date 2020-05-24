@@ -54,46 +54,48 @@
         <div style="float: none;" class="w-col w-col-12">
         </div>
         <div class="table-responsive">
-        <table  id="supplier" class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Country</th>
-              <th scope="col">Region</th>
-              <th scope="col">Product</th>
-              <th scope="col">Price</th>
-              <th scope="col">Supply Capacity</th>
-              <th scope="col">Inventory</th>
-              <th scope="col">Shipping Terms</th>
-              <th scope="col">Payment Terms</th>
-              <th scope="col">Port of origin</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach ($suppliers->sortByDesc('id') as $key => $value)
+          <table  id="supplier" class="table">
+            <thead class="thead-dark">
               <tr>
-                <th scope="row"><a href="/supplier_info/{{$value->supplier_id}}">{{$value->firstname}} {{$value->lastname}}</a></th>
-                <td  data-toggle="modal" data-target="#auto_email" class="get_email">{{$value->email}}</td>
-                <td>{{$value->country_name}}</td>
-                <td>{{$value->region}}</td>
-                <td>{{$value->name}}</td>
-                <td>{{$value->price}}</td>
-                <td>{{$value->capacity}}</td>
-                <td>{{$value->inventory}}</td>
-                <td>{{$value->shipping_terms}}</td>
-                <td>{{$value->payment_terms}}</td>
-                <td>{{$value->port_of_origin}}</td>
-                @if ($value->status == 'pending')
-                    <td class="text-warning"><b>{{$value->status}}</b></td>
-                @else
-                    <td class="text-success"><b>{{$value->status}}</b></td>
-                @endif
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Country</th>
+                <th scope="col">Region</th>
+                <th scope="col">address</th>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Supply Capacity</th>
+                <th scope="col">Inventory</th>
+                <th scope="col">Shipping Terms</th>
+                <th scope="col">Payment Terms</th>
+                <th scope="col">Port of origin</th>
+                <th scope="col">Status</th>
               </tr>
-            @endforeach
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              @foreach ($suppliers->sortByDesc('id') as $key => $value)
+                <tr>
+                  <th scope="row"><a href="/supplier_info/{{$value->supplier_id}}">{{$value->firstname}} {{($value->lastname)}}</a></th>
+                  <td  data-toggle="modal" id="{{$value->id}}" data-name="supplier"  data-target="#auto_email" class="get_email">{{$value->email}}</td>
+                  <td>{{$value->country_name}}</td>
+                  <td>{{$value->region}}</td>
+                  <td>{{$value->address}}</td>
+                  <td>{{$value->name}}</td>
+                  <td>{{$value->price}}</td>
+                  <td>{{$value->capacity}}</td>
+                  <td>{{$value->inventory}}</td>
+                  <td>{{$value->shipping_terms}}</td>
+                  <td>{{$value->payment_terms}}</td>
+                  <td>{{$value->port_of_origin}}</td>
+                  @if ($value->status == 'pending')
+                      <td class="text-warning"><b>{{$value->status}}</b></td>
+                  @else
+                      <td class="text-success"><b>{{$value->status}}</b></td>
+                  @endif
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
       </div>
       @else
         <div style="float: none;" class="w-col w-col-12">
