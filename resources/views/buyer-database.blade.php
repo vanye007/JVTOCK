@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+@php( $buyer_doc = \App\buyer_doc::all())
   <div class="section supplier-data-sec buyer-sec-title">
     <div>
       <h1 class="supplier-database-header">Buyer Database</h1>
@@ -20,6 +20,7 @@
             <th scope="col">Interested product</th>
             <th scope="col">Delivery port</th>
             <th scope="col">Proof of funds</th>
+            <th scope="col">Documents</th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,11 @@
               @endforeach</td>
               <td>{{$value->delivery_port}}</td>
               <td>{{$value->proof}}</td>
+              <td>@foreach ($buyer_doc as $key => $b_value)
+                @if ($b_value->buyer_id == $value->id)
+                  <a href="/view_doc/{{$b_value->path}}/{{$value->id}}/buyer">{{$b_value->name}}</a>
+                @endif
+              @endforeach</td>
             </tr>
           @endforeach
         </tbody>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+@php( $supplier_doc = \App\supplier_docs::all())
     <!-- Modal -->
     <div class="modal fade" id="supplier_form" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -69,6 +69,7 @@
                 <th scope="col">Shipping Terms</th>
                 <th scope="col">Payment Terms</th>
                 <th scope="col">Port of origin</th>
+                <th scope="col">Documents</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
@@ -87,6 +88,11 @@
                   <td>{{$value->shipping_terms}}</td>
                   <td>{{$value->payment_terms}}</td>
                   <td>{{$value->port_of_origin}}</td>
+                  <td>@foreach ($supplier_doc as $key => $s_value)
+                    @if ($s_value->supplier_infos_id == $value->supplier_id)
+                      <a href="/view_doc/{{$s_value->path}}/{{$value->supplier_id}}/supplier">{{$s_value->name}}</a>
+                    @endif
+                  @endforeach</td>
                   @if ($value->status == 'pending')
                       <td class="text-warning"><b>{{$value->status}}</b></td>
                   @else

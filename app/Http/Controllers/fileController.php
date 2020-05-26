@@ -76,7 +76,7 @@ class fileController extends Controller
 
     public function view_doc($name,$id,$client){
       $file = '';
-      if ($file == 'supplier') {
+      if ($client == 'supplier') {
         $file = storage_path('/app/uploads/supplier/').$id .'/' .$name;
       } else {
         $file = storage_path('/app/uploads/buyer/').$id .'/' .$name;

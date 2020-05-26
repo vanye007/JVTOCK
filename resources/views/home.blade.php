@@ -2,7 +2,8 @@
 
 @section('content')
 
-
+@php( $buyer_doc = \App\buyer_doc::all())
+@php( $supplier_doc = \App\supplier_docs::all())
 
   <div class="title">
     <div class="w-container">
@@ -95,6 +96,7 @@
             <th scope="col">Shipping Terms</th>
             <th scope="col">Payment Terms</th>
             <th scope="col">Port of origin</th>
+            <th scope="col">Documents</th>
             <th scope="col">Status</th>
           </tr>
         </thead>
@@ -113,6 +115,11 @@
               <td>{{$value->shipping_terms}}</td>
               <td>{{$value->payment_terms}}</td>
               <td>{{$value->port_of_origin}}</td>
+              <td>@foreach ($supplier_doc as $key => $s_value)
+                @if ($s_value->supplier_infos_id == $value->supplier_id)
+                  <a href="/view_doc/{{$s_value->path}}/{{$value->supplier_id}}/supplier">{{$s_value->name}}</a>
+                @endif
+              @endforeach</td>
               @if ($value->status == 'pending')
                   <td class="text-warning"><b>{{$value->status}}</b></td>
               @else
@@ -154,6 +161,8 @@
             <th scope="col">Interested product</th>
             <th scope="col">Delivery port</th>
             <th scope="col">Proof of funds</th>
+            <th scope="col">Document</th>
+
           </tr>
         </thead>
         <tbody>
@@ -173,6 +182,11 @@
               @endforeach</td>
               <td>{{$value->delivery_port}}</td>
               <td>{{$value->proof}}</td>
+              <td>@foreach ($buyer_doc as $key => $b_value)
+                @if ($b_value->buyer_id == $value->id)
+                  <a href="/view_doc/{{$b_value->path}}/{{$value->id}}/buyer">{{$b_value->name}}</a>
+                @endif
+              @endforeach</td>
             </tr>
           @endforeach
         </tbody>
