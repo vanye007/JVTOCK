@@ -39,7 +39,7 @@
                 @endif
               @endforeach</td>
               <td>{{$value->delivery_port}}</td>
-              <td>{{$value->proof}}</td>
+              <td><a href="/view_proof_of_funds/{{$value->proof}}/{{$value->id}}">{{$value->proof}}</a></td>
               <td>@foreach ($buyer_doc as $key => $b_value)
                 @if ($b_value->buyer_id == $value->id)
                   <a href="/view_doc/{{$b_value->path}}/{{$value->id}}/buyer">{{$b_value->name}}</a>
