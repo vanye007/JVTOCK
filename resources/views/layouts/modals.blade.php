@@ -128,3 +128,27 @@
   </div>
 </div>
 </div>
+
+<!-- Modal -->
+{{-- upload product documents --}}
+<div class="modal fade" id="upload_product_file" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-body">
+      <h1 class="supplier-database-header">Upload product document</h1>
+      <div class="row">
+      <div class="col-md-12">
+        <form action="/upload_product_file" method="POST" enctype='multipart/form-data'>
+            @csrf
+            <input type="hidden" name="id" value="{{$id ?? ''}}" />
+            <input type="hidden" id="product_id" name="product_id" value="" />
+            <input type="text" class="form-field w-input" maxlength="256" name="name"  placeholder="document name"  required="">
+            <input type="file" class="form-field w-input" name="document" required/>
+            <button class="btn btn-primary mt-4">Submit</button>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

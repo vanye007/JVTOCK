@@ -85,6 +85,7 @@ Route::post('/send_loi','messageController@loi_message');
 Route::post('/send_mndnc','messageController@mndnc_message');
 // Route::post('/upload_doc','HomeController@upload_doc')->middleware('isUserApprove');
 Route::post('/upload_doc/{type}','HomeController@upload_doc')->middleware('isUserApprove');
+Route::post('/upload_product_file','HomeController@upload_product_file')->middleware('isUserApprove');
 
 Route::get('/users','HomeController@users')->middleware('superAdmin');
 Route::get('/approve_user/{id}','HomeController@approve_user')->middleware('superAdmin');

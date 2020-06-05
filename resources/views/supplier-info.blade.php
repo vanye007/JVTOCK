@@ -42,7 +42,7 @@
         @endforeach
       </div>
       <div class="col-md-3 float-left">
-        <h3>Legal Documents</h3>
+        <h3>Documents</h3>
         @foreach ($docs as $key => $value)
           <a href="/view_doc/{{$value->path}}/{{$value->supplier_infos_id}}/supplier"><p>{{$value->name}}</p></a>
         @endforeach
@@ -69,7 +69,12 @@
         <p><strong>Volume:</strong> {{$value->volume}}</p>
         <p><strong>Inventory:</strong> {{$value->inventory}}</p>
         <p><strong>Supply Capacity:</strong> {{$value->capacity}}</p>
-        <p><strong>Certificates:</strong> <a href="/certificates/{{$value->path}}/{{$id}}">{{$value->certificates}} </a></p>
+        <p><strong>Certificates:</strong> @foreach ($certificates as $key => $cert_value)
+          @if ($cert_value->product_infos_id == $value->product_id)
+              <a href="/certificates/{{$cert_value->path}}/{{$id}}">{{$cert_value->certificates}} </a>,
+          @endif
+        @endforeach
+        </p>
         {{-- <p><strong>Proof of life:</strong> <a href="/proof_of_life/{{$value->pof}}/{{$id}}">{{$value->pof}} </a></p> --}}
         <p><strong>Units / Package:</strong> Length {{$value->length}} | Width {{$value->width}} | Height {{$value->height}} | weight {{$value->weight}}</p>
         <p><strong>Packages / Carton:</strong> Length {{$value->plength}} | Width {{$value->pwidth}} | Height {{$value->pheight}} | weight {{$value->pweight}}</p>
@@ -83,6 +88,7 @@
           </form>
         </p>
         <p style=""><strong>Audit Status</strong>: {{$value->status}}</p>
+        <a href="" id="{{$value->product_id}}"  class="btn btn-info upload_prod_cert mb-3" data-toggle="modal" data-target="#upload_product_file">Upload product certificate</a>
 
         @if ($value->status == 'pending')
             <a href="/approve_product/{{$value->product_id}}"><button style="Width:100%" type="button" class="btn btn-primary">Approve</button></a>

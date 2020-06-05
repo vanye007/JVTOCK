@@ -151,7 +151,6 @@ Burnaby, BC V5B OA3</span>
             </table>
           </div>
           <!-- END FOOTER -->
-
         <!-- END CENTERED WHITE CONTAINER -->
         </div>
       </td>

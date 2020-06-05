@@ -75,5 +75,10 @@ $(document).ready(function() {
 			 $('#upload_doc_form').attr('action', '/upload_doc/buyer');
 		})
 
+		$('#upload_prod_cert').clic(function(){
+			var product_id = $(this).attr('id');
+			$('#product_id').attr('value',product_id);
+		})
+
 
 } );

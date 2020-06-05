@@ -142,18 +142,22 @@ class HomeController extends Controller
       $facility_info = supplier_info::find($id)->facility_info;
       $facility_id = supplier_info::find($id)->facility_info->pluck('id');
       $products = facility_info::join('product_infos','facility_infos.id',"=",'product_infos.facility_infos_id')
-                                ->leftjoin('product_certs','product_infos.id',"=",'product_certs.product_infos_id')
+                                // ->leftjoin('product_certs','product_infos.id',"=",'product_certs.product_infos_id')
                                 ->leftjoin('product_audits','product_infos.id',"=",'product_audits.product_infos_id')
                                 ->leftjoin('packages_per_cartons','product_infos.id',"=",'packages_per_cartons.product_infos_id')
                                 ->leftjoin('units_per_packages','product_infos.id','=','units_per_packages.product_infos_id')
-                                ->join('product_prices','product_infos.id','=','product_prices.product_infos_id')
-                                ->select('product_prices.sale_price','product_prices.id as sales_price_id','product_infos.*', 'product_infos.id as product_id','product_certs.*','product_audits.*','packages_per_cartons.*','units_per_packages.*','packages_per_cartons.length as plength', 'packages_per_cartons.width as pwidth','packages_per_cartons.height as pheight', 'packages_per_cartons.weight as pweight')
+                                ->leftjoin('product_prices','product_infos.id','=','product_prices.product_infos_id')
+                                ->select('product_prices.sale_price','product_prices.id as sales_price_id','product_infos.*', 'product_infos.id as product_id','product_audits.*','packages_per_cartons.*','units_per_packages.*','packages_per_cartons.length as plength', 'packages_per_cartons.width as pwidth','packages_per_cartons.height as pheight', 'packages_per_cartons.weight as pweight')
                                 ->where('facility_infos.id',$facility_id)
                                 ->get();
       $docs =  supplier_docs::where('supplier_infos_id',$id)->get();
       $countries = countries::get();
 
-      return view('supplier-info',['supplier_info'=>$supplier_info,'business_info'=>$business_info,'facility_info'=>$facility_info,'countries'=>$countries,'products'=>$products,'docs'=>$docs])->with('id',$id);
+      $certificates =  product_certs::get();
+
+
+
+      return view('supplier-info',['supplier_info'=>$supplier_info,'business_info'=>$business_info,'facility_info'=>$facility_info,'countries'=>$countries,'products'=>$products,'docs'=>$docs, 'certificates'=>$certificates])->with('id',$id);
     }
 
     public function buyer_info($id){
@@ -371,6 +375,26 @@ public function mndnc_custom_email($who,$email,$id){
   return view ('template.mndnc')->with('to_email',$email)->with('name',$name)->with('address',$address);
 }
 
+public function upload_product_file(Request $request){
+  $id = $request->input('id');
+  $product_id = $request->input('product_id');
+  $file = $request->file('document');
+  $file_name = $request->input('name');
+  $path = $file_name. '.'. $file->getClientOriginalExtension();
+
+  $destination = 'uploads/supplier/'.$id;
+
+  $certificate = new product_certs();
+  $certificate->product_infos_id = $id;
+  $certificate->certificates = $file_name;
+  $certificate->path = $path;
+  $certificate->save();
+
+  $file->storeAs($destination,$path);
+
+  return redirect()->back()->with('notification','product certificate uploaded');
+
+}
 
 
 

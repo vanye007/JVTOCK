@@ -63,6 +63,7 @@
                 <th scope="col">Region</th>
                 <th scope="col">address</th>
                 <th scope="col">Product</th>
+                <th scope="col">Cost</th>
                 <th scope="col">Price</th>
                 <th scope="col">Supply Capacity</th>
                 <th scope="col">Inventory</th>
@@ -82,6 +83,7 @@
                   <td>{{$value->region}}</td>
                   <td>{{$value->address}}</td>
                   <td>{{$value->name}}</td>
+                  <td>{{$value->cost}}</td>
                   <td>{{$value->price}}</td>
                   <td>{{$value->capacity}}</td>
                   <td>{{$value->inventory}}</td>
