@@ -5,10 +5,11 @@
       <h1 class="supplier-database-header">Supplier Informations</h1>
     </div>
     <div class="col-md-12 m-3 action_btns">
-      <button id="supplier_upload" class="btn"  data-toggle="modal" data-target="#upload_doc">Upload Doc</button>
+      <button id="supplier_upload" class="btn btn-info mb-3"  data-toggle="modal" data-target="#upload_doc"><i class="fa fa-upload"></i> Upload Doc</button>
+        <a href="/edit_supplier_info/{{$supplier_info['id']}}"><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit supplier info</button></a>
     </div>
     <div class="w-container container col-md-12 w-col-12">
-      <div class="col-md-3 info float-left">
+      <div class="col-md-3 col-sm-12 info float-left">
         <h3>Supplier details</h3>
         <p><strong>Firsname:</strong> {{$supplier_info['firstname']}}</p>
         <p><strong>Lastname:</strong> {{$supplier_info['lastname']}}</p>
@@ -58,10 +59,11 @@
     <div class="container w-container col-md-12 w-col-12">
 
     @foreach ($products as $key => $value)
-      <div class="col-md-6 w-col-6 float-left">
+      <div class="col-md-6 col-sm-12 float-left">
         {{-- <img class="mb-3 mt-2" src='{{asset("images/uploads/supplier/{$id}/{$value->image}")}}'></img> --}}
-
+        <a href="/edit_product/{{$id}}"><button class="btn btn-warning"><i class="fa fa-edit"></i> Edit product</button></a>
         <img class="mb-3 mt-2" src='{{ url("images/{$id}/{$value->image}") }}' alt="" title="">
+
         {{-- <img class="mb-3 mt-2" src="{{ route('image.displayImage',$value->image) }}" alt="" title=""> --}}
         <p><strong>Name:</strong> {{$value->name}}</p>
         <p><strong>Description:</strong> {{$value->description}}</p>

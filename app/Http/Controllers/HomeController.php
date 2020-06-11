@@ -396,6 +396,131 @@ public function upload_product_file(Request $request){
 
 }
 
+public function edit_product($id){
+  $product = product_info::leftjoin('units_per_packages','product_infos.id','=','units_per_packages.product_infos_id')
+                         ->leftjoin('packages_per_cartons','product_infos.id','=','packages_per_cartons.product_infos_id')
+                         ->select('product_infos.*','units_per_packages.length as u_length','units_per_packages.width as u_width','units_per_packages.height as u_height','packages_per_cartons.length as p_length','packages_per_cartons.width as p_width','packages_per_cartons.height as p_height','packages_per_cartons.weight as p_weight')
+                         ->where('product_infos.id',$id)
+                         ->get();
+
+  return view('edit_product',['product'=>$product]);
+}
+
+public function update_supplier_product(Request $request){
+  $id = $request->input('product_id');
+
+  //product info
+  $name = $request->input('name');
+  $description = $request->input('description');
+  $volume = $request->input('volume');
+  $inventory = $request->input('inventory');
+  $capacity = $request->input('capacity');
+
+  product_info::where('id',$id)->update(['name' => $name,'description'=>$description,'volume'=>$volume,'inventory'=>$inventory,'capacity'=>$capacity]);
+
+  //unite per packages
+  $u_length = $request->input('u_length');
+  $u_width = $request->input('u_width');
+  $u_height = $request->input('u_height');
+  $units = units_per_package::where('product_infos_id',$id)->exists();
+  if ($units) {
+    units_per_package::where('product_infos_id',$id)->update(['length' => $u_length,'width'=>$u_width,'height'=>$u_height]);
+  } else {
+    $units = new units_per_package();
+    $units->product_infos_id = $id;
+    $units->length = $u_length;
+    $units->Width = $u_width;
+    $units->height = $u_height;
+    $units->save();
+  }
+
+  //packages per carton
+  $package = packages_per_carton::where('product_infos_id',$id)->exists();
+  $p_length = $request->input('p_length');
+  $p_height = $request->input('p_height');
+  $p_width = $request->input('p_width');
+  $p_weight = $request->input('p_weight');
+  if ($package) {
+    packages_per_carton::where('product_infos_id',$id)->update(['length' => $p_length,'width'=>$p_width,'height'=>$p_height]);
+  } else {
+    $package = new packages_per_carton();
+    $package->product_infos_id = $id;
+    $package->length = $p_length;
+    $package->Width = $p_width;
+    $package->height = $p_height;
+    $package->weight = $p_weight;
+    $package->save();
+  }
+
+  return redirect()->back()->with('notification','Product info updated');
+
+  }
+
+  public function edit_supplier_info($id){
+    $supplier_info = supplier_info::leftjoin('business_infos','supplier_infos.id','=','business_infos.supplier_infos_id')
+                                  ->leftjoin('facility_infos','supplier_infos.id','=','facility_infos.business_infos_id')
+                                  ->select('supplier_infos.*','business_infos.country_id as b_country','business_infos.city as b_city','business_infos.address as b_address','business_infos.postal_code as b_postcode','facility_infos.country_id as f_country','facility_infos.city as f_city','facility_infos.address as f_address','facility_infos.postal_code as f_postcode')
+                                  ->where('supplier_infos.id',$id)
+                                  ->get();
+
+    return view('edit_supplier_info',['supplier_info'=>$supplier_info]);
+
+  }
+
+  public function update_supplier_info(Request $request){
+    $id = $request->input('supplier_id');
+
+    // supplier info db
+    $firstname = $request->input('firstname');
+    $lastname = $request->input('lastname');
+    $email = $request->input('email');
+    $phone = $request->input('phone');
+
+    supplier_info::where('id',$id)->update(['firstname' => $firstname,'lastname'=>$lastname,'email'=>$email,'phone'=>$phone]);
+
+    // business_info db
+    $b_city = $request->input('b_city');
+    $b_address = $request->input('b_address');
+    $b_postcode = $request->input('b_postcode');
+
+    $business_info = business_info::where('supplier_infos_id',$id)->exists();
+    $business_info_id = '';
+
+    if ($business_info) {
+      business_info::where('supplier_infos_id',$id)->update(['city' => $b_city,'address'=>$b_address,'postal_code'=>$b_postcode]);
+      $business_info_id = business_info::where('supplier_infos_id',$id)->value('id');
+    } else {
+      $business_info = new business_info();
+      $business_info->supplier_infos_id = $id;
+      $business_info->city = $b_city;
+      $business_info->address = $b_address;
+      $business_info->postal_code = $b_postcode;
+      $business_info->save();
+
+      $business_info_id = $business_info->id;
+    }
+
+    // facility_info db
+    $f_city = $request->input('f_city');
+    $f_address = $request->input('f_address');
+    $f_postcode = $request->input('f_postcode');
+
+    $facility_info = facility_info::where('business_infos_id',$business_info_id)->exists();
+
+    if ($facility_info) {
+        facility_info::where('business_infos_id',$business_info_id)->update(['city' => $f_city,'address'=>$f_address,'postal_code'=>$f_postcode]);
+    } else {
+      $facility_info = new facility_infos();
+      $facility_info->business_infos_id = $business_info_id;
+      $facility_info->city = $f_city;
+      $facility_info->address = $f_address;
+      $facility_info->postal_code = $f_postcode;
+      $facility_info->save();
+    }
+
+    return redirect()->back()->with('notification','Supplier info updated');
+
+  }
 
 
 }

@@ -64,6 +64,8 @@ Route::get('delete_product/{id}','HomeController@delete_product')->middleware('i
 Route::post('/update_sales_price','HomeController@update_selling_price')->middleware('isUserApprove');
 Route::get('/approve_buyer/{id}','HomeController@approve_buyer')->middleware('isUserApprove');
 Route::get('/reject_buyer/{id}','HomeController@reject_buyer')->middleware('isUserApprove');
+Route::get('/edit_product/{id}','HomeController@edit_product')->middleware('isUserApprove');
+Route::get('/edit_supplier_info/{id}','HomeController@edit_supplier_info')->middleware('isUserApprove');
 
 
 Route::get('/certificates/{value}/{id}','fileController@view_certificates')->middleware('isUserApprove');
@@ -80,9 +82,11 @@ Route::get('/get_mndnc_email/{client}/{email}/{id}','HomeController@mndnc_custom
 
 
 Route::post('/send_message','messageController@send_message')->middleware('isUserApprove');
-Route::post('/message/{type}','messageController@message');
-Route::post('/send_loi','messageController@loi_message');
-Route::post('/send_mndnc','messageController@mndnc_message');
+Route::post('/message/{type}','messageController@message')->middleware('isUserApprove');
+Route::post('/send_loi','messageController@loi_message')->middleware('isUserApprove');
+Route::post('/send_mndnc','messageController@mndnc_message')->middleware('isUserApprove');
+Route::post('/update_supplier_product','HomeController@update_supplier_product')->middleware('isUserApprove');
+Route::post('/update_supplier_info','HomeController@update_supplier_info')->middleware('isUserApprove');
 // Route::post('/upload_doc','HomeController@upload_doc')->middleware('isUserApprove');
 Route::post('/upload_doc/{type}','HomeController@upload_doc')->middleware('isUserApprove');
 Route::post('/upload_product_file','HomeController@upload_product_file')->middleware('isUserApprove');
@@ -90,6 +94,7 @@ Route::post('/upload_product_file','HomeController@upload_product_file')->middle
 Route::get('/users','HomeController@users')->middleware('superAdmin');
 Route::get('/approve_user/{id}','HomeController@approve_user')->middleware('superAdmin');
 Route::get('/revoke_user/{id}','HomeController@revoke_user')->middleware('superAdmin');
+
 
 
 
