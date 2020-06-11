@@ -64,9 +64,13 @@
             <label for="exampleInputEmail1">Weight</label>
             <input type="text" class="form-control" id="p_weight" name="p_weight"  value="{{$value->p_weight}}" placeholder="">
           </div>
-            @endforeach
+
           <button type="submit" class="btn btn-primary">update</button>
+          <a href="supplier_info/{{$value->supplier_infos_id}}"><button type="reset" class="btn btn-warning float-right">Cancel</button></a>
+            @endforeach
         </form>
+
+
 
       </div>
 
