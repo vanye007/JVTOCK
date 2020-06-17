@@ -6,7 +6,7 @@
 <div class="sign-up-col orange w-col w-col-12">
   <div class="login-div _2 height">
     <h1 class="heading-5 heading-2">Create Account</h1><a href="#" class="link-block-5 w-inline-block"></a><a href="#" class="link-block-6 w-inline-block"></a><a href="#" class="link-block-7 w-inline-block"></a>
-    <div class="text-block">Or Use your email for registration.</div>
+    {{-- <div class="text-block">Or Use your email for registration.</div> --}}
     <div class="w-form">
       <form id="email-form" method="post" name="email-form" data-name="Email Form" action="{{ route('register') }}">
         @csrf
