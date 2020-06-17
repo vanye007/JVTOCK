@@ -9,7 +9,6 @@
         <div class="sign-in-col col-change w-col w-col-12">
           <div class="login-div bg-color blue-height">
             <h1 class="heading-5">Welcome Back!</h1>
-            <div class="text-block _1">Please login with your personal info</div>
             <div class="w-form">
               <form class="px-5" id="email-form" name="email-form" data-name="Email Form"  action="{{ route('login') }}" method="post">
                   @csrf
@@ -25,7 +24,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-                <div class="text-block _1">Forgot your Password?</div>
+                {{-- <div class="text-block _1">Forgot your Password?</div> --}}
                 <input style="margin:auto;display:block;" type="submit" value="Sign in" data-wait="Please wait..." class="button-2 sign-in-button white w-button mt-4"></form>
               <div class="w-form-done">
                 <div>Thank you! Your submission has been received!</div>
