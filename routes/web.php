@@ -18,6 +18,7 @@ Route::post('/submit_referral_supply/{id}','supplierController@submit_referral_s
 Route::post('/supplier_info','supplierController@supplier_info');
 Route::post('/business_info','supplierController@submit_business_info');
 Route::post('/submit_product_info','supplierController@submit_product_info');
+Route::get('/submit_product_details','supplierController@submit_product_info');
 Route::post('/packages','supplierController@store_package_info');
 Route::post('/supplier_loi','supplierController@submit_loi');
 

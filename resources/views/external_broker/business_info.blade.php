@@ -18,8 +18,8 @@
             {{-- Check if business info variable is not null. This is used to validate  --}}
             @if (isset($business_info) && count($business_info)>0)
               @foreach ($business_info as $key => $b_value)
-                <select class="input-fields w-input" name="country">
-                    <option selected="selected">SELECT COUNTRY</option>
+                <select class="input-fields w-input" name="country" required>
+                    <option selected="selected" value="">SELECT COUNTRY</option>
                   @foreach ($countries as $key => $value)
                     <option value="{{$value->id}}" >{{$value->country_name}}</option>
                   @endforeach
@@ -34,7 +34,7 @@
                 <input type="text" class="input-fields w-input" maxlength="256" value="{{$b_value->postal_code}}" name="postcode" data-name="postcode" id="postcode" required="">
               @endforeach
             @else
-              <select class="input-fields w-input" name="country">
+              <select class="input-fields w-input" name="country" required>
                   <option selected="selected">SELECT COUNTRY</option>
                 @foreach ($countries as $key => $value)
                   <option value="{{$value->id}}" >{{$value->country_name}}</option>
@@ -54,8 +54,8 @@
             <h1 class="supplier-form">Facility information</h1>
             @if (isset($facility_info) && count($facility_info)>0)
               @foreach ($facility_info as $key => $f_value)
-                <select class="input-fields w-input" name="facility_country">
-                    <option selected="selected">SELECT FACILITY COUNTRY</option>
+                <select class="input-fields w-input" name="facility_country" required>
+                    <option selected="selected" value="">SELECT FACILITY COUNTRY</option>
                   @foreach ($countries as $key => $value)
                     <option value="{{$value->id}}" >{{$value->country_name}}</option>
                   @endforeach

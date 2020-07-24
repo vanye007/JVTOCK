@@ -68,21 +68,21 @@ class supplierController extends Controller
     //validate to check if supplier exist
     $check_supplier = supplier_info::where('email',$email)->exists();
 
-    if($check_supplier){
-      $supplier_id_fk = supplier_info::where('email',$email)->value('id');
-
-      //check if supplier has already registered business and facility info
-      $business_info = business_info::where('supplier_infos_id', $supplier_id_fk)
-                                    ->join('countries','business_infos.country_id','=','countries.id')
-                                    ->get();
-      $business_info_id = business_info::where('supplier_infos_id', $supplier_id_fk)->value('id');
-      $facility_info = facility_info::where('business_infos_id',$business_info_id)
-                                    ->join('countries','facility_infos.country_id','=','countries.id')
-                                    ->get();
-      //after using the id, encrypt it
-      $supplier_id_fk = Crypt::encryptString($supplier_id_fk);
-      return view('external_broker.business_info',['countries'=>$countries,'business_info'=>$business_info, 'facility_info'=>$facility_info])->with('supplier_info_fk',$supplier_id_fk);
-    }else{
+    // if($check_supplier){
+    //   $supplier_id_fk = supplier_info::where('email',$email)->value('id');
+    //
+    //   //check if supplier has already registered business and facility info
+    //   $business_info = business_info::where('supplier_infos_id', $supplier_id_fk)
+    //                                 ->join('countries','business_infos.country_id','=','countries.id')
+    //                                 ->get();
+    //   $business_info_id = business_info::where('supplier_infos_id', $supplier_id_fk)->value('id');
+    //   $facility_info = facility_info::where('business_infos_id',$business_info_id)
+    //                                 ->join('countries','facility_infos.country_id','=','countries.id')
+    //                                 ->get();
+    //   //after using the id, encrypt it
+    //   $supplier_id_fk = Crypt::encryptString($supplier_id_fk);
+    //   return view('external_broker.business_info',['countries'=>$countries,'business_info'=>$business_info, 'facility_info'=>$facility_info])->with('supplier_info_fk',$supplier_id_fk);
+    // }else{
       $supplier =  new supplier_info();
       $supplier->firstname = $firstname;
       $supplier->lastname = $lastname;
@@ -109,7 +109,7 @@ class supplierController extends Controller
       $action->type = 'supplier';
       $action->visited = 'no';
       $action->save();
-    }
+    // }
 
 
 
@@ -131,6 +131,7 @@ class supplierController extends Controller
     $address = $request->input('address');
     $postcode = $request->input('postcode');
     $countries = countries::get();
+
 
     $facility_country = $request->input('facility_country');
     $facility_region = $request->input('region');
@@ -161,14 +162,14 @@ class supplierController extends Controller
     }
 
     $check_business = business_info::where('supplier_infos_id',$supplier_id_fk)->exists();
-    if ($check_business) {
-        business_info::where('supplier_infos_id',$supplier_id_fk)->update(['country_id'=>$country,'city'=>$city,'address'=>$address,'postal_code'=>$postcode]);
-        $business_id = business_info::where('supplier_infos_id',$supplier_id_fk)->value('id');
-        facility_info::where('business_infos_id',$business_id)->update(['country_id'=>$facility_country,'region'=>$facility_region,'city'=>$facility_city,'address'=>$facility_address,'postal_code'=>$facility_postcode,'port_of_origin'=>$port_of_origin,'shipping_terms'=>$shipping_terms,'payment_terms'=>$payment_terms]);
-        $facility_id = facility_info::where('business_infos_id',$business_id)->value('id');
-        $facility_id = Crypt::encryptString($facility_id);
-        return view('external_broker.product_info')->with('facility_info',$facility_id);
-    } else {
+    // if ($check_business) {
+    //     business_info::where('supplier_infos_id',$supplier_id_fk)->update(['country_id'=>$country,'city'=>$city,'address'=>$address,'postal_code'=>$postcode]);
+    //     $business_id = business_info::where('supplier_infos_id',$supplier_id_fk)->value('id');
+    //     facility_info::where('business_infos_id',$business_id)->update(['country_id'=>$facility_country,'region'=>$facility_region,'city'=>$facility_city,'address'=>$facility_address,'postal_code'=>$facility_postcode,'port_of_origin'=>$port_of_origin,'shipping_terms'=>$shipping_terms,'payment_terms'=>$payment_terms]);
+    //     $facility_id = facility_info::where('business_infos_id',$business_id)->value('id');
+    //     $facility_id = Crypt::encryptString($facility_id);
+    //     return view('external_broker.product_info')->with('facility_info',$facility_id);
+    // } else {
       $business = new business_info();
       $business->supplier_infos_id = $supplier_id_fk;
       $business->country_id = $country;
@@ -194,7 +195,7 @@ class supplierController extends Controller
       $facility_id_fk = Crypt::encryptString($facility_id_fk);
       return view('external_broker.product_info')->with('facility_info',$facility_id_fk);
       // code...
-    }
+    // }
 
   }
 
@@ -208,7 +209,8 @@ class supplierController extends Controller
     $facility_info_id = Crypt::decryptString($facility_info_id);
     $name = $request->input('name');
     $image = $request->file('image');
-    $image_name = $image->getClientOriginalName();
+    $image_name = '';
+
     // $pof = $request->file('pof');
     // $pof_name = $pof->getClientOriginalName();
     $description = $request->input('description');
@@ -218,8 +220,9 @@ class supplierController extends Controller
     $capacity = $request->input('capacity');
     $audit_date = $request->input('date');
     $certificates = $request->file('certificates');
-    $cert_type = $request->input('cert_type');
-    $certs_name = $certificates->getClientOriginalName();
+    $certificates2 = $request->file('certificates2');
+    // $cert_type = $request->input('cert_type');
+    $certs_name = '';
 
     $validate = Validator::make($request->all(), [
       'name' => 'required',
@@ -228,9 +231,9 @@ class supplierController extends Controller
       'volume' => 'required',
       'capacity' => 'required',
       'date' => 'required',
-      'image'=> 'required|mimes:png,jpeg,jpg',
+      'image'=> 'mimes:png,jpeg,jpg,pdf',
       // 'pof' => 'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts|max:100040|required',
-      'certificates' => 'required|mimes:png,jpeg,pdf,doc,docx',
+      'certificates' => 'mimes:png,jpeg,pdf,doc,docx',
     ]);
 
     if ($validate->fails())
@@ -244,9 +247,15 @@ class supplierController extends Controller
     //store copy of image in publc folder
     // $image->move('/public/images/'.$destination, $image_name);
     //store copy in private folder
-    $image->storeAs($destination,$image_name);
+    if($request->has('image') && !empty($request->file('image'))) {
+      $image_name = $image->getClientOriginalName();
+      $image->storeAs($destination,$image_name);
+    } else {
+
+    }
+
     // $pof->storeAs($destination,$pof_name);
-    $certificates->storeAs($destination,$certs_name);
+
     $product = new product_info();
     $product->facility_infos_id = $facility_info_id;
     $product->name = $name;
@@ -259,15 +268,35 @@ class supplierController extends Controller
     $product->capacity = $capacity;
     $product->save();
 
-    $product_id_fk =  $product->id;
-    $certificates = new product_certs();
-    $certificates->product_infos_id = $product_id_fk;
-    $certificates->certificates = $cert_type;
-    $certificates->path = $certs_name;
-    $certificates->save();
+    if($request->has('certificates') && !empty($request->file('certificates'))) {
+        $certs_name = $certificates->getClientOriginalName();
+        $certificates->storeAs($destination,$certs_name);
+        $product_id_fk =  $product->id;
+        $certificates = new product_certs();
+        $certificates->product_infos_id = $product_id_fk;
+        $certificates->certificates = $certs_name;
+        $certificates->path = $certs_name;
+        $certificates->save();
+    } else {
+
+    }
+
+    if($request->has('certificates2') && !empty($request->file('certificates2'))) {
+        $certs_name = $certificates2->getClientOriginalName();
+        $certificates2->storeAs($destination,$certs_name);
+        $product_id_fk =  $product->id;
+        $certificates = new product_certs();
+        $certificates->product_infos_id = $product_id_fk;
+        $certificates->certificates = $certs_name;
+        $certificates->path = $certs_name;
+        $certificates->save();
+    } else {
+
+    }
+
 
     $audit = new product_audit();
-    $audit->product_infos_id = $product_id_fk;
+    $audit->product_infos_id = $product->id;
     $audit->pol = 'null';
     $audit->summary = 'null';
     $audit->audit_date = $audit_date;
@@ -275,11 +304,11 @@ class supplierController extends Controller
     $audit->save();
 
     $product_price = new product_price();
-    $product_price->product_infos_id = $product_id_fk;
+    $product_price->product_infos_id = $product->id;
     $product_price->sale_price = 'null';
     $product_price->save();
 
-    $product_id_fk = Crypt::encryptString($product_id_fk);
+    $product_id_fk = Crypt::encryptString($product->id);
     return view('external_broker.package_info')->with('product_info_fk',$product_id_fk);
   }
 

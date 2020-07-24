@@ -22,8 +22,9 @@
             <textarea name="description"  value="{{ old('description') }}" class="input-fields w-input">
             </textarea>
             <label for="name" class="field-label">Product Certificates </label>
-            <input type="text" class="input-fields w-input" maxlength="256" placeholder="Certificate type" name="cert_type"  value="{{ old('cert_type') }}" data-name="cert_type" id="cert_name" required="">
-            <input type="file" class="input-fields w-input" maxlength="256" name="certificates"  value="{{ old('certificates') }}" data-name="certificates" id="certificates" required="">
+            {{-- <input type="text" class="input-fields w-input" maxlength="256" placeholder="Certificate type" name="cert_type"  value="{{ old('cert_type') }}" data-name="cert_type" id="cert_name" required=""> --}}
+            <input type="file" class="input-fields w-input" maxlength="256" name="certificates" placeholder="certificate"  value="{{ old('certificates') }}" data-name="certificates" id="certificates" >
+            <input type="file" class="input-fields w-input" maxlength="256" name="certificates2" placeholder="certificate"  value="{{ old('certificates2') }}" data-name="certificates2" id="certificates2" >
             <label for="name" class="field-label">Product Image </label>
             <input type="file" class="input-fields w-input" maxlength="256" name="image"  value="{{ old('image') }}" data-name="image" id="image" required="">
             {{-- <label for="name" class="field-label">Proof of life (Product video) </label>
