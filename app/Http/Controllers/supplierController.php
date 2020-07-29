@@ -179,6 +179,14 @@ class supplierController extends Controller
       $business->save();
       $business_id_fk =  $business->id;
 
+      //check if the session is stored .. this will be used for the next form submit
+      if($request->session()->has('supplier_session'))
+      {
+      }else{
+        $supplier_id_fk = Crypt::encryptString($supplier_id_fk);
+        $request->session()->put('supplier_session', $supplier_id_fk);
+      }
+
       $facility = new facility_info();
       $facility->business_infos_id = $business_id_fk;
       $facility->country_id = $facility_country;
@@ -203,10 +211,14 @@ class supplierController extends Controller
   public function submit_product_info(Request $request){
 
     $facility_info_id = $request->input('facility_info');
+
     //save facility info id in section. it will be used when the user adds another product
     $request->session()->put('facility_info', $facility_info_id);
 
+
     $facility_info_id = Crypt::decryptString($facility_info_id);
+
+
     $name = $request->input('name');
     $image = $request->file('image');
     $image_name = '';
@@ -243,6 +255,7 @@ class supplierController extends Controller
 
     $supplier_folder = $request->session()->get('supplier_session');
     $supplier_folder = Crypt::decryptString($supplier_folder);
+
     $destination = 'uploads/supplier/'.$supplier_folder;
     //store copy of image in publc folder
     // $image->move('/public/images/'.$destination, $image_name);
