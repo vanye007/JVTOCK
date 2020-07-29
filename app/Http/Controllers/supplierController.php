@@ -120,7 +120,7 @@ class supplierController extends Controller
   public function get_business_info_page($id){
     $countries = countries::get();
     $supplier_id_fk = $id;
-    return view('external_broker.business_info',['countries'=>$countries,])->with('supplier_info',$supplier_id_fk);
+    return view('external_broker.business_info',['countries'=>$countries,])->with('supplier_info_fk',$supplier_id_fk);
   }
 
   public function submit_business_info(Request $request){
