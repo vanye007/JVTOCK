@@ -232,13 +232,13 @@ class HomeController extends Controller
     }
 
     public function approve_product($id){
-      $userId = $name = Auth::user()->id;
-      $product_id = $id;
-
-      $log = new audit_log();
-      $log->user_id = $userId;
-      $log->product_audit_id = $product_id;
-      $log->save();
+      // $userId = $name = Auth::user()->id;
+      // $product_id = $id;
+      //
+      // $log = new audit_log();
+      // $log->user_id = $userId;
+      // $log->product_audit_id = $product_id;
+      // $log->save();
 
       product_audit::where('id',$id)->update(['status'=>'approved']);
       return redirect()->back()->with('notification','Product approved');
